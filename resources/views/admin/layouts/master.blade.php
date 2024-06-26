@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>General Dashboard &mdash; Stisla</title>
+  <title>General Dashboard &mdash; marketp</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href={{asset("backend/assets/modules/bootstrap/css/bootstrap.min.css")}}>
@@ -74,5 +74,14 @@
   <!-- Template JS File -->
   <script src={{asset("backend/assets/js/scripts.js")}}></script>
   <script src={{asset("backend/assets/js/custom.js")}}></script>
+  <script>
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            @php
+                toastr()->error($error);
+            @endphp
+        @endforeach
+    @endif
+  </script>
 </body>
 </html>
