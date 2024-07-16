@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <meta name="csrf_token" content="{{ csrf_token() }}" />
   <title>General Dashboard &mdash; marketp</title>
 
   <!-- General CSS Files -->
@@ -14,7 +15,9 @@
   <link rel="stylesheet" href={{asset("backend/assets/modules/weather-icon/css/weather-icons.min.css")}}>
   <link rel="stylesheet" href={{asset("backend/assets/modules/weather-icon/css/weather-icons-wind.min.css")}}>
   <link rel="stylesheet" href={{asset("backend/assets/modules/summernote/summernote-bs4.css")}}>
-
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
+  <link rel="stylesheet" href="{{ asset('backend/assets/css/bootstrap-iconpicker.min.css') }}">
   <!-- Template CSS -->
   <link rel="stylesheet" href={{asset("backend/assets/css/style.css")}}>
   <link rel="stylesheet" href={{asset("backend/assets/css/components.css")}}>
@@ -40,14 +43,8 @@
       <div class="main-content">
         @yield('content')
       </div>
-      <footer class="main-footer">
-        <div class="footer-left">
-          Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
-        </div>
-        <div class="footer-right">
 
-        </div>
-      </footer>
+
     </div>
   </div>
 
@@ -70,6 +67,10 @@
 
   <!-- Page Specific JS File -->
   <script src={{asset("backend/assets/js/page/index-0.js")}}></script>
+  <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="{{ asset('backend/assets/js/bootstrap-iconpicker.bundle.min.js') }}"></script>
 
   <!-- Template JS File -->
   <script src={{asset("backend/assets/js/scripts.js")}}></script>
@@ -83,5 +84,73 @@
         @endforeach
     @endif
   </script>
+
+  <script>
+    $(document).ready(function(){
+        $.ajaxSetup({
+          "headers": {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}
+        });
+
+        $('body').on('click', '.delete-item', function(event){
+            event.preventDefault();
+            let deleteURL = $(this).attr('href');
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed){
+                    $.ajax({
+                      type: 'DELETE',
+                      url: deleteURL,
+
+                      success: function(data){
+                        if(data.status == 'success'){
+                            swalWithBootstrapButtons.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                            window.location.reload();
+                        }
+                        else if (data.status == 'error'){
+                            swalWithBootstrapButtons.fire({
+                                title: "Error",
+                                text: "Error",
+                                icon: "error"
+                            });
+                        }
+                      },
+
+                      error: function(xhr, status, error){
+                        console.log(error);
+                      }
+                    })
+
+                } else if(result.dismiss === Swal.DismissReason.cancel){
+                    swalWithBootstrapButtons.fire({
+                        title: "Cancelled",
+                        text: "Your imaginary file is safe :)",
+                        icon: "error"
+                    });
+                }
+            });
+        })
+    })
+  </script>
+
+  @stack('script')
 </body>
 </html>

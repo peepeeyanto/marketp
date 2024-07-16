@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\backend\adminController;
 use App\Http\Controllers\backend\sellerController;
+use App\Http\Controllers\frontend\userDashboardController;
+use App\Http\Controllers\frontend\userProfileController;
+use App\Http\Controllers\homeController;
 use App\Http\Controllers\ProfileController;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,13 +20,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [homeController::class, 'index']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('frontend.dashboard.dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -36,3 +38,9 @@ require __DIR__.'/auth.php';
 
 Route::get('/admin/login', [adminController::class, 'login'])->name('admin.login');
 
+Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function(){
+    Route::get('/dashboard', [userDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [userProfileController::class, 'index'])->name('profile');
+    Route::put('/profile', [userProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/profile', [userProfileController::class, 'updatePassword'])->name('profile.update.password');
+});
