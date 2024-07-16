@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\category;
 use Illuminate\Http\Request;
 use Str;
+use App\Models\subCategory;
 class categoryController extends Controller
 {
     /**
@@ -92,8 +93,11 @@ class categoryController extends Controller
     public function destroy(string $id)
     {
         $category = category::findOrFail($id);
+        $subCategory = subCategory::where('category_id', $category->id)->count();
+        if($subCategory > 0){
+            return response(['status' => 'error', 'Kategori tidak bisa dihapus karena masih ada subkategori yang bersangkutan!']);
+        }
         $category->delete();
-
         return response(['status' => 'success', 'message' => 'Berhasil Dihapus']);
     }
 

@@ -128,7 +128,7 @@
                         else if (data.status == 'error'){
                             swalWithBootstrapButtons.fire({
                                 title: "Error",
-                                text: "Error",
+                                text: data.message,
                                 icon: "error"
                             });
                         }
