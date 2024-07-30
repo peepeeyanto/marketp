@@ -5,27 +5,47 @@
       </div>
 
       <div class="sidebar-brand sidebar-brand-sm">
-        <a href="{{ route('admin.dashboard') }}">marketp</a>
+        <a href="{{ route('admin.dashboard') }}">ADM</a>
       </div>
 
       <ul class="sidebar-menu">
         <li class="menu-header">Dashboard</li>
+
         <li class="dropdown active">
           <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
         </li>
+
         <li class="menu-header">Starter</li>
-        <li class="dropdown">
+
+        <li class="dropdown {{ setActive([
+            'admin.slider.*',
+            'admin.category.*',
+            'admin.subcategory.*',
+        ]) }}">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage website</span></a>
           <ul class="dropdown-menu">
-            <li><a class="nav-link" href="{{ route('admin.slider.index') }}">Slider</a></li>
+            <li class="{{ setActive(['admin.slider.*']) }}"><a class="nav-link" href="{{ route('admin.slider.index') }}">Slider</a></li>
           </ul>
           <ul class="dropdown-menu">
-            <li><a class="nav-link" href="{{ route('admin.category.index') }}">Category</a></li>
+            <li class="{{ setActive(['admin.category.*']) }}"><a class="nav-link" href="{{ route('admin.category.index') }}">Category</a></li>
           </ul>
           <ul class="dropdown-menu">
-            <li><a class="nav-link" href="{{ route('admin.subcategory.index') }}">Subcategory</a></li>
+            <li class="{{ setActive(['admin.subcategory.*']) }}"><a class="nav-link" href="{{ route('admin.subcategory.index') }}">Subcategory</a></li>
           </ul>
         </li>
+
+        <li class="dropdown {{ setActive([
+            'admin.vendor-profile.*',
+            'admin.products.*'])
+            }}">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Commerce</span></a>
+            <ul class="dropdown-menu">
+              <li class="{{ setActive(['admin.vendor-profile.*']) }}"><a class="nav-link" href="{{ route('admin.vendor-profile.index') }}">Vendor Profile</a></li>
+              <li class="{{ setActive(['admin.products.*']) }}"><a class="nav-link" href="{{ route('admin.products.index') }}">Products</a></li>
+            </ul>
+        </li>
+
+
 
         {{-- <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>

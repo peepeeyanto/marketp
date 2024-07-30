@@ -21,9 +21,10 @@
   <link rel="stylesheet" href="{{ asset('frontend/css/ranger_style.css') }}">
   <link rel="stylesheet" href="{{ asset('frontend/css/jquery.classycountdown.css') }}">
   <link rel="stylesheet" href="{{ asset('frontend/css/venobox.min.css') }}">
-
+  <link rel="stylesheet" href={{asset("backend/assets/modules/summernote/summernote-bs4.css")}}>
   <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
+  <link href="https://cdn.datatables.net/v/bs5/dt-2.1.2/r-3.0.2/datatables.min.css" rel="stylesheet">
   <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
 
@@ -33,11 +34,12 @@
   <!--=============================
     DASHBOARD MENU START
   ==============================-->
-    @include('frontend.dashboard.layouts.navbar')
+    @include('seller.layouts.navbar')
   <!--=============================
     DASHBOARD MENU END
   ==============================-->
 
+    @include('seller.layouts.sidebar')
 
   <!--=============================
     DASHBOARD START
@@ -96,6 +98,16 @@
 
   <!--main/custom js-->
   <script src="{{ asset('frontend/js/main.js') }}"></script>
+  <script src={{asset("backend/assets/modules/summernote/summernote-bs4.js")}}></script>
+  <script src="https://cdn.datatables.net/v/bs5/dt-2.1.2/r-3.0.2/datatables.min.js"></script>
+
+  <script>
+    $('.summernote').summernote({
+        height:150
+    });
+  </script>
+
+  @stack('script')
 </body>
 
 </html>

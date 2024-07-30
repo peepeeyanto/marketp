@@ -15,8 +15,9 @@
   <link rel="stylesheet" href={{asset("backend/assets/modules/weather-icon/css/weather-icons.min.css")}}>
   <link rel="stylesheet" href={{asset("backend/assets/modules/weather-icon/css/weather-icons-wind.min.css")}}>
   <link rel="stylesheet" href={{asset("backend/assets/modules/summernote/summernote-bs4.css")}}>
-  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
+  {{-- <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css"> --}}
+  <link href="https://cdn.datatables.net/v/bs5/dt-2.1.2/r-3.0.2/datatables.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('backend/assets/css/bootstrap-iconpicker.min.css') }}">
   <!-- Template CSS -->
   <link rel="stylesheet" href={{asset("backend/assets/css/style.css")}}>
@@ -68,7 +69,8 @@
   <!-- Page Specific JS File -->
   <script src={{asset("backend/assets/js/page/index-0.js")}}></script>
   <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+  {{-- <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script> --}}
+  <script src="https://cdn.datatables.net/v/bs5/dt-2.1.2/r-3.0.2/datatables.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="{{ asset('backend/assets/js/bootstrap-iconpicker.bundle.min.js') }}"></script>
 
@@ -103,12 +105,12 @@
             })
 
             swalWithBootstrapButtons.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
+                title: "Konfirmasi",
+                text: "Apakah anda ingin menghapus data ini",
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "No, cancel!",
+                confirmButtonText: "Ok",
+                cancelButtonText: "Batalkan",
                 reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed){
@@ -119,8 +121,8 @@
                       success: function(data){
                         if(data.status == 'success'){
                             swalWithBootstrapButtons.fire({
-                                title: "Deleted!",
-                                text: "Your file has been deleted.",
+                                title: "Data dihapus",
+                                text: data.message,
                                 icon: "success"
                             });
                             window.location.reload();
@@ -141,8 +143,8 @@
 
                 } else if(result.dismiss === Swal.DismissReason.cancel){
                     swalWithBootstrapButtons.fire({
-                        title: "Cancelled",
-                        text: "Your imaginary file is safe :)",
+                        title: "Operasi hapus dibatalkan",
+                        text: "Data anda tidak dihapus",
                         icon: "error"
                     });
                 }

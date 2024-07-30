@@ -95,7 +95,7 @@ class categoryController extends Controller
         $category = category::findOrFail($id);
         $subCategory = subCategory::where('category_id', $category->id)->count();
         if($subCategory > 0){
-            return response(['status' => 'error', 'Kategori tidak bisa dihapus karena masih ada subkategori yang bersangkutan!']);
+            return response(['status' => 'error', 'message' => 'Kategori tidak bisa dihapus karena masih ada subkategori yang bersangkutan!']);
         }
         $category->delete();
         return response(['status' => 'success', 'message' => 'Berhasil Dihapus']);
@@ -105,6 +105,6 @@ class categoryController extends Controller
        $category = category::findOrFail($request->id);
        $category->status = $request->status == 'true' ? 1 : 0;
        $category->save();
-       return response(['status' => 'succcess', 'messsage' => 'status berhasil diupdate']);
+       return response(['status' => 'succcess', 'message' => 'status berhasil diupdate']);
     }
 }

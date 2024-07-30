@@ -21,7 +21,7 @@
                     <a href="{{ route('admin.category.create') }}" class="btn btn-primary">Add</a>
                 </div>
               </div>
-              <div class="card-body">
+              <div class="card-body table-responsive">
                 {{ $dataTable->table() }}
               </div>
             </div>
