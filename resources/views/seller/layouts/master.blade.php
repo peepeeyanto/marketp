@@ -5,8 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
+  <meta name="csrf_token" content="{{ csrf_token() }}" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <title>One Shop || e-Commerce HTML Template</title>
+  <title>@yield('title')</title>
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="stylesheet" href="{{ asset('frontend/css/all.min.css') }}">
   <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
@@ -100,11 +101,88 @@
   <script src="{{ asset('frontend/js/main.js') }}"></script>
   <script src={{asset("backend/assets/modules/summernote/summernote-bs4.js")}}></script>
   <script src="https://cdn.datatables.net/v/bs5/dt-2.1.2/r-3.0.2/datatables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            @php
+                toastr()->error($error);
+            @endphp
+        @endforeach
+    @endif
+  </script>
 
   <script>
     $('.summernote').summernote({
         height:150
     });
+  </script>
+
+<script>
+    $(document).ready(function(){
+        $.ajaxSetup({
+          "headers": {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}
+        });
+
+        $('body').on('click', '.delete-item', function(event){
+            event.preventDefault();
+            let deleteURL = $(this).attr('href');
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success me-7",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: true
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: "Konfirmasi",
+                text: "Apakah anda ingin menghapus data ini",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ok",
+                cancelButtonText: "Batalkan",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed){
+                    $.ajax({
+                      type: 'DELETE',
+                      url: deleteURL,
+
+                      success: function(data){
+                        if(data.status == 'success'){
+                            swalWithBootstrapButtons.fire({
+                                title: "Data dihapus",
+                                text: data.message,
+                                icon: "success"
+                            });
+                            window.location.reload();
+                        }
+                        else if (data.status == 'error'){
+                            swalWithBootstrapButtons.fire({
+                                title: "Error",
+                                text: data.message,
+                                icon: "error"
+                            });
+                        }
+                      },
+
+                      error: function(xhr, status, error){
+                        console.log(error);
+                      }
+                    })
+
+                } else if(result.dismiss === Swal.DismissReason.cancel){
+                    swalWithBootstrapButtons.fire({
+                        title: "Operasi hapus dibatalkan",
+                        text: "Data anda tidak dihapus",
+                        icon: "error"
+                    });
+                }
+            });
+        })
+    })
   </script>
 
   @stack('script')

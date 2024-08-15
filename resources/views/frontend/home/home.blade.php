@@ -1,17 +1,19 @@
    @extends('frontend.home.layouts.master')
-
+   @section('title')
+   COCOHub
+   @endsection
    @section('content')
    <!--============================
         MAIN MENU START
     ==============================-->
-    @include('frontend.home.sections.menu')
+    {{-- @include('frontend.home.sections.menu') --}}
     <!--============================
         MAIN MENU END
     ==============================-->
     <!--==========================
       PRODUCT MODAL VIEW START
     ===========================-->
-    <section class="product_popup_modal">
+    {{-- <section class="product_popup_modal">
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -142,7 +144,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!--==========================
       PRODUCT MODAL VIEW END
     ===========================-->

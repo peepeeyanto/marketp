@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\backend\adminController;
 use App\Http\Controllers\backend\sellerController;
+use App\Http\Controllers\frontend\cartController;
+use App\Http\Controllers\frontend\frontendProductController;
+use App\Http\Controllers\frontend\userAddressController;
 use App\Http\Controllers\frontend\userDashboardController;
 use App\Http\Controllers\frontend\userProfileController;
 use App\Http\Controllers\homeController;
@@ -43,4 +46,16 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::get('/profile', [userProfileController::class, 'index'])->name('profile');
     Route::put('/profile', [userProfileController::class, 'updateProfile'])->name('profile.update');
     Route::post('/profile', [userProfileController::class, 'updatePassword'])->name('profile.update.password');
+    Route::resource('/address', userAddressController::class);
 });
+
+Route::get('product-detail/{slug}', [frontendProductController::class, 'showProduct'])->name('product-detail');
+Route::post('add2cart', [cartController::class, 'add'])->name('add2cart');
+Route::get('cart-detail', [cartController::class,'cartDetail'])->name('cart-detail');
+Route::post('cart/updateqty', [cartController::class, 'updateQty'])->name('cart.update-qty');
+Route::get('cart-clear', [cartController::class, 'clearCart'])->name('cart-clear');
+Route::get('cart/remove-product/{rowId}', [cartController::class,'removeProduct'])->name('cart-removeProduct');
+Route::get('cart-count', [cartController::class, 'cartCount'])->name('cart-count');
+Route::get('cart-product', [cartController::class, 'getCartProduct'])->name('cart-product');
+Route::post('cart/remove-sideProduct', [cartController::class,'removeSideProduct'])->name('cart-removeSideProduct');
+Route::get('cart/get-subtotal', [cartController::class,'getSubTotal'])->name('cart-subtotal');

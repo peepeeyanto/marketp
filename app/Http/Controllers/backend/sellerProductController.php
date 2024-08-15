@@ -6,6 +6,8 @@ use App\DataTables\sellerProductDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\category;
 use App\Models\product;
+use App\Models\productImageGallery;
+use App\Models\productVariant;
 use App\Models\subCategory;
 use App\Traits\imageUploadsTrait;
 use Illuminate\Http\Request;
@@ -79,7 +81,13 @@ class sellerProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $categories = category::all();
+        $product = product::findOrFail($id);
+        if($product->vendor_id != Auth::user()->vendor->id){
+            abort(404);
+        }
+        $subcategories = subCategory::where('category_id', $product->category_id)->get();
+        return view('seller.products.edit', compact('product', 'categories', 'subcategories'));
     }
 
     /**
@@ -87,7 +95,40 @@ class sellerProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'image' => ['nullable', 'image', 'max:3000'],
+            'name' => ['required', 'max:200'],
+            'category' => ['required'],
+            'price' => ['required'],
+            'qty' => ['required'],
+            'short_description' => ['required', 'max:600'],
+            'long_description' => ['required']
+        ]);
+
+        $product = product::findOrFail($id);
+
+        if($product->vendor_id != Auth::user()->vendor->id){
+            abort(404);
+        }
+
+        $imagepath = $this->imageUpdate($request, 'image', 'uploads', $product->thumb_image);
+
+
+        $product->thumb_image = empty(!$imagepath) ? $imagepath : $product->thumb_image;
+        $product->name = $request->name;
+        $product->slug = Str::slug($request->name);
+        $product->vendor_id = Auth::user()->vendor->id;
+        $product->category_id = $request->category;
+        $product->subcategory_id = $request->subcategory;
+        $product->price = $request->price;
+        $product->qty = $request->qty;
+        $product->sku = $request->sku;
+        $product->short_description = $request->short_description;
+        $product->long_description = $request->long_description;
+        $product->save();
+
+        toastr('produk berhasil diupdate', 'success');
+        return redirect()->back();
     }
 
     /**
@@ -95,7 +136,23 @@ class sellerProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = product::findOrFail($id);
+        if($product->vendor_id != Auth::user()->vendor->id){
+            abort(404);
+        }
+        $this->imageDelete($product->thumb_image);
+        $galleryImages = productImageGallery::where('product_id', $product->id)->get();
+        foreach ($galleryImages as $image) {
+            $this->imageDelete($image->image);
+            $image->delete();
+        }
+        $variants = productVariant::where('product_id', $product->id)->get();
+        foreach ($variants as $variant) {
+            $variant->productVariantItems()->delete();
+            $variant->delete();
+        }
+        $product->delete();
+        return response(['status' => 'success', 'message' => 'produk berhasil dihapus']);
     }
 
     public function getSubcategories(Request $request){

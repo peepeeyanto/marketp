@@ -3,7 +3,7 @@
       <i class="far fa-bars dash_bar"></i>
       <i class="far fa-times dash_close"></i>
     </span>
-    <a href="dsahboard.html" class="dash_logo"><img src="images/logo.png" alt="logo" class="img-fluid"></a>
+    <a href="dsahboard.html" class="dash_logo text-center mt-5"><h4 class="text-white">MarketP</h4></a>
     <ul class="dashboard_link">
       <li><a class="active" href="{{ route('seller.dashboard') }}"><i class="fas fa-tachometer"></i>Dashboard</a></li>
       <li><a href="dsahboard_profile.html"><i class="far fa-user"></i> My Profile</a></li>

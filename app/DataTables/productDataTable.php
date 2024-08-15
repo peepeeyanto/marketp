@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\product;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -33,13 +34,6 @@ class productDataTable extends DataTable
                                 <a class="dropdown-item" href="'.route('admin.products-image-gallery.index', ['product' => $query->id]).'">Galeri gambar</a>
                                 <a class="dropdown-item" href="'.route('admin.products-variant.index', ['product' => $query->id]).'">Varian produk</a>s
                             </div>';
-                // $moreBtn = "<div class='dropdown d-inline'>
-                //                 <button class='btn btn-primary dropdown-toggle mt-2' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>More</button>
-                //                 <div class='dropdown-menu'>
-                //                     <a class='dropdown-item' href='".route('admin.products-image-gallery.index', ['product' => $query->id])."'>Image Gallery</a>
-                //                     <a class='dropdown-item' href='".route('admin.products-variant.index', ['product' => $query->id])."'>Varian</a>
-                //                 </div>
-                //             </div>";
                 return $editBtn.$deleteBtn.$moreBtn;
             })
             ->addColumn('image', function($query){
@@ -54,7 +48,7 @@ class productDataTable extends DataTable
      */
     public function query(product $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->where('vendor_id', Auth::user()->vendor->id)->newQuery();
     }
 
     /**

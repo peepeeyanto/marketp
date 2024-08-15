@@ -1,5 +1,7 @@
 @extends('frontend.home.layouts.master')
-
+@section('title')
+COCOHub - Login
+@endsection
 @section('content')
     <!--============================
          BREADCRUMB START

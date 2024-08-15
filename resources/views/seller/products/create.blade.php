@@ -1,5 +1,7 @@
 @extends('seller.layouts.master')
-
+@section('title')
+COCOHub - Tambah Produk
+@endsection
 @section('content')
 <section id="wsus__dashboard">
     <div class="container-fluid">

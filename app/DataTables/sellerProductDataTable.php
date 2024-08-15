@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\product;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -22,8 +23,25 @@ class sellerProductDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'sellerproduct.action')
-            ->setRowId('id');
+        ->addColumn('action', function($query){
+            $editBtn = "<a href='".route('seller.products.edit', $query->id)."' class='btn btn-primary'>edit</a>";
+            $deleteBtn = "<a href='".route('seller.products.destroy', $query->id)."' class='btn btn-danger delete-item'>delete</a>";
+            $moreBtn = '<div class="btn-group dropstart">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                More
+                            </button>
+                            <ul class="dropdown-menu">
+                                 <a class="dropdown-item" href="'.route('seller.products-image-gallery.index', ['product' => $query->id]).'">Image Gallery</a>
+                                 <a class="dropdown-item" href="'.route('seller.products-variant.index', ['product' => $query->id]).'">Varian</a>
+                            </ul>
+                        </div>';
+            return $editBtn.$deleteBtn.$moreBtn;
+        })
+        ->addColumn('image', function($query){
+            return "<img width='100px' src='".asset($query->thumb_image)."'></img>";
+        })
+        ->rawColumns(['image', 'action'])
+        ->setRowId('id');
     }
 
     /**
@@ -31,7 +49,7 @@ class sellerProductDataTable extends DataTable
      */
     public function query(product $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->where('vendor_id', Auth::user()->vendor->id)->newQuery();
     }
 
     /**
@@ -62,15 +80,16 @@ class sellerProductDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('name'),
+            Column::make('image'),
+            Column::make('qty'),
+            Column::make('price'),
+            Column::computed('action')
+            ->exportable(false)
+            ->printable(false)
+            ->width(200)
+            ->addClass('text-center'),
         ];
     }
 

@@ -3,11 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <title>Cocohub || Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, target-densityDpi=device-dpi" />
+    <meta name="csrf_token" content="{{ csrf_token() }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>@yield('title')</title>
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="{{asset('frontend/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
@@ -25,6 +24,7 @@
 
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
 
@@ -34,6 +34,7 @@
         HEADER START
     ==============================-->
         @include('frontend.home.layouts.header')
+        @include('frontend.home.sections.menu')
     <!--============================
         HEADER END
     ==============================-->
@@ -137,8 +138,12 @@
     <!--classycountdown js-->
     <script src="{{asset('frontend/js/jquery.classycountdown.js')}}"></script>
 
+
     <!--main/custom js-->
     <script src="{{asset("frontend/js/main.js")}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
     <script>
         @if ($errors->any())
             @foreach ($errors->all() as $error)
@@ -147,7 +152,9 @@
                 @endphp
             @endforeach
         @endif
-      </script>
+    </script>
+    @include('frontend.home.layouts.scripts')
+    @stack('script')
 </body>
 
 </html>

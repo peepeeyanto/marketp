@@ -8,8 +8,10 @@ use App\Http\Controllers\backend\productImageGalleryController;
 use App\Http\Controllers\backend\productsVariantsController;
 use App\Http\Controllers\backend\productVariantController;
 use App\Http\Controllers\backend\profileController;
+use App\Http\Controllers\backend\shippingRuleController;
 use App\Http\Controllers\backend\sliderController;
 use App\Http\Controllers\backend\subCategoryController;
+use App\Http\Controllers\backend\vendorProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('dashboard', [adminController::class, 'dashboard'])->name('dashboard');
@@ -44,3 +46,7 @@ Route::delete('products-variant-item/{variantItemID}', [productsVariantsControll
 Route::put('products-variant-item-status', [productsVariantsController::class, 'changeStatus'])->name('products-variant-item.changeStatus');
 Route::get('products-variant-item/{productID}/{variantID}', [productsVariantsController::class, 'index'])->name('products-variant-item.index');
 
+Route::get('vendor-product', [vendorProductController::class, 'index'])->name('vendor-product.index');
+
+Route::put('shipping-rule/change-status', [shippingRuleController::class, 'changeStatus'])->name('shipping-rule.changeStatus');
+Route::resource('shipping-rule', shippingRuleController::class);
