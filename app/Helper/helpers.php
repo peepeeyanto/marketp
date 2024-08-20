@@ -18,7 +18,8 @@ function setActive(array $route){
 function getSubTotal(){
     $subtotal = 0;
     foreach(Cart::content() as $product){
-        $subtotal = "Rp".($product->price + $product->options->variants_total)* $product->qty;
+        $subtotal += ($product->price + $product->options->variants_total)* $product->qty;
     }
+
     return $subtotal;
-} 
+}

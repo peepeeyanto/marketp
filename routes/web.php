@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\backend\adminController;
+use App\Http\Controllers\backend\checkOutController;
+use App\Http\Controllers\backend\paymentController;
 use App\Http\Controllers\backend\sellerController;
 use App\Http\Controllers\frontend\cartController;
 use App\Http\Controllers\frontend\frontendProductController;
+use App\Http\Controllers\frontend\gradingController;
 use App\Http\Controllers\frontend\userAddressController;
 use App\Http\Controllers\frontend\userDashboardController;
 use App\Http\Controllers\frontend\userProfileController;
@@ -47,6 +50,11 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::put('/profile', [userProfileController::class, 'updateProfile'])->name('profile.update');
     Route::post('/profile', [userProfileController::class, 'updatePassword'])->name('profile.update.password');
     Route::resource('/address', userAddressController::class);
+
+    Route::get('checkout', [checkOutController::class, 'index'])->name('checkout');
+    Route::post('checkout/address', [checkOutController::class,'storeAddress'])->name('checkout.address.create');
+    Route::post('checkout/form-submit', [checkOutController::class,'checkoutSubmit'])->name('checkout.submit');
+    Route::get('payment', [paymentController::class, 'index'])->name('pay');
 });
 
 Route::get('product-detail/{slug}', [frontendProductController::class, 'showProduct'])->name('product-detail');
@@ -59,3 +67,4 @@ Route::get('cart-count', [cartController::class, 'cartCount'])->name('cart-count
 Route::get('cart-product', [cartController::class, 'getCartProduct'])->name('cart-product');
 Route::post('cart/remove-sideProduct', [cartController::class,'removeSideProduct'])->name('cart-removeSideProduct');
 Route::get('cart/get-subtotal', [cartController::class,'getSubTotal'])->name('cart-subtotal');
+Route::get('grading', [gradingController::class, 'index'])->name('grading');

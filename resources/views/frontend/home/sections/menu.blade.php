@@ -32,8 +32,8 @@
                     </ul>
 
                     <ul class="wsus__menu_item">
-                        <li><a class="active" href="{{ url('/') }}">home</a></li>
-                        <li><a href="product_grid_view.html">shop <i class="fas fa-caret-down"></i></a>
+                        <li><a class="active" href="{{ url('/') }}">Beranda</a></li>
+                        {{-- <li><a href="product_grid_view.html">shop <i class="fas fa-caret-down"></i></a>
                             <div class="wsus__mega_menu">
                                 <div class="row">
                                     <div class="col-xl-3 col-lg-3">
@@ -98,11 +98,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </li>
-                        <li><a href="vendor.html">vendor</a></li>
-                        <li><a href="blog.html">blog</a></li>
-                        <li><a href="daily_deals.html">campain</a></li>
-                        <li class="wsus__relative_li"><a href="#">pages <i class="fas fa-caret-down"></i></a>
+                        </li> --}}
+                        <li><a href="vendor.html">Toko</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="{{ route('grading') }}">Cek Kualitas Kelapa</a></li>
+                        {{-- <li class="wsus__relative_li"><a href="#">pages <i class="fas fa-caret-down"></i></a>
                             <ul class="wsus__menu_droapdown">
                                 <li><a href="404.html">404</a></li>
                                 <li><a href="faqs.html">faq</a></li>
@@ -118,13 +118,13 @@
                                 <li><a href="product_category.html">product category</a></li>
                                 <li><a href="brands.html">brands</a></li>
                             </ul>
-                        </li>
-                        <li><a href="track_order.html">track order</a></li>
-                        <li><a href="daily_deals.html">daily deals</a></li>
+                        </li> --}}
+                        <li><a href="track_order.html">Lacak Pesanan</a></li>
+                        {{-- <li><a href="daily_deals.html">daily deals</a></li> --}}
                     </ul>
                     <ul class="wsus__menu_item wsus__menu_item_right">
-                        <li><a href="contact.html">contact</a></li>
-                        <li><a href="dsahboard.html">my account</a></li>
+                        {{-- <li><a href="contact.html">contact</a></li> --}}
+                        <li><a href="dsahboard.html">Dashboard</a></li>
                         <li><a href="{{route('login')}}">login</a></li>
                     </ul>
                 </div>

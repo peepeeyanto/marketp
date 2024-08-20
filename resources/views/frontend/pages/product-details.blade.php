@@ -1,5 +1,7 @@
 @extends('frontend.home.layouts.master')
-
+@section('title')
+    {{ $product->name }} - COCOhub
+@endsection
 @section('content')
 <section id="wsus__product_details">
     <div class="container">

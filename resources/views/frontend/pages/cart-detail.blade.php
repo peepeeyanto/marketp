@@ -94,16 +94,8 @@ COCOHub - Cart
             <div class="col-xl-3">
                 <div class="wsus__cart_list_footer_button" id="sticky_sidebar">
                     <h6>total cart</h6>
-                    <p>subtotal: <span id="subtotalSide">{{ getSubTotal() }}</span></p>
-                    <p>delivery: <span>$00.00</span></p>
-                    <p>discount: <span>$10.00</span></p>
-                    <p class="total"><span>total:</span> <span>$134.00</span></p>
-
-                    <form>
-                        <input type="text" placeholder="Coupon Code">
-                        <button type="submit" class="common_btn">apply</button>
-                    </form>
-                    <a class="common_btn mt-4 w-100 text-center" href="check_out.html">checkout</a>
+                    <p>subtotal: <span id="subtotalSide">Rp{{ getSubTotal() }}</span></p>
+                    <a class="common_btn mt-4 w-100 text-center" href="{{ route('user.checkout') }}">checkout</a>
                     <a class="common_btn mt-1 w-100 text-center" href="product_grid_view.html"><i
                             class="fab fa-shopify"></i> go shop</a>
                 </div>
