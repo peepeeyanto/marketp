@@ -2848,14 +2848,14 @@ SCROLL BUTTON  END
 BREADCRUMB START
 ========================*/
 #wsus__breadcrumb {
-  background: url(../images/breadcrumb_bg.jpg);
+  /* background: url(../images/breadcrumb_bg.jpg); */
   background-size: cover !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
 }
 
 .wsus_breadcrumb_overlay {
-  background: #0b2c3dc9;
+  background: #295b10c9;
   padding: 100px 0px;
 }
 

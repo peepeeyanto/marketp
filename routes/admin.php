@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\adminController;
 use App\Http\Controllers\backend\adminVendorProfile;
 use App\Http\Controllers\backend\categoryController;
+use App\Http\Controllers\backend\orderController;
 use App\Http\Controllers\backend\productController;
 use App\Http\Controllers\backend\productImageGalleryController;
 use App\Http\Controllers\backend\productsVariantsController;
@@ -50,3 +51,5 @@ Route::get('vendor-product', [vendorProductController::class, 'index'])->name('v
 
 Route::put('shipping-rule/change-status', [shippingRuleController::class, 'changeStatus'])->name('shipping-rule.changeStatus');
 Route::resource('shipping-rule', shippingRuleController::class);
+
+Route::resource('order', orderController::class);
