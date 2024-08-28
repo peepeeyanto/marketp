@@ -25,11 +25,11 @@
                 <div class="wsus__call_icon_area">
                     <div class="wsus__call_area">
                         <div class="wsus__call">
-                            <i class="fas fa-user-headset"></i>
+                            {{-- <i class="fas fa-user-headset d-none"></i> --}}
                         </div>
                         <div class="wsus__call_text">
-                            <p>example@gmail.com</p>
-                            <p>+569875544220</p>
+                            {{-- <p>example@gmail.com</p>
+                            <p>+569875544220</p> --}}
                         </div>
                     </div>
                     <ul class="wsus__icon_area">
@@ -37,7 +37,7 @@
                         <li><a href="compare.html"><i class="fal fa-random"></i><span>03</span></a></li> --}}
                         <li>
                             <a class="wsus__cart_icon" href="#">
-                                <i class="fal fa-shopping-bag"></i>
+                                <i class="fal fa-shopping-bag mt-2"></i>
                                 <span id="cart-count">{{ Cart::content()->count() }}</span>
                             </a>
                         </li>

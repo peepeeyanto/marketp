@@ -65,4 +65,11 @@ class orderController extends Controller
     {
         //
     }
+
+    public function changeStatus(Request $request){
+        $order = order::findOrFail($request->id);
+        $order->order_status = $request->status;
+        $order->save();
+        return response(['status' => 'success', 'message' =>'status berhasil diubah']);
+    }
 }

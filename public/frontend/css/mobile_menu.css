@@ -67,7 +67,7 @@ a {
 
 #wsus__mobile_menu {
   width: 300px;
-  background: #0b2c3d;
+  background: #0c3d15;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -156,9 +156,9 @@ a {
 .wsus__mobile_menu_header_icon li a {
   width: 31px;
   height: 31px;
-  background: #2a9cf5;
+  background: #418d2f;
   color: #fff;
-  border: 1px solid #2a9cf5;
+  border: 1px solid #ffffff;
   text-align: center;
   line-height: 30px;
   margin-right: 15px;
@@ -245,8 +245,8 @@ a {
 
 #wsus__mobile_menu .nav-pills .nav-link.active,
 #wsus__mobile_menu #pills-tab li button:hover {
-  color: #2a9cf5 !important;
-  border-color: #2a9cf5 !important;
+  color: #ffffff  !important;
+  border-color: #7aef16 !important;
 }
 
 .wsus_mobile_menu_category {

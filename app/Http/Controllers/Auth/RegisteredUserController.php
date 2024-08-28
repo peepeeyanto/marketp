@@ -30,11 +30,25 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // dd($request->has('isSeller'))->all();
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        if($request->has('isSeller')){
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'seller'
+            ]);
+            event(new Registered($user));
+
+            Auth::login($user);
+            return redirect()->route('seller.dashboard');
+        }
 
         $user = User::create([
             'name' => $request->name,

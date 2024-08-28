@@ -52,4 +52,6 @@ Route::get('vendor-product', [vendorProductController::class, 'index'])->name('v
 Route::put('shipping-rule/change-status', [shippingRuleController::class, 'changeStatus'])->name('shipping-rule.changeStatus');
 Route::resource('shipping-rule', shippingRuleController::class);
 
+Route::get('order-status', [orderController::class,'changeStatus'])->name('order.status');
 Route::resource('order', orderController::class);
+

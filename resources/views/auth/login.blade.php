@@ -108,6 +108,13 @@ COCOHub - Login
                                             <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password">
                                         </div>
 
+                                        <div class="form-check mt-5 ms-2">
+                                            <input class="form-check-input" type="checkbox" value="1" name="isSeller" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                              Daftar sebagai penjual
+                                            </label>
+                                        </div>
+
                                         <div class="wsus__login_save">
 
                                         </div>

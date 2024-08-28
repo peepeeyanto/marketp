@@ -51,6 +51,7 @@ class cartController extends Controller
         $cartData['options']['variants_total'] = $variantTotalAmount;
         $cartData['options']['image'] = $product->thumb_image;
         $cartData['options']['slug'] = $product->slug;
+        $cartData['options']['vendor_id'] = $product->vendor_id;
 
         // dd($cartData);
         Cart::add($cartData);

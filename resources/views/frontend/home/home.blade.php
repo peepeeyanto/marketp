@@ -162,7 +162,7 @@
     <!--============================
         FLASH SELL START
     ==============================-->
-        @include('frontend.home.sections.flash-sale')
+        {{-- @include('frontend.home.sections.flash-sale') --}}
     <!--============================
         FLASH SELL END
     ==============================-->
@@ -171,7 +171,7 @@
     <!--============================
        MONTHLY TOP PRODUCT START
     ==============================-->
-        @include('frontend.home.sections.monthly-top')
+        {{-- @include('frontend.home.sections.monthly-top') --}}
     <!--============================
        MONTHLY TOP PRODUCT END
     ==============================-->
@@ -180,7 +180,7 @@
     <!--============================
         BRAND SLIDER START
     ==============================-->
-        @include('frontend.home.sections.brand-slider')
+        {{-- @include('frontend.home.sections.brand-slider') --}}
     <!--============================
         BRAND SLIDER END
     ==============================-->
@@ -189,7 +189,7 @@
     <!--============================
         SINGLE BANNER START
     ==============================-->
-        @include('frontend.home.sections.single-banner')
+        {{-- @include('frontend.home.sections.single-banner') --}}
     <!--============================
         SINGLE BANNER END
     ==============================-->
@@ -198,7 +198,7 @@
     <!--============================
         HOT DEALS START
     ==============================-->
-        @include('frontend.home.sections.hot-deals')
+        {{-- @include('frontend.home.sections.hot-deals') --}}
     <!--============================
         HOT DEALS END
     ==============================-->
@@ -207,7 +207,7 @@
     <!--============================
         ELECTRONIC PART START
     ==============================-->
-        @include('frontend.home.sections.category-product-slider-one')
+        {{-- @include('frontend.home.sections.category-product-slider-one') --}}
     <!--============================
         ELECTRONIC PART END
     ==============================-->
@@ -216,7 +216,7 @@
     <!--============================
         ELECTRONIC PART START
     ==============================-->
-        @include('frontend.home.sections.category-product-slider-two')
+        {{-- @include('frontend.home.sections.category-product-slider-two') --}}
     <!--============================
         ELECTRONIC PART END
     ==============================-->
@@ -225,7 +225,7 @@
     <!--============================
         LARGE BANNER  START
     ==============================-->
-        @include('frontend.home.sections.large-banner')
+        {{-- @include('frontend.home.sections.large-banner') --}}
     <!--============================
         LARGE BANNER  END
     ==============================-->
@@ -234,7 +234,7 @@
     <!--============================
         WEEKLY BEST ITEM START
     ==============================-->
-        @include('frontend.home.sections.weekly-best')
+        {{-- @include('frontend.home.sections.weekly-best') --}}
     <!--============================
         WEEKLY BEST ITEM END
     ==============================-->
@@ -243,7 +243,7 @@
     <!--============================
       HOME SERVICES START
     ==============================-->
-        @include('frontend.home.sections.services')
+        {{-- @include('frontend.home.sections.services') --}}
     <!--============================
         HOME SERVICES END
     ==============================-->
@@ -252,7 +252,7 @@
     <!--============================
         HOME BLOGS START
     ==============================-->
-        @include('frontend.home.sections.blogs')
+        {{-- @include('frontend.home.sections.blogs') --}}
     <!--============================
         HOME BLOGS END
     ==============================-->
