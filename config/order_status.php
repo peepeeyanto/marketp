@@ -18,6 +18,14 @@ return [
             'status' => 'Terkirim',
             'details' => 'Pesanan telah sampai ke alamat tujuan'
         ],
+        '4' => [
+            'status' => 'Selesai',
+            'details' => 'Transaksi Berhasil'
+        ],
+        5 => [
+            'status' => 'Dibatalkan',
+            'details' => 'Pesanan telah dibatalkan'
+        ]
     ],
 
     'order_status_vendor' => [
@@ -37,5 +45,13 @@ return [
             'status' => 'Terkirim',
             'details' => 'Pesanan telah sampai ke alamat tujuan'
         ],
+        '4' => [
+            'status' => 'Selesai',
+            'details' => 'Transaksi Berhasil'
+        ],
+        5 => [
+            'status' => 'Dibatalkan',
+            'details' => 'Pesanan telah dibatalkan'
+        ]
     ]
 ];

@@ -42,7 +42,30 @@ class orderDataTable extends DataTable
                     return '<span class="badge bg-danger">Pending</span>';
                 }
             })
-            ->rawColumns(['action', 'payment_status'])
+            ->addColumn('order_status', function($query){
+                switch($query->order_status){
+                    case 0:
+                        return '<span class="badge bg-info">Pending</span>';
+                        break;
+                    case 1:
+                        return '<span class="badge bg-secondary">Sedang Diproses</span>';
+                        break;
+                    case 2:
+                        return '<span class="badge bg-primary">Dropped off</span>';
+                        break;
+                    case 3:
+                        return '<span class="badge bg-warning">Terkirim</span>';
+                        break;
+                    case 4:
+                        return '<span class="badge bg-success">Selesai</span>';
+                        break;
+                    case 5:
+                        return '<span class="badge bg-danger">Batal</span>';
+                        break;
+                };
+
+            })
+            ->rawColumns(['action', 'payment_status', 'order_status'])
             ->setRowId('id');
     }
 

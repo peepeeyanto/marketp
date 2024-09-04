@@ -132,6 +132,17 @@
                           </select>
                         </div>
                       </div>
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="">Status pembayaran</label>
+                          <select name="payment_status" id="payment_status" data-id="{{ $order->id }}" class="form-control">
+                                <option {{$order->payment_status == '0'? 'selected' : ''}} value="0">Pending</option>
+                                <option {{$order->payment_status == '1'? 'selected' : ''}} value="1">Success</option>
+                          </select>
+                        </div>
+                      </div>
+
                       {{-- <div class="section-title">Payment Method</div>
                       <p class="section-lead">The payment method that we provide is to make it easier for you to pay invoices.</p>
                       <div class="images">
@@ -162,11 +173,11 @@
             </div>
             <hr>
             <div class="text-md-right">
-              <div class="float-lg-left mb-lg-0 mb-3">
+              {{-- <div class="float-lg-left mb-lg-0 mb-3">
                 <button class="btn btn-primary btn-icon icon-left"><i class="fas fa-credit-card"></i> Process Payment</button>
                 <button class="btn btn-danger btn-icon icon-left"><i class="fas fa-times"></i> Cancel</button>
-              </div>
-              <button class="btn btn-warning btn-icon icon-left"><i class="fas fa-print"></i> Print</button>
+              </div> --}}
+              <button class="btn btn-warning btn-icon icon-left print_invoice"><i class="fas fa-print"></i> Print</button>
             </div>
           </div>
       </div>
@@ -200,6 +211,36 @@
                 }
             })
         })
+
+        $('#payment_status').on('change', function () {
+            let status = $(this).val();
+            let id = $(this).data('id');
+            $.ajax({
+                method: 'GET',
+                url: '{{ route('admin.order.payment_status') }}',
+                data: {
+                    payment_status : status,
+                    id: id
+                },
+                success: function (data) {
+                    if(data.status == 'success'){
+                        toastr.success(data.message);
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            })
+        })
+    })
+
+    $('.print_invoice').on('click', function () {
+        let contentBody = $('.invoice-print');
+        let originalContent = $('body').html();
+
+        $('body').html(contentBody.html());
+        window.print();
+        $('body').html(originalContent);
     })
     </script>
 @endpush

@@ -63,7 +63,11 @@ class orderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $order = order::findOrFail($id);
+        $order->orderProduct()->delete();
+        $order->transaction()->delete();
+        $order->delete();
+        return response(['status' =>'success','message' => 'Order Berhasil Dihapus']);
     }
 
     public function changeStatus(Request $request){
@@ -71,5 +75,12 @@ class orderController extends Controller
         $order->order_status = $request->status;
         $order->save();
         return response(['status' => 'success', 'message' =>'status berhasil diubah']);
+    }
+
+    public function changePaymentStatus (Request $request){
+        $order = order::findOrFail($request->id);
+        $order->payment_status  = $request->payment_status;
+        $order->save();
+        return response(['status' =>'success','message' => 'payment status berhasil diubah']);
     }
 }

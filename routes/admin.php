@@ -53,5 +53,6 @@ Route::put('shipping-rule/change-status', [shippingRuleController::class, 'chang
 Route::resource('shipping-rule', shippingRuleController::class);
 
 Route::get('order-status', [orderController::class,'changeStatus'])->name('order.status');
+Route::get('payment-status', [orderController::class, 'changePaymentStatus'])->name('order.payment_status');
 Route::resource('order', orderController::class);
 
