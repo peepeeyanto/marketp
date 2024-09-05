@@ -119,7 +119,7 @@
                                 <li><a href="brands.html">brands</a></li>
                             </ul>
                         </li> --}}
-                        <li><a href="track_order.html">Lacak Pesanan</a></li>
+                        <li><a href="{{ route('trackOrder') }}">Lacak Pesanan</a></li>
                         {{-- <li><a href="daily_deals.html">daily deals</a></li> --}}
                     </ul>
                     <ul class="wsus__menu_item wsus__menu_item_right">

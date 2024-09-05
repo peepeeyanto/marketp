@@ -8,6 +8,7 @@ use App\Http\Controllers\frontend\cartController;
 use App\Http\Controllers\frontend\demoProduct;
 use App\Http\Controllers\frontend\frontendProductController;
 use App\Http\Controllers\frontend\gradingController;
+use App\Http\Controllers\frontend\trackOrderController;
 use App\Http\Controllers\frontend\userAddressController;
 use App\Http\Controllers\frontend\userDashboardController;
 use App\Http\Controllers\frontend\userProfileController;
@@ -71,3 +72,5 @@ Route::post('cart/remove-sideProduct', [cartController::class,'removeSideProduct
 Route::get('cart/get-subtotal', [cartController::class,'getSubTotal'])->name('cart-subtotal');
 Route::get('grading', [gradingController::class, 'index'])->name('grading');
 Route::get('demoproduct', [demoProduct::class, 'index'])->name('demo.product');
+Route::get('order-track', [trackOrderController::class, 'index'])->name('trackOrder');
+Route::post('order-track/public', [trackOrderController::class, 'trackstatus'])->name('trackstatus');
