@@ -11,34 +11,30 @@
                     <div class="wsus__check_form">
                         <h5>Billing Details <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">add new address</a></h5>
                         <div class="row">
-                            @foreach ($addresses as $address)
-                                <div class="col-xl-6">
+                                <div class="col-xl-12">
                                     <div class="wsus__checkout_single_address">
                                         <div class="form-check">
-                                            <input class="form-check-input ship_address" type="radio" data-id="{{$address->id}}" name="flexRadioDefault" id="flexRadioDefault1" >
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Select Address
-                                            </label>
+                                            <h5>
+                                                Alamat Pengiriman
+                                            </h5>
                                         </div>
                                         <ul>
-                                            <li><span>Name :</span> {{ $address->name }}</li>
-                                            <li><span>Phone :</span> {{ $address->phone }}</li>
-                                            <li><span>State :</span> {{ $address->state }}</li>
-                                            <li><span>City :</span> {{ $address->city }}</li>
-                                            <li><span>Zip Code :</span> {{ $address->zip }}</li>
-                                            <li><span>Address :</span> {{ $address->address }}</li>
+                                            <li><span>Name :</span> {{ $addresses->name }}</li>
+                                            <li><span>Phone :</span> {{ $addresses->phone }}</li>
+                                            <li><span>State :</span> {{ $addresses->state }}</li>
+                                            <li><span>City :</span> {{ $addresses->city }}</li>
+                                            <li><span>Zip Code :</span> {{ $addresses->zip }}</li>
+                                            <li><span>Address :</span> {{ $addresses->address }}</li>
                                         </ul>
                                     </div>
                                 </div>
-                            @endforeach
-
                         </div>
                     </div>
                 </div>
 
                 <div class="col-xl-4 col-lg-5">
                     <div class="wsus__order_details" id="sticky_sidebar">
-                        <p class="wsus__product">shipping Methods</p>
+                        {{-- <p class="wsus__product">shipping Methods</p>
 
                         @foreach ($shippingMethod as $method)
 
@@ -60,7 +56,10 @@
                                 </div>
                             @endif
 
-                        @endforeach
+                        @endforeach --}}
+
+
+
 
                         <div class="wsus__order_details_summery">
                             <p>subtotal: <span>Rp{{ getSubTotal() }}</span></p>
@@ -85,6 +84,38 @@
                         </form>
 
                         <a href="" id="submitCheckoutForm" class="common_btn">Place Order</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-xl-8">
+                    <div class="wsus__check_form">
+                        <h5>Pengiriman</h5>
+
+                        @foreach ($groupedCart as $key=>$vendorItems)
+                            <div class="wsus__checkout_single_address">
+                                <div class="row">
+                                    <div class="col-xl-8">
+                                        <h5>{{ $vendorInfo[$key][0]['shop_name'] }}</h5>
+                                        Produk:
+                                        @foreach ($vendorItems as $items)
+                                            <p>{{ $items->name }}</p>
+                                        @endforeach
+                                    </div>
+
+                                    <div class="col-xl-4 d-flex justify-content-end align-items-center">
+                                        <select name="" id="" style="width: 100%">
+                                            <option value="">Pilih pengiriman</option>
+                                            @foreach ($responses[$key]->pricing as $value)
+                                                <option value="">{{ $value->courier_name}} {{$value->courier_service_name}} (Harga:{{ $value->price }})</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
@@ -178,11 +209,14 @@
                 e.preventDefault();
                 if($('#ship_id').val() == ''){
                     toastr.error('Metode Pengiriman perlu diisi');
-                }else if($('#add_id').val() == ''){
+                }
+                else if($('#add_id').val() == ''){
                     toastr.error('Alamat pengiriman perlu diisi');
-                }else if(!$('.agree-tos').prop('checked')){
+                }
+                else if(!$('.agree-tos').prop('checked')){
                     toastr.error('Anda harus menyetujui syarat dan ketentuan');
-                }else{
+                }
+                else{
                     $.ajax({
                     url: '{{ route('user.checkout.submit') }}',
                     method: 'post',

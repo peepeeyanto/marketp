@@ -53,7 +53,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::post('/profile', [userProfileController::class, 'updatePassword'])->name('profile.update.password');
     Route::resource('/address', userAddressController::class);
 
-    Route::get('checkout', [checkOutController::class, 'index'])->name('checkout');
+    Route::get('checkout/', [checkOutController::class, 'index'])->name('checkout');
+    Route::get('checkout/addresses/{addressID}', [checkOutController::class, 'checkoutSpecific'])->name('checkout.address.specific');
     Route::post('checkout/address', [checkOutController::class,'storeAddress'])->name('checkout.address.create');
     Route::post('checkout/form-submit', [checkOutController::class,'checkoutSubmit'])->name('checkout.submit');
     Route::get('payment/{payId}', [paymentController::class, 'index'])->name('pay');

@@ -13,6 +13,10 @@ COCOHub - Alamat
               <form action="{{ route('user.address.store') }}" method="POST">
                 @csrf
                 <div class="row">
+
+                    <input type="hidden" name="latitude"  value="" class='lat'>
+                    <input type="hidden" name="longitude" value="" class='long'>
+
                   <div class="col-xl-6 col-md-6">
                     <div class="wsus__add_address_single">
                       <label>name <b>*</b></label>
@@ -55,6 +59,13 @@ COCOHub - Alamat
                     </div>
                   </div>
 
+                  <div class="col-xl-12">
+                    <div class="wsus__add_address_single">
+                        <div id="map" style="height:500px; width:100%">
+                        </div>
+                    </div>
+                  </div>
+
                   <div>
                     <button type="submit" class="common_btn">Submit</button>
                   </div>
@@ -67,3 +78,33 @@ COCOHub - Alamat
     </div>
   </section>
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function(){
+            var map = L.map('map').setView([-6.174475073397235, 106.8274102920588], 13);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            var marker;
+
+            function onMapClick(e) {
+                var latitude = e.latlng.lat;
+                var longitude = e.latlng.lng;
+
+                $('.lat').val(latitude);
+                $('.long').val(longitude);
+                console.log('Latitude:', latitude, 'Longitude:', longitude);
+                if (marker) {
+                    map.removeLayer(marker);
+                }
+
+                marker = L.marker([latitude, longitude]).addTo(map);
+            }
+
+            map.on('click', onMapClick);
+        })
+    </script>
+@endpush

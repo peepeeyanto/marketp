@@ -9,17 +9,89 @@ use App\Models\product;
 use App\Models\shippingRule;
 use App\Models\transaction;
 use App\Models\userAddress;
+use App\Models\vendor;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
 class checkOutController extends Controller
 {
     public function index(){
-        $addresses = userAddress::where('user_id', Auth::user()->id)->get();
-        $shippingMethod = shippingRule::where('status', '1')->get();
-        return view('frontend.pages.checkout', compact('addresses', 'shippingMethod'));
+        $addresses = userAddress::where('user_id', Auth::user()->id)->first();
+
+        $groupedCart = Cart::content()->groupBy(function ($item) {
+            return $item->options->vendor_id;
+        });
+
+        $vendorInfo = [];
+        foreach ($groupedCart as $key => $value) {
+            $vendorInfo[$key] = vendor::where('id',$key)->select('shop_name', 'address')->get()->toarray();
+        }
+
+        $url = '';
+        $data = [];
+        $items = [];
+
+        foreach($groupedCart as $key1=>$vend){
+            foreach($vend as $key2=> $item){
+                $items[$key1][$key2] = [
+                    "name"=>$item->name,
+                    'weight'=>200,
+                    'quantity'=>$item->qty
+                ];
+            }
+        }
+
+
+        foreach($vendorInfo as $key=>$value){
+            $data[$key] = [
+                "origin_postal_code" => $value[0]['address'],
+                "destination_postal_code" => $addresses->zip,
+                "couriers" => "jne",
+                "items" => $items[$key]
+            ];
+        }
+        // dd(json_encode($data))->all();
+
+        // $shippingMethod = shippingRule::where('status', '1')->get();
+
+        $shippingMethod = [];
+        $url = 'https://api.biteship.com/v1/rates/couriers';
+        $header = ['authorization' => config('biteship.apikey'), 'content-type' => 'application/json'];
+        foreach($data as $key => $value){
+            $shippingMethod[$key] = Http::withHeaders($header)->post($url, $value);
+        }
+
+        $responses = [];
+        foreach($shippingMethod as $key=>$value){
+            $responses[$key] = json_decode($value->body());
+        }
+
+        // dd($responses);
+
+        return view('frontend.pages.checkout', compact('addresses', 'groupedCart', 'vendorInfo', 'responses'));
+    }
+
+
+    public function checkoutSpecific(string $addressId){
+        $addresses = userAddress::where('user_id', Auth::user()->id)->where('')->get();
+
+        $groupedCart = Cart::content()->groupBy(function ($item) {
+            return $item->options->vendor_id;
+        });
+
+        $vendorInfo = [];
+        foreach ($groupedCart as $key => $value) {
+            $vendorInfo[$key] = vendor::where('id',$key)->select('shop_name', 'address')->get()->toarray();
+        }
+
+        // dd($groupedCart)->all();
+        // $shippingMethod = shippingRule::where('status', '1')->get();
+
+        $shippingMethod = [];
+        return view('frontend.pages.checkout', compact('addresses', 'groupedCart', 'vendorInfo'));
     }
 
     public function storeAddress(Request $request){

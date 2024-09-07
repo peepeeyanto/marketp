@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\sellerController;
+use App\Http\Controllers\backend\sellerOrderController;
 use App\Http\Controllers\backend\sellerProductController;
 use App\Http\Controllers\backend\sellerProductImageGalleryController;
 use App\Http\Controllers\backend\sellerProductsVariantItemController;
@@ -27,4 +28,6 @@ Route::put('products-variant-item-update/{variantItemID}', [sellerProductsVarian
 Route::delete('products-variant-item/{variantItemID}', [sellerProductsVariantItemController::class, 'destroy'])->name('products-variant-item.destroy');
 Route::put('products-variant-item-status', [sellerProductsVariantItemController::class, 'changeStatus'])->name('products-variant-item.changeStatus');
 Route::get('products-variant-item/{productID}/{variantID}', [sellerProductsVariantItemController::class, 'index'])->name('products-variant-item.index');
-
+Route::get('orders', [sellerOrderController::class, 'index'])->name('orders.index');
+Route::get('orders/show/{id}', [sellerOrderController::class,'show'])->name('orders.show');
+Route::get('orders/changeStatus/{id}', [sellerOrderController::class, 'changeStatus'])->name('orders.changeStatus');
