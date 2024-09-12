@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\adminController;
 use App\Http\Controllers\backend\checkOutController;
 use App\Http\Controllers\backend\paymentController;
 use App\Http\Controllers\backend\sellerController;
+use App\Http\Controllers\backend\yoloGrading;
 use App\Http\Controllers\frontend\cartController;
 use App\Http\Controllers\frontend\demoProduct;
 use App\Http\Controllers\frontend\frontendProductController;
@@ -69,5 +70,7 @@ Route::get('cart-count', [cartController::class, 'cartCount'])->name('cart-count
 Route::get('cart-product', [cartController::class, 'getCartProduct'])->name('cart-product');
 Route::post('cart/remove-sideProduct', [cartController::class,'removeSideProduct'])->name('cart-removeSideProduct');
 Route::get('cart/get-subtotal', [cartController::class,'getSubTotal'])->name('cart-subtotal');
+Route::get('yoloGrading', [yoloGrading::class, 'index'])->name('grading.yolo');
+Route::post('yoloGrading/predict', [yoloGrading::class, 'predict'])->name('grading.yolo.predict');
 Route::get('grading', [gradingController::class, 'index'])->name('grading');
 Route::get('demoproduct', [demoProduct::class, 'index'])->name('demo.product');
