@@ -6,6 +6,7 @@ use App\Http\Controllers\backend\sellerProductImageGalleryController;
 use App\Http\Controllers\backend\sellerProductsVariantItemController;
 use App\Http\Controllers\backend\sellerProductVariantController;
 use App\Http\Controllers\backend\sellerShopProfileController;
+use App\Http\Controllers\frontend\sellerOrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('dashboard', [sellerController::class, 'dashboard'])->name('dashboard');
@@ -28,3 +29,6 @@ Route::delete('products-variant-item/{variantItemID}', [sellerProductsVariantIte
 Route::put('products-variant-item-status', [sellerProductsVariantItemController::class, 'changeStatus'])->name('products-variant-item.changeStatus');
 Route::get('products-variant-item/{productID}/{variantID}', [sellerProductsVariantItemController::class, 'index'])->name('products-variant-item.index');
 
+Route::get('orders', [sellerOrderController::class, 'index'])->name('orders.index');
+Route::get('orders/show/{id}', [sellerOrderController::class,'show'])->name('orders.show');
+Route::get('orders/changeStatus/{id}', [sellerOrderController::class, 'changeStatus'])->name('orders.changeStatus');
