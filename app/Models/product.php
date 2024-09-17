@@ -18,4 +18,8 @@ class product extends Model
     public function vendor(){
         return $this->belongsTo(vendor::class);
     }
+
+    public function category(){
+        return $this->belongsTo(category::class);
+    }
 }

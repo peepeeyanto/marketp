@@ -47,4 +47,8 @@ class User extends Authenticatable
     public function vendor(){
         return $this->hasOne(vendor::class);
     }
+
+    public function address(){
+        return $this->hasMany(userAddress::class,'user_id');
+    }
 }

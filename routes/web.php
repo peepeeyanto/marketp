@@ -10,6 +10,7 @@ use App\Http\Controllers\frontend\frontendProductController;
 use App\Http\Controllers\frontend\gradingController;
 use App\Http\Controllers\frontend\userAddressController;
 use App\Http\Controllers\frontend\userDashboardController;
+use App\Http\Controllers\frontend\userOrderController;
 use App\Http\Controllers\frontend\userProfileController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\ProfileController;
@@ -57,8 +58,12 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::post('checkout/form-submit', [checkOutController::class,'checkoutSubmit'])->name('checkout.submit');
     Route::get('payment/{payId}', [paymentController::class, 'index'])->name('pay');
     Route::get('payment-success/{transactionID}', [paymentController::class, 'paySuccess'])->name('pay.success');
+    Route::get('orders', [userOrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/show/{id}', [userOrderController::class,'show'])->name('orders.show');
 });
 
+Route::get('change-product-list', [frontendProductController::class,'changeProductList'])->name('products.change');
+Route::get('products', [frontendProductController::class, 'productsIndex'])->name('products.index');
 Route::get('product-detail/{slug}', [frontendProductController::class, 'showProduct'])->name('product-detail');
 Route::post('add2cart', [cartController::class, 'add'])->name('add2cart');
 Route::get('cart-detail', [cartController::class,'cartDetail'])->name('cart-detail');
