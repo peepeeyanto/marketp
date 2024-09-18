@@ -292,7 +292,7 @@ COCOHub - Produk
                                                     </p>
                                                     <a class="wsus__pro_name" href="{{ route('product-detail', $product->slug) }}">{{ $product->name }}</a>
                                                     <p class="wsus__price">Rp{{ $product->price }}</p>
-                                                    <a class="add_cart" href="#">add to cart</a>
+                                                    {{-- <a class="add_cart" href="#">add to cart</a> --}}
                                                 </div>
                                             </div>
                                         </div>

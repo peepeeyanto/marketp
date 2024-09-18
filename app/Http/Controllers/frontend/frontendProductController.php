@@ -29,8 +29,19 @@ class frontendProductController extends Controller
                 return $query->where('price', '>=', $from)->where('price', '<=', $to);
             })
             ->paginate(12);
+        }elseif($request->has('search')){
+            $products = product::where(function($query) use ($request){
+                $query->where('name', 'like', '%'.$request->search.'%')->orWhere('long_description', 'like', '%'.$request->search.'%');
+            })
+            ->orWhereHas('category', function($query) use ($request){
+                $query->where('name', 'like', '%'.$request->search.'%')->orWhere('long_description', 'like', '%'.$request->search.'%');
+            })
+            ->paginate(12);
+        }else{
+            $products = product::paginate(12);
         }
 
+        // dd($request)->all();
         $categories = category::where('status', 1)->get();
         return view('frontend.pages.product', compact('products', 'categories'));
     }

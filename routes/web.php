@@ -8,6 +8,7 @@ use App\Http\Controllers\frontend\cartController;
 use App\Http\Controllers\frontend\demoProduct;
 use App\Http\Controllers\frontend\frontendProductController;
 use App\Http\Controllers\frontend\gradingController;
+use App\Http\Controllers\frontend\reviewController;
 use App\Http\Controllers\frontend\userAddressController;
 use App\Http\Controllers\frontend\userDashboardController;
 use App\Http\Controllers\frontend\userOrderController;
@@ -60,6 +61,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::get('payment-success/{transactionID}', [paymentController::class, 'paySuccess'])->name('pay.success');
     Route::get('orders', [userOrderController::class, 'index'])->name('orders.index');
     Route::get('orders/show/{id}', [userOrderController::class,'show'])->name('orders.show');
+
+    Route::post('review', [reviewController::class, 'create'])->name('review.create');
 });
 
 Route::get('change-product-list', [frontendProductController::class,'changeProductList'])->name('products.change');
