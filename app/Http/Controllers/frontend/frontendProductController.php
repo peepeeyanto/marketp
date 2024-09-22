@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Models\category;
 use App\Models\product;
+use App\Models\productReview;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -15,7 +16,8 @@ class frontendProductController extends Controller
         if (!$product) {
             abort(404);
         }
-        return view('frontend.pages.product-details', compact('product'));
+        $reviews = productReview::where('product_id', $product->id)->where('status', 1)->paginate(10);
+        return view('frontend.pages.product-details', compact('product', 'reviews'));
     }
 
     public function productsIndex(Request $request){

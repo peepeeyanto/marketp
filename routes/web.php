@@ -12,6 +12,7 @@ use App\Http\Controllers\frontend\reviewController;
 use App\Http\Controllers\frontend\userAddressController;
 use App\Http\Controllers\frontend\userDashboardController;
 use App\Http\Controllers\frontend\userOrderController;
+use App\Http\Controllers\frontend\userProductReviewController;
 use App\Http\Controllers\frontend\userProfileController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\ProfileController;
@@ -53,6 +54,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::put('/profile', [userProfileController::class, 'updateProfile'])->name('profile.update');
     Route::post('/profile', [userProfileController::class, 'updatePassword'])->name('profile.update.password');
     Route::resource('/address', userAddressController::class);
+    Route::get('/userReviews', [reviewController::class, 'index'])->name('productReview.index');
 
     Route::get('checkout', [checkOutController::class, 'index'])->name('checkout');
     Route::post('checkout/address', [checkOutController::class,'storeAddress'])->name('checkout.address.create');

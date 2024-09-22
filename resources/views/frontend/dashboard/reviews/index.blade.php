@@ -1,6 +1,6 @@
 @extends('frontend.dashboard.layouts.master')
 @section('title')
-COCOHub - Pesanan
+COCOHub - Ulasan
 @endsection
 @section('content')
 <section id="wsus__dashboard">
@@ -13,7 +13,7 @@ COCOHub - Pesanan
             <h3><i class="far fa-user"></i> Pesanan</h3>
             <div class="wsus__dashboard_profile">
               <div class="wsus__dash_pro_area">
-                <h4>Lihat Semua Pesanan</h4>
+                <h4>Lihat Semua Ulasan</h4>
                 {{ $dataTable->table() }}
               </div>
             </div>

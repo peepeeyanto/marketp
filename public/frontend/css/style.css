@@ -9504,3 +9504,10 @@ a:not([href]):not([class]):hover {
     height: 70px;
     object-fit: cover;
 }
+
+.wsus__pro_det_review .wsus__comment_text ul li {
+    width: 20% !important;
+    height: 20% !important;
+    margin-right: 10px;
+    float: left;
+}

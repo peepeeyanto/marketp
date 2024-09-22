@@ -3,7 +3,7 @@
     $shipping = json_decode($orders->shipping_method);
 @endphp
 
-@extends('seller.layouts.master')
+@extends('frontend.dashboard.layouts.master')
 @section('title')
 COCOHub - Pesanan
 @endsection
