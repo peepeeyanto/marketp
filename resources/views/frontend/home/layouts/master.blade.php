@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{asset('frontend/css/jquery.classycountdown.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/venobox.min.css')}}">
 
+    <link rel="stylesheet" href="{{asset('backend/assets/css/camerastyle.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">

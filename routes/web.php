@@ -14,6 +14,7 @@ use App\Http\Controllers\frontend\userDashboardController;
 use App\Http\Controllers\frontend\userOrderController;
 use App\Http\Controllers\frontend\userProductReviewController;
 use App\Http\Controllers\frontend\userProfileController;
+use App\Http\Controllers\frontend\yolov5Controller;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\ProfileController;
 use GuzzleHttp\Middleware;
@@ -81,3 +82,7 @@ Route::post('cart/remove-sideProduct', [cartController::class,'removeSideProduct
 Route::get('cart/get-subtotal', [cartController::class,'getSubTotal'])->name('cart-subtotal');
 Route::get('grading', [gradingController::class, 'index'])->name('grading');
 Route::get('demoproduct', [demoProduct::class, 'index'])->name('demo.product');
+Route::post('yolov5/apirequest', [yolov5Controller::class, 'detect'])->name('yolov5-request');
+route::get('yolov5/filegrade', [yolov5Controller::class, 'filegrade'])->name('yolov5-filegrade');
+Route::get('yolov5/cameragrade', [yolov5Controller::class, 'cameragrade'])->name('yolov5-cameragrade');
+Route::get('yolov5', [yolov5Controller::class,'index'])->name('yolov5-grading');
