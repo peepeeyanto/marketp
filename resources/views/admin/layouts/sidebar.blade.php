@@ -45,8 +45,9 @@
             <ul class="dropdown-menu">
               <li class="{{ setActive(['admin.vendor-profile.*']) }}"><a class="nav-link" href="{{ route('admin.vendor-profile.index') }}">Profil Penjual Admin</a></li>
               <li class="{{ setActive(['admin.products.*']) }}"><a class="nav-link" href="{{ route('admin.products.index') }}">Produk</a></li>
-              <li class="{{ setActive(['admin.vendor-product.*']) }}"><a class="nav-link" href="{{ route('admin.vendor-product.index') }}" }}">Produk Penjual</a></li>
+              <li class="{{ setActive(['admin.vendor-product.*']) }}"><a class="nav-link" href="{{ route('admin.vendor-product.index') }}">Produk Penjual</a></li>
               <li class="{{ setActive(['admin.shipping-rule.*']) }}"><a class="nav-link" href="{{ route('admin.shipping-rule.index') }}">Shipping</a></li>
+              <li class="{{ setActive(['admin.review.*']) }}"><a class="nav-link" href="{{ route('admin.review.index') }}">Ulasan</a></li>
             </ul>
         </li>
 

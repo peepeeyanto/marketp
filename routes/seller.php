@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\sellerController;
 use App\Http\Controllers\backend\sellerProductController;
 use App\Http\Controllers\backend\sellerProductImageGalleryController;
+use App\Http\Controllers\backend\sellerProductReviewController;
 use App\Http\Controllers\backend\sellerProductsVariantItemController;
 use App\Http\Controllers\backend\sellerProductVariantController;
 use App\Http\Controllers\backend\sellerShopProfileController;
@@ -32,3 +33,5 @@ Route::get('products-variant-item/{productID}/{variantID}', [sellerProductsVaria
 Route::get('orders', [sellerOrderController::class, 'index'])->name('orders.index');
 Route::get('orders/show/{id}', [sellerOrderController::class,'show'])->name('orders.show');
 Route::get('orders/changeStatus/{id}', [sellerOrderController::class, 'changeStatus'])->name('orders.changeStatus');
+
+Route::get('reviews', [sellerProductReviewController::class, 'index'])->name('reviews.index');

@@ -2,10 +2,9 @@
 
 namespace App\DataTables;
 
+use App\Models\adminProductReview;
 use App\Models\productReview;
-use App\Models\userProductReview;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -14,7 +13,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class userProductReviewsDataTable extends DataTable
+class adminProductReviewDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -27,7 +26,24 @@ class userProductReviewsDataTable extends DataTable
             ->addColumn('product', function($query){
                 return '<a href='.route('product-detail', $query->product->slug).'>'.$query->product->name.'</a>';
             })
-            ->rawColumns(['product'])
+            ->addColumn('user', function($query){
+                return $query->user->name;
+            })
+            ->addColumn('status', function($query){
+                if($query->status){
+                $button = '<label class="custom-switch mt-2">
+                        <input type="checkbox" name="custom-switch-checkbox" checked data-id="'.$query->id.'" class="custom-switch-input change-status">
+                        <span class="custom-switch-indicator"></span>
+                      </label>';
+                }else{
+                    $button = '<label class="custom-switch mt-2">
+                    <input type="checkbox" name="custom-switch-checkbox" data-id="'.$query->id.'" class="custom-switch-input change-status">
+                    <span class="custom-switch-indicator"></span>
+                  </label>';
+                }
+                return $button;
+            })
+            ->rawColumns(['product', 'status'])
             ->setRowId('id');
     }
 
@@ -36,7 +52,7 @@ class userProductReviewsDataTable extends DataTable
      */
     public function query(productReview $model): QueryBuilder
     {
-        return $model->where('user_id', Auth::user()->id)->newQuery();
+        return $model->newQuery();
     }
 
     /**
@@ -45,11 +61,11 @@ class userProductReviewsDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('userproductreviews-table')
+                    ->setTableId('adminproductreview-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(0)
+                    ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -69,8 +85,10 @@ class userProductReviewsDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('product'),
+            Column::make('user'),
             Column::make('review'),
             Column::make('rating'),
+            Column::make('status')
         ];
     }
 
@@ -79,6 +97,6 @@ class userProductReviewsDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'userProductReviews_' . date('YmdHis');
+        return 'adminProductReview_' . date('YmdHis');
     }
 }

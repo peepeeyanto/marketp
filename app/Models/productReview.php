@@ -16,4 +16,8 @@ class productReview extends Model
     public function productReviewGallery(){
         return $this->hasMany(productReviewGallery::class,'product_review_id');
     }
+
+    public function product(){
+        return $this->belongsTo(product::class, 'product_id');
+    }
 }

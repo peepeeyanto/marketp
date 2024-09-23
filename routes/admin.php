@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\adminController;
+use App\Http\Controllers\backend\adminProductReviewController;
 use App\Http\Controllers\backend\adminVendorProfile;
 use App\Http\Controllers\backend\categoryController;
 use App\Http\Controllers\backend\orderController;
@@ -56,3 +57,5 @@ Route::get('order-status', [orderController::class,'changeStatus'])->name('order
 Route::get('payment-status', [orderController::class, 'changePaymentStatus'])->name('order.payment_status');
 Route::resource('order', orderController::class);
 
+Route::put('reviews/change-status', [adminProductReviewController::class, 'changeStatus'])->name('review.change_status');
+Route::get('reviews', [adminProductReviewController::class,'index'])->name('review.index');

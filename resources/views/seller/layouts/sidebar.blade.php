@@ -8,6 +8,7 @@
       <li><a class="active" href="{{ route('seller.dashboard') }}"><i class="fas fa-tachometer"></i>Dashboard</a></li>
       <li><a href="dsahboard_profile.html"><i class="far fa-user"></i> My Profile</a></li>
       <li><a href="{{ route('seller.shop-profile.index') }}"><i class="far fa-user"></i> Shop Profile</a></li>
+      <li><a href="{{ route('seller.reviews.index') }}"><i class="far fa-user"></i> Ulasan</a></li>
       <li><a href="{{ route('seller.orders.index') }}"><i class="far fa-user"></i> Order</a></li>
       <li><a href="{{ route('seller.products.index') }}"><i class="far fa-user"></i> Produk</a></li>
       <li>

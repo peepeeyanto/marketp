@@ -3,7 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\order;
-use App\Models\sellerOrder;
+// use App\Models\sellerOrder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;

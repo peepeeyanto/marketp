@@ -51,6 +51,7 @@ class reviewController extends Controller
     }
 
     public function index(userProductReviewsDataTable $datatable){
+        // dd(Auth::user()->id);
         return $datatable->render('frontend.dashboard.reviews.index');
     }
 }

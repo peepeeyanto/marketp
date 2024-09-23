@@ -3,7 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\order;
-use App\Models\sellerOrder;
+// use App\Models\sellerOrder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
@@ -83,7 +83,7 @@ class userOrderDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('sellerorder-table')
+                    ->setTableId('userorder-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -126,6 +126,6 @@ class userOrderDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'sellerOrder_' . date('YmdHis');
+        return 'userOrder_' . date('YmdHis');
     }
 }
