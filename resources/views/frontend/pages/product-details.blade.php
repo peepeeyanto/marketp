@@ -39,12 +39,20 @@
 
                         <h4>Rp{{ $product->price }}</h4>
                         <p class="review">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>20 review</span>
+                            @php
+                                $avgRating = $product->reviews()->avg('rating');
+                                $roundedRating = round($avgRating);
+                            @endphp
+
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $roundedRating)
+                                    <i class="fas fa-star"></i>
+                                @else
+                                    <i class="far fa-star"></i>
+                                @endif
+                            @endfor
+
+                            <span>{{ count($product->reviews) }} review</span>
                         </p>
                         <p class="description">
                             {!! $product->short_description !!}

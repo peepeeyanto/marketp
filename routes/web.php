@@ -81,3 +81,5 @@ Route::post('cart/remove-sideProduct', [cartController::class,'removeSideProduct
 Route::get('cart/get-subtotal', [cartController::class,'getSubTotal'])->name('cart-subtotal');
 Route::get('grading', [gradingController::class, 'index'])->name('grading');
 Route::get('demoproduct', [demoProduct::class, 'index'])->name('demo.product');
+Route::get('sellers-product/{id}', [homeController::class,'sellerProductsPage'])->name('sellers-products');
+Route::get('sellers', [homeController::class, 'sellers'])->name('sellers');

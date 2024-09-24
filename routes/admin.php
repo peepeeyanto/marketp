@@ -4,12 +4,14 @@ use App\Http\Controllers\backend\adminController;
 use App\Http\Controllers\backend\adminProductReviewController;
 use App\Http\Controllers\backend\adminVendorProfile;
 use App\Http\Controllers\backend\categoryController;
+use App\Http\Controllers\backend\customerListController;
 use App\Http\Controllers\backend\orderController;
 use App\Http\Controllers\backend\productController;
 use App\Http\Controllers\backend\productImageGalleryController;
 use App\Http\Controllers\backend\productsVariantsController;
 use App\Http\Controllers\backend\productVariantController;
 use App\Http\Controllers\backend\profileController;
+use App\Http\Controllers\backend\sellerListController;
 use App\Http\Controllers\backend\shippingRuleController;
 use App\Http\Controllers\backend\sliderController;
 use App\Http\Controllers\backend\subCategoryController;
@@ -59,3 +61,9 @@ Route::resource('order', orderController::class);
 
 Route::put('reviews/change-status', [adminProductReviewController::class, 'changeStatus'])->name('review.change_status');
 Route::get('reviews', [adminProductReviewController::class,'index'])->name('review.index');
+
+Route::put('customers/change-status', [customerListController::class, 'changeStatus'])->name('customers.change-status');
+Route::get('customers', [customerListController::class, 'index'])->name('customers.index');
+
+Route::put('sellers/change-status', [sellerListController::class, 'changeStatus'])->name('sellers.change-status');
+Route::get('sellers', [sellerListController::class, 'index'])->name('sellers.index');

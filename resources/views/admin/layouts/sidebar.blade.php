@@ -21,6 +21,8 @@
             'admin.slider.*',
             'admin.category.*',
             'admin.subcategory.*',
+            'admin.customers.*',
+            'admin.sellers.*'
         ]) }}">
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage website</span></a>
           <ul class="dropdown-menu">
@@ -31,6 +33,12 @@
           </ul>
           <ul class="dropdown-menu">
             <li class="{{ setActive(['admin.subcategory.*']) }}"><a class="nav-link" href="{{ route('admin.subcategory.index') }}">Subcategory</a></li>
+          </ul>
+          <ul class="dropdown-menu">
+            <li class="{{ setActive(['admin.customers.*']) }}"><a class="nav-link" href="{{ route('admin.customers.index') }}">Customers</a></li>
+          </ul>
+          <ul class="dropdown-menu">
+            <li class="{{ setActive(['admin.sellers.*']) }}"><a class="nav-link" href="{{ route('admin.sellers.index') }}">Penjual</a></li>
           </ul>
         </li>
 

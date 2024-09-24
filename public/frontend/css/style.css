@@ -820,6 +820,7 @@ header {
 
 .toggle_menu {
   display: none;
+  z-index: 1002;
 }
 
 .wsus__menu_item {
