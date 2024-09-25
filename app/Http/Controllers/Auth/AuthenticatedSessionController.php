@@ -29,6 +29,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if($request->user()->status == 'inactive'){
+            Auth::guard('web')->logout();
+            $request->session()->regenerateToken();
+            toastr('Akun telah dinonaktifkan admin', 'error', 'Akun dinonaktifkan');
+            return redirect('/');
+        }
+
         if($request->user()->role == 'admin'){
             return redirect()->intended('/admin/dashboard');
         }elseif($request->user()->role == 'seller'){

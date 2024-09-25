@@ -24,7 +24,7 @@ class customerListDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
         ->addColumn('status', function($query){
-            if($query->status){
+            if($query->status == 'active'){
             $button = '<label class="custom-switch mt-2">
                     <input type="checkbox" name="custom-switch-checkbox" checked data-id="'.$query->id.'" class="custom-switch-input change-status">
                     <span class="custom-switch-indicator"></span>
