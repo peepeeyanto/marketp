@@ -101,7 +101,7 @@
                         </li> --}}
                         <li><a href="{{ route('demo.product') }}">Toko</a></li>
                         <li><a href="blog.html">Blog</a></li>
-                        <li><a href="{{ route('grading') }}">Cek Kualitas Kelapa</a></li>
+                        <li><a href="{{ route('yolov5-grading') }}">Cek Kualitas Kelapa</a></li>
                         {{-- <li class="wsus__relative_li"><a href="#">pages <i class="fas fa-caret-down"></i></a>
                             <ul class="wsus__menu_droapdown">
                                 <li><a href="404.html">404</a></li>

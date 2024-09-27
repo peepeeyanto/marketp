@@ -18,7 +18,7 @@ class yolov5Controller extends Controller
 
 
     public function cameragrade(){
-        return view('frontend.grading.cameragrade');
+        return view('frontend.grading.cameratest');
     }
 
     public function detect(Request $request){
@@ -40,5 +40,9 @@ class yolov5Controller extends Controller
             // Handle the case where the request failed
             abort(200);
         }
+    }
+
+    public function cameratest(){
+        return view('frontend.grading.cameratest');
     }
 }
