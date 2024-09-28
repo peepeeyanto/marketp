@@ -5,6 +5,7 @@ use App\Http\Controllers\backend\checkOutController;
 use App\Http\Controllers\backend\paymentController;
 use App\Http\Controllers\backend\sellerController;
 use App\Http\Controllers\frontend\cartController;
+use App\Http\Controllers\frontend\chatListController;
 use App\Http\Controllers\frontend\demoProduct;
 use App\Http\Controllers\frontend\frontendProductController;
 use App\Http\Controllers\frontend\gradingController;
@@ -68,6 +69,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::post('review', [reviewController::class, 'create'])->name('review.create');
 
     Route::get('chat/{id}', Chat::class)->name('chat');
+
+    Route::get('chat-list', [chatListController::class, 'index'])->name('chat-list');
 });
 
 Route::get('change-product-list', [frontendProductController::class,'changeProductList'])->name('products.change');

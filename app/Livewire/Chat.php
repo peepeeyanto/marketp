@@ -13,10 +13,20 @@ class Chat extends Component
     public $message = '';
     public function render()
     {
-        $messages = message::where('from_user_id', Auth::user()->id)
-        ->orWhere('from_user_id', $this->id->id)
-        ->orWhere('to_user_id', Auth::user()->id)
-        ->orWhere('to_user_id', $this->id->id)
+        // $messages = message::where('from_user_id', Auth::user()->id)
+        // ->orWhere('from_user_id', $this->id->id)
+        // ->orWhere('to_user_id', Auth::user()->id)
+        // ->orWhere('to_user_id', $this->id->id)
+        // ->get();
+
+        $messages = message::where(function($query){
+            $query->where('from_user_id', Auth::user()->id)
+            ->where('to_user_id', $this->id->id);
+        })
+        ->orWhere(function($query){
+            $query->where('from_user_id', $this->id->id)
+            ->where('to_user_id', Auth::user()->id);
+        })
         ->get();
 
         return view('livewire.chat', compact('messages'));

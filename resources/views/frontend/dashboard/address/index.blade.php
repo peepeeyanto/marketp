@@ -60,5 +60,5 @@ COCOHub - Alamat
         </div>
       </div>
     </div>
-  </section>
+</section>
 @endsection

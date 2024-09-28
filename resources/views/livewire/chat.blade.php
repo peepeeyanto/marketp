@@ -1,6 +1,6 @@
 <div>
     <div class="col-12 px-0">
-        <div class="px-4 py-5 chat-box bg-white">
+        <div class="px-4 py-5 chat-box bg-white" wire:poll>
 
           @foreach ($messages as $message)
           <div class="media w-50 {{ $message->from_user_id == Auth::user()->id ? 'ml-auto' : '' }} mb-3">
