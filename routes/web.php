@@ -16,6 +16,7 @@ use App\Http\Controllers\frontend\userProductReviewController;
 use App\Http\Controllers\frontend\userProfileController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Chat;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +66,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::get('orders/show/{id}', [userOrderController::class,'show'])->name('orders.show');
 
     Route::post('review', [reviewController::class, 'create'])->name('review.create');
+
+    Route::get('chat/{id}', Chat::class)->name('chat');
 });
 
 Route::get('change-product-list', [frontendProductController::class,'changeProductList'])->name('products.change');
