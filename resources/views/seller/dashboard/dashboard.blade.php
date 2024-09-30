@@ -8,6 +8,15 @@
         <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
           <div class="dashboard_content">
             <div class="wsus__dashboard">
+                @if (empty(Auth::user()->vendor->id))
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h4 class="card-title">Buat toko-mu sekarang!</h4>
+                            <a class="btn btn-primary" href="{{ route('seller.shop-profile.index')}}" type="button">Buat Toko</a>
+                        </div>
+                    </div>
+                @endif
+
               <div class="row">
                 <div class="col-xl-2 col-6 col-md-4">
                   <a class="wsus__dashboard_item red" href="dsahboard_order.html">

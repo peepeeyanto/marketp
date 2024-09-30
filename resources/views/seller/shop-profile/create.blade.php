@@ -11,37 +11,37 @@
             <h3><i class="far fa-user"></i> Shop Profile</h3>
             <div class="wsus__dashboard_profile">
               <div class="wsus__dash_pro_area">
-                <h4>Edit Profil Toko</h4>
-                <form action="{{route('seller.shop-profile.store')}}" method="POST" enctype="multipart/form-data">
+                <h4>Buat Toko</h4>
+                <form action="{{route('seller.shop-profile.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group wsus__sinput">
                         <label>Preview</label>
                         <br>
-                        <img width="200px" src="{{asset($profile->banner)}}" alt="">
+                        <img width="200px" src="{{ empty($profile->banner) ? asset('frontend/images/ts-2.jpg') : asset($profile->banner) }}" alt="">
                     </div>
                     <div class="form-group wsus__sinput">
-                        <label>Banner Image</label>
+                        <label>Gambar Banner</label>
                         <input type="file" name="banner" class="form-control">
                     </div>
                     <div class="form-group wsus__sinput">
-                        <label>Shop Name</label>
-                        <input type="text" name="shop_name" class="form-control" value="{{ $profile->shop_name }}">
+                        <label>Nama Toko</label>
+                        <input type="text" name="shop_name" class="form-control">
                     </div>
                     <div class="form-group wsus__sinput">
-                        <label>Phone</label>
-                        <input type="text" name="phone" class="form-control" value="{{ $profile->phone }}">
+                        <label>No. Handphone toko</label>
+                        <input type="text" name="phone" class="form-control">
                     </div>
                     <div class="form-group wsus__sinput">
                         <label>Email</label>
-                        <input type="text" name="email" class="form-control" value="{{ $profile->email }}">
+                        <input type="text" name="email" class="form-control">
                     </div>
                     <div class="form-group wsus__sinput">
-                        <label>Description</label>
-                        <textarea class="summernote" name="description">{{ $profile->description }}</textarea>
+                        <label>Deskripsi toko</label>
+                        <textarea class="summernote" name="description"></textarea>
                     </div>
                     <div class="form-group wsus__sinput">
-                        <label>Address</label>
-                        <input type="text" name="address" class="form-control" value="{{ $profile->address}}">
+                        <label>Kota</label>
+                        <input type="text" name="address" class="form-control" value="">
                     </div>
                     <button type="submit" class="btn btn-primary">Add</button>
                 </form>

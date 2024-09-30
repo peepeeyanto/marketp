@@ -5,12 +5,16 @@
     </span>
     <a href="{{ url('/') }}" class="dash_logo text-center mt-5"><h4 class="text-white">MarketP</h4></a>
     <ul class="dashboard_link">
+      <li><a class="active" href="{{ url('/') }}"><i class="fas fa-tachometer"></i>Halaman Utama</a></li>
       <li><a class="active" href="{{ route('seller.dashboard') }}"><i class="fas fa-tachometer"></i>Dashboard</a></li>
-      <li><a href="dsahboard_profile.html"><i class="far fa-user"></i> My Profile</a></li>
-      <li><a href="{{ route('seller.shop-profile.index') }}"><i class="far fa-user"></i> Shop Profile</a></li>
+      {{-- <li><a href="dsahboard_profile.html"><i class="far fa-user"></i> My Profile</a></li> --}}
+      @if (!empty(Auth::user()->vendor->id))
+      <li><a href="{{ route('seller.shop-profile.edit', Auth::user()->vendor->id) }}"><i class="far fa-user"></i> Shop Profile</a></li>
+      <li><a href="{{ route('seller.products.index') }}"><i class="far fa-user"></i> Produk</a></li>
       <li><a href="{{ route('seller.reviews.index') }}"><i class="far fa-user"></i> Ulasan</a></li>
       <li><a href="{{ route('seller.orders.index') }}"><i class="far fa-user"></i> Order</a></li>
-      <li><a href="{{ route('seller.products.index') }}"><i class="far fa-user"></i> Produk</a></li>
+      @endif
+
       <li>
         <form method="POST" action="{{ route('logout') }}">
             @csrf

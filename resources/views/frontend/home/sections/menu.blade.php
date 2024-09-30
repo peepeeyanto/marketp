@@ -125,7 +125,7 @@
                     <ul class="wsus__menu_item wsus__menu_item_right">
                         {{-- <li><a href="contact.html">contact</a></li> --}}
                         <li><a href="dsahboard.html">Dashboard</a></li>
-                        <li><a href="{{route('login')}}">login</a></li>
+                        <li><a href="{{route('login')}}">Login/Daftar</a></li>
                     </ul>
                 </div>
             </div>
