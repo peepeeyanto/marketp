@@ -19,6 +19,8 @@ class Chat extends Component
         // ->orWhere('to_user_id', $this->id->id)
         // ->get();
 
+        $name = User::findOrFail($this->id->id)->name;
+
         $messages = message::where(function($query){
             $query->where('from_user_id', Auth::user()->id)
             ->where('to_user_id', $this->id->id);
@@ -29,7 +31,7 @@ class Chat extends Component
         })
         ->get();
 
-        return view('livewire.chat', compact('messages'));
+        return view('livewire.chat', compact('messages', 'name'));
     }
 
     public function sendMessage() {

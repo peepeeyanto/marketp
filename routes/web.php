@@ -17,6 +17,7 @@ use App\Http\Controllers\frontend\userProductReviewController;
 use App\Http\Controllers\frontend\userProfileController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Assistant;
 use App\Livewire\Chat;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -71,6 +72,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::get('chat/{id}', Chat::class)->name('chat');
 
     Route::get('chat-list', [chatListController::class, 'index'])->name('chat-list');
+
+    Route::get('assistant', Assistant::class)->name('assistant');
 });
 
 Route::get('change-product-list', [frontendProductController::class,'changeProductList'])->name('products.change');

@@ -8,7 +8,7 @@ COCOHub - Produk
     <section id="wsus__product_page">
         <div class="container">
             <div class="row">
-                <div class="col-xl-12">
+                {{-- <div class="col-xl-12">
                     <div class="wsus__pro_page_bammer">
                         <img src="images/pro_banner_1.jpg" alt="banner" class="img-fluid w-100">
                         <div class="wsus__pro_page_bammer_text">
@@ -20,7 +20,7 @@ COCOHub - Produk
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-xl-3 col-lg-4">
                     <div class="wsus__sidebar_filter ">
                         <p>filter</p>
@@ -75,139 +75,6 @@ COCOHub - Produk
                                     </div>
                                 </div>
                             </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingThree2">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseThree2" aria-expanded="false"
-                                        aria-controls="collapseThree">
-                                        size
-                                    </button>
-                                </h2>
-                                <div id="collapseThree2" class="accordion-collapse collapse show"
-                                    aria-labelledby="headingThree2" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                small
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                medium
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckChecked2">
-                                            <label class="form-check-label" for="flexCheckChecked2">
-                                                large
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingThree3">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseThree3" aria-expanded="false"
-                                        aria-controls="collapseThree">
-                                        brand
-                                    </button>
-                                </h2>
-                                <div id="collapseThree3" class="accordion-collapse collapse show"
-                                    aria-labelledby="headingThree3" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault11">
-                                            <label class="form-check-label" for="flexCheckDefault11">
-                                                gentle park
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckChecked22">
-                                            <label class="form-check-label" for="flexCheckChecked22">
-                                                colors
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckChecked222">
-                                            <label class="form-check-label" for="flexCheckChecked222">
-                                                yellow
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckChecked33">
-                                            <label class="form-check-label" for="flexCheckChecked33">
-                                                enice man
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckChecked333">
-                                            <label class="form-check-label" for="flexCheckChecked333">
-                                                plus point
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingThree">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseThree" aria-expanded="true"
-                                        aria-controls="collapseThree">
-                                        color
-                                    </button>
-                                </h2>
-                                <div id="collapseThree" class="accordion-collapse collapse show"
-                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefaultc1">
-                                            <label class="form-check-label" for="flexCheckDefaultc1">
-                                                black
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckCheckedc2">
-                                            <label class="form-check-label" for="flexCheckCheckedc2">
-                                                white
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckCheckedc3">
-                                            <label class="form-check-label" for="flexCheckCheckedc3">
-                                                green
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckCheckedc4">
-                                            <label class="form-check-label" for="flexCheckCheckedc4">
-                                                pink
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckCheckedc5">
-                                            <label class="form-check-label" for="flexCheckCheckedc5">
-                                                red
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -231,24 +98,6 @@ COCOHub - Produk
                                         </button>
                                     </div>
 
-                                    <div class="wsus__topbar_select">
-                                        <select class="select_2" name="state">
-                                            <option>default shorting</option>
-                                            <option>short by rating</option>
-                                            <option>short by latest</option>
-                                            <option>low to high </option>
-                                            <option>high to low</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="wsus__topbar_select">
-                                    <select class="select_2" name="state">
-                                        <option>show 12</option>
-                                        <option>show 15</option>
-                                        <option>show 18</option>
-                                        <option>show 21</option>
-                                    </select>
-                                </div>
                             </div>
                         </div>
                         <div class="tab-content" id="v-pills-tabContent">
@@ -287,7 +136,7 @@ COCOHub - Produk
                                                             $avgRating = $product->reviews()->avg('rating');
                                                             $roundedRating = round($avgRating);
                                                         @endphp
-                        
+
                                                         @for ($i = 1; $i <= 5; $i++)
                                                             @if ($i <= $roundedRating)
                                                                 <i class="fas fa-star"></i>
@@ -295,7 +144,7 @@ COCOHub - Produk
                                                                 <i class="far fa-star"></i>
                                                             @endif
                                                         @endfor
-                        
+
                                                         <span>{{ count($product->reviews) }} review</span>
                                                     </p>
                                                     <a class="wsus__pro_name" href="{{ route('product-detail', $product->slug) }}">{{ $product->name }}</a>
@@ -369,7 +218,7 @@ COCOHub - Produk
                                                             $avgRating = $product->reviews()->avg('rating');
                                                             $roundedRating = round($avgRating);
                                                         @endphp
-                        
+
                                                         @for ($i = 1; $i <= 5; $i++)
                                                             @if ($i <= $roundedRating)
                                                                 <i class="fas fa-star"></i>
@@ -377,7 +226,7 @@ COCOHub - Produk
                                                                 <i class="far fa-star"></i>
                                                             @endif
                                                         @endfor
-                        
+
                                                         <span>{{ count($product->reviews) }} review</span>
                                                     </p>
                                                     <a class="wsus__pro_name" href="{{ route('product-detail', $product->slug) }}">{{ $product->name }}</a>

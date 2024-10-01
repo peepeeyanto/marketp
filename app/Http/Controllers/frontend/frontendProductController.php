@@ -45,6 +45,10 @@ class frontendProductController extends Controller
 
         // dd($request)->all();
         $categories = category::where('status', 1)->get();
+        if(!Session::has('product_list_style')){
+            Session::put('product_list_style', 'grid');
+        }
+
         return view('frontend.pages.product', compact('products', 'categories'));
     }
 

@@ -1,13 +1,15 @@
 <div>
+    <h4 class="mt-3 mb-2 ms-2">Chat dengan: {{ $name }} </h4>
     <div class="col-12 px-0">
+        
         <div class="px-4 py-5 chat-box bg-white" wire:poll>
 
           @foreach ($messages as $message)
-          <div class="media w-50 {{ $message->from_user_id == Auth::user()->id ? 'ml-auto' : '' }} mb-3">
+          <div class="media w-50 {{ $message->from_user_id == Auth::user()->id ? 'ms-auto' : '' }} mb-3">
             @if ($message->from_user_id != Auth::user()->id)
-                <img src="{{ asset($message->fromUser->image) }}" alt="Generic placeholder image" width="50" height="50" class="mr-3 rounded-circle">
+                <img src="{{ asset($message->fromUser->image) }}" alt="Generic placeholder image" width="50" height="50" class="me-3 rounded-circle">
             @endif
-            <div class="media-body ml-3">
+            <div class="media-body ms-3">
               <div class="{{$message->from_user_id == Auth::user()->id ? 'bg-primary' : 'bg-light'}} rounded py-2 px-3 mb-2">
                 <p class="text-small mb-0 {{ $message->from_user_id == Auth::user()->id ? 'text-white' : 'text-muted' }}">{{ $message->message }}</p>
               </div>

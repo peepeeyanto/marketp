@@ -100,7 +100,7 @@
                             </div>
                         </li> --}}
                         <li><a href="{{ route('sellers') }}">Toko</a></li>
-                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="{{ route('products.index') }}">Produk</a></li>
                         <li><a href="{{ route('grading') }}">Cek Kualitas Kelapa</a></li>
                         {{-- <li class="wsus__relative_li"><a href="#">pages <i class="fas fa-caret-down"></i></a>
                             <ul class="wsus__menu_droapdown">
@@ -119,13 +119,26 @@
                                 <li><a href="brands.html">brands</a></li>
                             </ul>
                         </li> --}}
-                        <li><a href="track_order.html">Lacak Pesanan</a></li>
+                        {{-- <li><a href="track_order.html">Lacak Pesanan</a></li> --}}
                         {{-- <li><a href="daily_deals.html">daily deals</a></li> --}}
                     </ul>
                     <ul class="wsus__menu_item wsus__menu_item_right">
                         {{-- <li><a href="contact.html">contact</a></li> --}}
-                        <li><a href="dsahboard.html">Dashboard</a></li>
-                        <li><a href="{{route('login')}}">Login/Daftar</a></li>
+
+
+
+                        @if (Auth::check())
+                            @if (Auth::user()->role == 'admin')
+                                <li><a href={{route('admin.dashboard')}}>Dashboard</a></li>
+                            @elseif (Auth::user()->role == 'seller')
+                                <li><a href={{route('seller.dashboard')}}>Dashboard</a></li>
+                            @elseif (Auth::user()->role == 'user')
+                                <li><a href={{route('user.dashboard')}}>Dashboard</a></li>
+                            @endif
+                        @else
+                            <li><a href="{{route('login')}}">Login/Daftar</a></li>
+                        @endif
+
                     </ul>
                 </div>
             </div>
