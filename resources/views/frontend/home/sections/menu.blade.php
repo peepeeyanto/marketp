@@ -28,7 +28,18 @@
                                 @endif
                             </li>
                         @endforeach
-                        <li><a href="#"><i class="fal fa-gem"></i> View All Categories</a></li>
+                        <li><a href="#"><i class="fal fa-gem"></i> Semua kategori</a></li>
+
+                        @if (Auth::check())
+                        <li><a class="wsus__droap_arrow" href="{{route('user.dashboard')}}"> Akun</a>
+                            <ul class="wsus_menu_cat_droapdown">
+                                <li><a href="">Profil saya</a></li>
+                                <li><a href="">Pesanan</a></li>
+                                <li><a href="">Alamat</a></li>
+                                <li><a href="">Chat</a></li>
+                            </ul>
+                        </li>
+                    @endif
                     </ul>
 
                     <ul class="wsus__menu_item">
@@ -119,7 +130,7 @@
                                 <li><a href="brands.html">brands</a></li>
                             </ul>
                         </li> --}}
-                        {{-- <li><a href="track_order.html">Lacak Pesanan</a></li> --}}
+                        <li><a href="{{ route('user.assistant') }}">Bantuan</a></li>
                         {{-- <li><a href="daily_deals.html">daily deals</a></li> --}}
                     </ul>
                     <ul class="wsus__menu_item wsus__menu_item_right">
@@ -131,10 +142,17 @@
                             @if (Auth::user()->role == 'admin')
                                 <li><a href={{route('admin.dashboard')}}>Dashboard</a></li>
                             @elseif (Auth::user()->role == 'seller')
-                                <li><a href={{route('seller.dashboard')}}>Dashboard</a></li>
-                            @elseif (Auth::user()->role == 'user')
-                                <li><a href={{route('user.dashboard')}}>Dashboard</a></li>
+                                <li><a href={{route('seller.dashboard')}}>Jualan sekarang!</a></li>
                             @endif
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();">
+                                        Log out
+                                    </a>
+                                </form>
+                            </li>
+
                         @else
                             <li><a href="{{route('login')}}">Login/Daftar</a></li>
                         @endif

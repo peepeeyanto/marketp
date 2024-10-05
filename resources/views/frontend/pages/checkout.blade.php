@@ -9,7 +9,11 @@
             <div class="row">
                 <div class="col-xl-8 col-lg-7">
                     <div class="wsus__check_form">
-                        <h5>Billing Details <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">add new address</a></h5>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="d-flex align-items-center">Alamat pengiriman</h5>
+                            <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">add new address</a>
+                        </div>
+
                         <div class="row">
                             @foreach ($addresses as $address)
                                 <div class="col-xl-6">
@@ -17,16 +21,16 @@
                                         <div class="form-check">
                                             <input class="form-check-input ship_address" type="radio" data-id="{{$address->id}}" name="flexRadioDefault" id="flexRadioDefault1" >
                                             <label class="form-check-label" for="flexRadioDefault1">
-                                                Select Address
+                                                Pilih alamat
                                             </label>
                                         </div>
                                         <ul>
-                                            <li><span>Name :</span> {{ $address->name }}</li>
-                                            <li><span>Phone :</span> {{ $address->phone }}</li>
-                                            <li><span>State :</span> {{ $address->state }}</li>
-                                            <li><span>City :</span> {{ $address->city }}</li>
+                                            <li><span>Nama :</span> {{ $address->name }}</li>
+                                            <li><span>No.hp :</span> {{ $address->phone }}</li>
+                                            <li><span>Kota :</span> {{ $address->state }}</li>
+                                            <li><span>Provinsi :</span> {{ $address->city }}</li>
                                             <li><span>Zip Code :</span> {{ $address->zip }}</li>
-                                            <li><span>Address :</span> {{ $address->address }}</li>
+                                            <li><span>Alamat :</span> {{ $address->address }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -38,7 +42,7 @@
 
                 <div class="col-xl-4 col-lg-5">
                     <div class="wsus__order_details" id="sticky_sidebar">
-                        <p class="wsus__product">shipping Methods</p>
+                        <p class="wsus__product">Metode Pengiriman</p>
 
                         @foreach ($shippingMethod as $method)
 
@@ -64,7 +68,7 @@
 
                         <div class="wsus__order_details_summery">
                             <p>subtotal: <span>Rp{{ getSubTotal() }}</span></p>
-                            <p>shipping fee: <span id="spanShipping">-</span></p>
+                            <p>ongkos kirim: <span id="spanShipping">-</span></p>
                             {{-- <p>tax: <span>$00.00</span></p> --}}
                             <p><b>total:</b> <span><b id="tAmmount" data-id="{{ getSubTotal() }}">Rp{{ getSubTotal() }}</b></span></p>
                         </div>

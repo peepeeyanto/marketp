@@ -42,7 +42,7 @@ class checkOutController extends Controller
         $address->address=$request->address;
         $address->save();
         toastr('alamat berhasil ditambahkan', 'success');
-        return redirect()->back();
+        return redirect()->route('user.checkout');
 
     }
 

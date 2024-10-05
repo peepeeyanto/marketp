@@ -11,7 +11,7 @@ COCOHub - Login
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4>login / register</h4>
+                        <h4>Login / Daftar</h4>
                         <ul>
                             <li><a href="#">home</a></li>
                             <li><a href="#">login / register</a></li>
@@ -43,7 +43,7 @@ COCOHub - Login
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="pills-profile-tab2" data-bs-toggle="pill"
                                     data-bs-target="#pills-profiles" type="button" role="tab"
-                                    aria-controls="pills-profiles" aria-selected="true">signup</button>
+                                    aria-controls="pills-profiles" aria-selected="true">Daftar</button>
                             </li>
                         </ul>
                         <div class="tab-content" id="pills-tabContent2">
@@ -73,13 +73,13 @@ COCOHub - Login
                                             <a class="forget_p" href="{{route('password.request')}}">forget password ?</a>
                                         </div>
                                         <button class="common_btn" type="submit">login</button>
-                                        <p class="social_text">Sign in with social account</p>
+                                        {{-- <p class="social_text">Sign in with social account</p>
                                         <ul class="wsus__login_link">
                                             <li><a href="#"><i class="fab fa-google"></i></a></li>
                                             <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                                             <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                                             <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                        </ul>
+                                        </ul> --}}
                                     </form>
                                 </div>
                             </div>

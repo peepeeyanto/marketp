@@ -15,7 +15,10 @@ Grading - COCOHub
                 <div class="col d-lg-flex justify-content-lg-center"><img id="imagePreview" style="width: 495px;height: 292px;margin-bottom: 12px;"></div>
             </div>
             <div class="row" style="border: 2px solid var(--bs-gray) ;">
-                <div class="col d-lg-flex align-items-lg-center" style="height: 140px;border-right-style: solid;border-right-color: var(--bs-gray);"><input id="imageUpload" type="file" /></div>
+                <div class="col d-lg-flex align-items-lg-center" style="height: 140px;border-right-style: solid;border-right-color: var(--bs-gray);">
+                    <h5>Upload gambar kelapa disini!</h5>
+                    <input id="imageUpload" type="file" />
+                </div>
                 <div class="col d-lg-flex align-items-lg-center">
                     <div id="label-container"></div>
                 </div>
@@ -59,7 +62,7 @@ Grading - COCOHub
         const prediction = await model.predict(image, false);
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
-                prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
+                prediction[i].className + ': ' + 'Kemungkinan ' + (prediction[i].probability.toFixed(2) * 100) + '%';
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
     }

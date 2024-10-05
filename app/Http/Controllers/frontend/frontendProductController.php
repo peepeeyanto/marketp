@@ -40,7 +40,13 @@ class frontendProductController extends Controller
             })
             ->paginate(12);
         }else{
-            $products = product::paginate(12);
+            $products = product::when($request->has('price_range'), function($query) use ($request){
+                $price = explode(';', $request->price_range);
+                $from = $price[0];
+                $to = $price[1];
+
+                return $query->where('price', '>=', $from)->where('price', '<=', $to);
+            })->paginate(12);
         }
 
         // dd($request)->all();

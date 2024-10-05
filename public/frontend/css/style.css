@@ -6679,7 +6679,7 @@ WISHLIST PAGE START
   align-items: center;
   justify-content: end;
   padding: 5px 20px;
-  background: #0b2c3d;
+  background: rgb(118, 177, 113);
 }
 
 .wsusd__dashboard_user {
@@ -6708,7 +6708,7 @@ WISHLIST PAGE START
 .dashboard_sidebar {
   width: 15%;
   height: 100vh;
-  background: #0b2c3d;
+  background: rgb(39 79 35);
   position: fixed;
   top: 0;
   left: 0;
@@ -6761,7 +6761,7 @@ WISHLIST PAGE START
 
 .dashboard_link li a:hover,
 .dashboard_link li a.active {
-  background: #051a25;
+  background: #0c3f20;
 }
 
 .dashboard_content h3 {
@@ -8510,7 +8510,7 @@ header .dropdown .nav-link {
 }
 
 header .dropdown-menu {
-  padding: 0;
+  padding: 10px;
   border: 1px solid #aad8ff73;
   border-radius: 5px;
   overflow: hidden;

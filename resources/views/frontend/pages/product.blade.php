@@ -35,7 +35,7 @@ COCOHub - Produk
                                 <h2 class="accordion-header" id="headingOne">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        All Categories
+                                        Semua kategori
                                     </button>
                                 </h2>
                                 <div id="collapseOne" class="accordion-collapse collapse show"
@@ -54,7 +54,7 @@ COCOHub - Produk
                                 <h2 class="accordion-header" id="headingTwo">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Price
+                                        Harga
                                     </button>
                                 </h2>
                                 <div id="collapseTwo" class="accordion-collapse collapse show"

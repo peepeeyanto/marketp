@@ -10,7 +10,7 @@ COCOHub - Penjual Kami
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h4>vendors</h4>
+                    <h4>Toko kami</h4>
                     <ul>
                         <li><a href="#">home</a></li>
                         <li><a href="#">vendors</a></li>

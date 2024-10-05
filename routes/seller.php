@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\backend\sellerChatListController;
 use App\Http\Controllers\backend\sellerController;
 use App\Http\Controllers\backend\sellerProductController;
 use App\Http\Controllers\backend\sellerProductImageGalleryController;
@@ -35,3 +36,5 @@ Route::get('orders/show/{id}', [sellerOrderController::class,'show'])->name('ord
 Route::get('orders/changeStatus/{id}', [sellerOrderController::class, 'changeStatus'])->name('orders.changeStatus');
 
 Route::get('reviews', [sellerProductReviewController::class, 'index'])->name('reviews.index');
+
+Route::get('chat-list', [sellerChatListController::class, 'index'])->name('chat-list');

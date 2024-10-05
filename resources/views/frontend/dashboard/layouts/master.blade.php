@@ -31,7 +31,8 @@
 
 <body>
 
-
+    {{-- @include('frontend.home.layouts.header')
+    @include('frontend.home.sections.menu') --}}
   <!--=============================
     DASHBOARD MENU START
   ==============================-->
