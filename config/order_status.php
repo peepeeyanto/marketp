@@ -16,7 +16,7 @@ return [
         ],
         3 => [
             'status' => 'Terkirim',
-            'details' => 'Pesanan telah sampai ke alamat tujuan'
+            'details' => 'Pesanan telah dikirim'
         ],
         '4' => [
             'status' => 'Selesai',
@@ -25,7 +25,11 @@ return [
         5 => [
             'status' => 'Dibatalkan',
             'details' => 'Pesanan telah dibatalkan'
-        ]
+        ],
+        6 => [
+            'status' => 'Menunggu pick up',
+            'details' => 'Pesanan sudah siap untuk diambil'
+        ],
     ],
 
     'order_status_vendor' => [
@@ -43,15 +47,19 @@ return [
         ],
         3 => [
             'status' => 'Terkirim',
-            'details' => 'Pesanan telah sampai ke alamat tujuan'
+            'details' => 'Pesanan telah Dikirim'
         ],
-        '4' => [
-            'status' => 'Selesai',
-            'details' => 'Transaksi Berhasil'
+        // '4' => [
+        //     'status' => 'Selesai',
+        //     'details' => 'Transaksi Berhasil'
+        // ],
+        // 5 => [
+        //     'status' => 'Dibatalkan',
+        //     'details' => 'Pesanan telah dibatalkan'
+        // ],
+        6 => [
+            'status' => 'Menunggu pick up',
+            'details' => 'Pesanan sudah siap untuk diambil'
         ],
-        5 => [
-            'status' => 'Dibatalkan',
-            'details' => 'Pesanan telah dibatalkan'
-        ]
     ]
 ];

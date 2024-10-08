@@ -26,7 +26,13 @@ class userOrderDataTable extends DataTable
         return (new EloquentDataTable($query))
         ->addColumn('action', function($query){
             $showBtn = "<a href='".route('user.orders.show', $query->id)."' class='btn btn-primary mb-1'>Tampilkan</a>";
-            return $showBtn;
+            if($query->order_status == 3 || $query->order_status == 6){
+                $completeButton = "<a href='".route('user.orders.complete', $query->id)."' class='btn btn-success mb-1'>Selesaikan</a>";
+            }
+            else{
+                $completeButton = "";
+            }
+            return $showBtn. $completeButton;
         })
         ->addColumn('customer', function($query){
             return $query->user->name;

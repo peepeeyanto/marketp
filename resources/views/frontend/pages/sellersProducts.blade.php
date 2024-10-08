@@ -18,7 +18,8 @@ COCOHub - Produk
                                 <a href="#"><i class="far fa-phone-alt"></i> {{ $vendor->phone }}</a>
                                 <a href="#"><i class="far fa-envelope"></i> {{ $vendor->email }}</a>
                                 <p class="wsus__vendor_location"><i class="fal fa-map-marker-alt"></i> {{ $vendor->address }} </p>
-                                <p class="wsus__open_store"><i class="fab fa-shopify"></i> store open</p>
+                                {{-- <p class="wsus__open_store"><i class="fab fa-shopify"></i> store open</p> --}}
+                                <a href="{{route('user.chat', $vendor->user->id)}}" class="btn btn-primary" style="width: 30%">Chat</a>
                                 {{-- <ul class="d-flex">
                                     <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
                                     <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
@@ -108,7 +109,7 @@ COCOHub - Produk
                                                             $avgRating = $product->reviews()->avg('rating');
                                                             $roundedRating = round($avgRating);
                                                         @endphp
-                        
+
                                                         @for ($i = 1; $i <= 5; $i++)
                                                             @if ($i <= $roundedRating)
                                                                 <i class="fas fa-star"></i>
@@ -116,7 +117,7 @@ COCOHub - Produk
                                                                 <i class="far fa-star"></i>
                                                             @endif
                                                         @endfor
-                        
+
                                                         <span>{{ count($product->reviews) }} review</span>
                                                     </p>
                                                     <a class="wsus__pro_name" href="{{ route('product-detail', $product->slug) }}">{{ $product->name }}</a>
@@ -190,7 +191,7 @@ COCOHub - Produk
                                                             $avgRating = $product->reviews()->avg('rating');
                                                             $roundedRating = round($avgRating);
                                                         @endphp
-                        
+
                                                         @for ($i = 1; $i <= 5; $i++)
                                                             @if ($i <= $roundedRating)
                                                                 <i class="fas fa-star"></i>
@@ -198,7 +199,7 @@ COCOHub - Produk
                                                                 <i class="far fa-star"></i>
                                                             @endif
                                                         @endfor
-                        
+
                                                         <span>{{ count($product->reviews) }} review</span>
                                                     </p>
                                                     <a class="wsus__pro_name" href="{{ route('product-detail', $product->slug) }}">{{ $product->name }}</a>

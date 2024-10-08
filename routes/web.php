@@ -74,6 +74,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::get('chat-list', [chatListController::class, 'index'])->name('chat-list');
 
     Route::get('assistant', Assistant::class)->name('assistant');
+
+    Route::get('orders/complete/{id}', [userOrderController::class,'complete'])->name('orders.complete');
 });
 
 Route::get('change-product-list', [frontendProductController::class,'changeProductList'])->name('products.change');
