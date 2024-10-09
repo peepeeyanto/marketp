@@ -69,6 +69,7 @@ class checkOutController extends Controller
             $responses[$key] = json_decode($value->body());
         }
 
+        
         // dd($responses);
 
         return view('frontend.pages.checkout', compact('addresses', 'groupedCart', 'vendorInfo', 'responses'));

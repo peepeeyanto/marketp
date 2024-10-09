@@ -63,7 +63,7 @@
 
                         <div class="wsus__order_details_summery">
                             <p>subtotal: <span>Rp{{ getSubTotal() }}</span></p>
-                            <p>shipping fee: <span id="spanShipping">-</span></p>
+                            <p>shipping fee: <span id="spanShipping" data-id=0>0</span></p>
                             {{-- <p>tax: <span>$00.00</span></p> --}}
                             <p><b>total:</b> <span><b id="tAmmount" data-id="{{ getSubTotal() }}">Rp{{ getSubTotal() }}</b></span></p>
                         </div>
@@ -105,10 +105,10 @@
                                     </div>
 
                                     <div class="col-xl-4 d-flex justify-content-end align-items-center">
-                                        <select name="" id="" style="width: 100%">
-                                            <option value="">Pilih pengiriman</option>
+                                        <select class="shipping-method" name="" id="" style="width: 100%" data-id={{$key}}>
+                                            <option  value="" data-id="0"="">Pilih pengiriman</option>
                                             @foreach ($responses[$key]->pricing as $value)
-                                                <option value="">{{ $value->courier_name}} {{$value->courier_service_name}} (Harga:{{ $value->price }})</option>
+                                                <option class="shipping-method" value="{{$value->courier_service_name}}" data-id="{{ $value->price }}">{{ $value->courier_name}} {{$value->courier_service_name}} (Harga:{{ $value->price }})</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -191,11 +191,32 @@
                 "headers": {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}
             });
 
+            let shipmet = {
+                @foreach ( $vendorInfo as $key => $value )
+                    {{$key}} : {
+                        method : null,
+                        cost : null
+                    },
+                @endforeach
+            };
+
+            console.log(shipmet);
+
             $('input[type="radio"]').prop('checked', false);
-            $('.shipping-method').on('click', function () {
-                let shipCost = $(this).data('id');
-                $('#ship_id').val($(this).val());
-                $('#spanShipping').text('Rp' + shipCost);
+            $('.shipping-method').on('change', function () {
+                let selectedOption = $(this).find('option:selected');
+                let shipCost = selectedOption.data('id');
+                let pastshipCost = $('#spanShipping').data('id');
+                let vendord = $(this).data('id');
+                console.log(shipCost);
+                shipmet[vendord] = {
+                    method : selectedOption.val(),
+                    cost : shipCost
+                };
+                console.log(shipmet);
+                // $('#ship_id').val($(this).val());
+                let tShipCost = pastshipCost + shipCost;
+                $('#spanShipping').text('Rp' + tShipCost);
                 let pastTotal = $('#tAmmount').data('id');
                 let total = pastTotal + shipCost;
                 $('#tAmmount').text('Rp' + total);
