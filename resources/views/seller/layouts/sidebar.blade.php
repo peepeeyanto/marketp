@@ -17,6 +17,7 @@
       <li><a class="{{setActive(['seller.reviews.*'])}}" href="{{ route('seller.reviews.index') }}"><i class="fas fa-star"></i> Ulasan</a></li>
       <li><a class="{{setActive(['seller.chat-list'])}}" href="{{ route('seller.chat-list') }}"><i class="fas fa-comment"></i> Chat</a></li>
       <li><a class="{{setActive(['seller.orders.*'])}}" href="{{ route('seller.orders.index') }}"><i class="fas fa-shopping-cart"></i> Order</a></li>
+      <li><a class="{{setActive(['seller.payout.*'])}}" href="{{ route('seller.payout.index') }}"><i class="fa fa-money"></i> Penarikan Saldo</a></li>
       @endif
 
       <li>

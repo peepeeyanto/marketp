@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vendors', function (Blueprint $table) {
+        Schema::create('withdraw_logs', function (Blueprint $table) {
             $table->id();
-            $table->text('banner');
-            $table->string('phone');
-            $table->string('email');
-            $table->text('description');
-            $table->text('address');
-            $table->integer('user_id');
-            $table->double('balance')->default(0);
+            $table->integer('vendor_id');
+            $table->double('ammount');
+            $table->text('from_acc_no');
+            $table->text('notes');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vendors');
+        Schema::dropIfExists('withdraw_logs');
     }
 };

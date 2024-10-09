@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\backend\payoutController;
 use App\Http\Controllers\backend\sellerChatListController;
 use App\Http\Controllers\backend\sellerController;
 use App\Http\Controllers\backend\sellerProductController;
@@ -38,3 +39,7 @@ Route::get('orders/changeStatus/{id}', [sellerOrderController::class, 'changeSta
 Route::get('reviews', [sellerProductReviewController::class, 'index'])->name('reviews.index');
 
 Route::get('chat-list', [sellerChatListController::class, 'index'])->name('chat-list');
+
+Route::get('payout', [payoutController::class, 'index'])->name('payout.index');
+Route::get('payout/create', [payoutController::class, 'create'])->name('payout.create');
+Route::post('payout/store',[payoutController::class,'store'])->name('payout.store');
