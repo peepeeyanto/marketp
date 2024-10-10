@@ -13,6 +13,7 @@ COCOHub - Penarikan
             <div class="wsus__dashboard_profile">
               <div class="wsus__dash_pro_area">
                 <h2>Saldo anda Rp{{Auth::user()->vendor->balance}}</h2>
+                <a href="{{ route('seller.payout.log') }}" class="btn btn-primary">Riwayat penarikan</a>
               </div>
             </div>
           </div>

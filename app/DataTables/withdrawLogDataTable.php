@@ -2,9 +2,10 @@
 
 namespace App\DataTables;
 
-use App\Models\beneficiaries;
-use App\Models\withdrawAcc;
+use App\Models\withdraw_log;
+use App\Models\withdrawLog;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -13,7 +14,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class withdrawAccDataTable extends DataTable
+class withdrawLogDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,20 +24,16 @@ class withdrawAccDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function($query){
-                $withdrawbtn = "<a href='".route('seller.withdraw', $query->id)."' class='btn btn-primary mb-1'>Tarik saldo</a>";
-                return $withdrawbtn;
-            })
-            ->rawColumns(['action'])
+            // ->addColumn('action', 'withdrawlog.action')
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(beneficiaries $model): QueryBuilder
+    public function query(withdraw_log $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->where('vendor_id', Auth::user()->vendor->id)->newQuery();
     }
 
     /**
@@ -45,7 +42,7 @@ class withdrawAccDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('withdrawacc-table')
+                    ->setTableId('withdrawlog-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -68,16 +65,11 @@ class withdrawAccDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('bank'),
-            Column::make('acc_number'),
-            Column::make('name'),
-            Column::make('email'),
-            Column::make('alias'),
-            Column::computed('action')
-            ->exportable(false)
-            ->printable(false)
-            ->width(60)
-            ->addClass('text-center'),
+            Column::make('amount'),
+            Column::make('notes'),
+            Column::make('status'),
+            Column::make('reference'),
+            Column::make('created_at'),
         ];
     }
 
@@ -86,6 +78,6 @@ class withdrawAccDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'withdrawAcc_' . date('YmdHis');
+        return 'withdrawLog_' . date('YmdHis');
     }
 }

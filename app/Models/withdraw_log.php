@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class withdraw_log extends Model
 {
     use HasFactory;
+
+    public function beneficiaries() {
+        return $this->belongsTo(beneficiaries::class, 'beneficiary_id');
+    }
 }

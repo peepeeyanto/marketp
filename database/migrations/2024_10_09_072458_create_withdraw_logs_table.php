@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('withdraw_logs', function (Blueprint $table) {
             $table->id();
             $table->integer('vendor_id');
-            $table->double('ammount');
-            $table->text('from_acc_no');
+            $table->double('amount');
+            $table->integer('from_acc_no');
             $table->text('notes');
+            $table->text('status');
+            $table->text('reference');
             $table->timestamps();
         });
     }

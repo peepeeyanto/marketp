@@ -42,4 +42,9 @@ Route::get('chat-list', [sellerChatListController::class, 'index'])->name('chat-
 
 Route::get('payout', [payoutController::class, 'index'])->name('payout.index');
 Route::get('payout/create', [payoutController::class, 'create'])->name('payout.create');
+Route::get('payout/log', [payoutController::class, 'log'])->name('payout.log');
 Route::post('payout/store',[payoutController::class,'store'])->name('payout.store');
+
+Route::post('withdraw/store', [payoutController::class, 'withdraw'])->name('withdraw-store');
+Route::get('withdraw/{id}', [payoutController::class, 'withdrawIndex'])->name('withdraw');
+
