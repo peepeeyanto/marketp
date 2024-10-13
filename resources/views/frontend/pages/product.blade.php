@@ -80,8 +80,8 @@ COCOHub - Produk
                 </div>
                 <div class="col-xl-9 col-lg-8">
                     <div class="row">
-                        <div class="col-xl-12 d-none d-md-block mt-md-4 mt-lg-0">
-                            <div class="wsus__product_topbar">
+                        <div class="col-xl-12 d-md-block mt-md-4 mt-lg-0">
+                            <div class="wsus__product_topbar mt-lg-0 mt-4">
                                 <div class="wsus__product_topbar_left">
                                     <div class="nav nav-pills" id="v-pills-tab" role="tablist"
                                         aria-orientation="vertical">
@@ -105,7 +105,7 @@ COCOHub - Produk
                                 aria-labelledby="v-pills-home-tab">
                                 <div class="row">
                                     @foreach ($products as $product)
-                                        <div class="col-xl-4  col-sm-6">
+                                        <div class="col-xl-4 col-sm-6 col-6">
                                             <div class="wsus__product_item">
                                                 <a class="wsus__pro_link" href="{{ route('product-detail', $product->slug) }}">
                                                     <img src="{{ asset($product->thumb_image) }}" alt="product"

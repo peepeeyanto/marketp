@@ -69,7 +69,7 @@
 
   <!-- Page Specific JS File -->
   <script src={{asset("backend/assets/js/page/index-0.js")}}></script>
-  <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+  {{-- <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script> --}}
   {{-- <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script> --}}
   <script src="https://cdn.datatables.net/v/bs5/dt-2.1.2/r-3.0.2/datatables.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

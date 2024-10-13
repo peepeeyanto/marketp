@@ -168,9 +168,9 @@
     <span class="wsus__mobile_menu_close"><i class="fal fa-times"></i></span>
     <ul class="wsus__mobile_menu_header_icon d-inline-flex">
 
-        <li><a href="wishlist.html"><i class="far fa-heart"></i> <span>2</span></a></li>
+        {{-- <li><a href="wishlist.html"><i class="far fa-heart"></i> <span>2</span></a></li>
 
-        <li><a href="compare.html"><i class="far fa-random"></i> </i><span>3</span></a></li>
+        <li><a href="compare.html"><i class="far fa-random"></i> </i><span>3</span></a></li> --}}
     </ul>
     <form action="{{ route('products.index') }}" method="GET">
         <input type="text" placeholder="Search" name="search">
@@ -193,11 +193,11 @@
             <div class="wsus__mobile_menu_main_menu">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <ul class="wsus_mobile_menu_category">
-                        <li><a href="#"><i class="fas fa-star"></i> hot promotions</a></li>
+                        {{-- <li><a href="#"><i class="fas fa-star"></i> hot promotions</a></li> --}}
 
                         @foreach ($categories as $categoryItem)
                             <li>
-                                <a href="#" class="{{ count($categoryItem->subCategories) > 0 ? "accordion-button collapsed" : " " }}" data-bs-toggle="collapse" data-bs-target="#flush-collapseThreew-{{ $loop->index }}" aria-expanded="false" aria-controls="flush-collapseThreew-{{ $loop->index }}"><i class="{{ $categoryItem->icon }}"></i>{{ $categoryItem->name }}</a>
+                                {{-- <a href="{{ route('products.index', ['category' => $categoryItem->slug]) }}" class="{{ count($categoryItem->subCategories) > 0 ? "accordion-button collapsed" : " " }}" data-bs-toggle="collapse" data-bs-target="#flush-collapseThreew-{{ $loop->index }}" aria-expanded="false" aria-controls="flush-collapseThreew-{{ $loop->index }}"><i class="{{ $categoryItem->icon }}"></i>{{ $categoryItem->name }}</a>
                                 @if (count($categoryItem->subCategories) > 0)
                                     <div id="flush-collapseThreew-{{ $loop->index }}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                                         <div class="accordion-body">
@@ -208,10 +208,12 @@
                                             </ul>
                                         </div>
                                     </div>
-                                @endif
+                                @endif --}}
+                                <a href="{{ route('products.index', ["category" => $categoryItem->slug]) }}"><i class="{{$categoryItem->icon}}"></i> {{$categoryItem->name}}</a>
+
                             </li>
                         @endforeach
-                        <li><a href="#"><i class="fal fa-gem"></i> View All Categories</a></li>
+                        {{-- <li><a href="#"><i class="fal fa-gem"></i> View All Categories</a></li> --}}
                     </ul>
                 </div>
             </div>

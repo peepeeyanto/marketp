@@ -154,4 +154,8 @@ class payoutController extends Controller
     public function log(withdrawLogDataTable $datatable){
         return $datatable->render('seller.payout.log');
     }
+
+    public function approve(){
+        
+    }
 }
