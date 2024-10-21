@@ -55,6 +55,11 @@ COCOHub - Tambah Produk
                     </div>
 
                     <div class="form-group wsus__sinput">
+                        <label>Berat</label>
+                        <input type="text" name="weight" class="form-control">
+                    </div>
+
+                    <div class="form-group wsus__sinput">
                         <label>Price</label>
                         <input type="text" name="price" class="form-control">
                     </div>

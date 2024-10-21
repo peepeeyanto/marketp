@@ -16,6 +16,8 @@ return new class extends Migration
             $table->integer('product_variant_id');
             $table->string('name');
             $table->double('price');
+            $table->integer('stock');
+            $table->integer('weight');
             $table->boolean('is_default');
             $table->boolean('status');
             $table->timestamps();

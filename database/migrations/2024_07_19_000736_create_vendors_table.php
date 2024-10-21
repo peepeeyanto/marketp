@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('email');
             $table->text('description');
             $table->text('address');
+            $table->text('city');
+            $table->text('province');
+            $table->text('zipcode');
             $table->integer('user_id');
             $table->double('balance')->default(0);
             $table->timestamps();

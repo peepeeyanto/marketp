@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
   <link href="https://cdn.datatables.net/v/bs5/dt-2.1.2/r-3.0.2/datatables.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
 
@@ -102,7 +103,7 @@
   <script src={{asset("backend/assets/modules/summernote/summernote-bs4.js")}}></script>
   <script src="https://cdn.datatables.net/v/bs5/dt-2.1.2/r-3.0.2/datatables.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script>
     @if ($errors->any())
         @foreach ($errors->all() as $error)

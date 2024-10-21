@@ -21,9 +21,7 @@ return new class extends Migration
             $table->integer('product_qty');
             $table->integer('payment_status');
             $table->text('order_address');
-            $table->text('shipping_method');
             $table->string('payment_method');
-            $table->integer('order_status');
             $table->timestamps();
         });
     }

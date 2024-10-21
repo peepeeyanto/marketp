@@ -37,6 +37,8 @@ class userAddressController extends Controller
             'state' => ['required', 'max:200'],
             'city' => ['required', 'max:200'],
             'zip' => ['required', 'max:200'],
+            'lat'=>['required'],
+            'lon'=>['required'],
             'address' => ['required'],
         ]);
 
@@ -47,6 +49,8 @@ class userAddressController extends Controller
         $address->state=$request->state;
         $address->city=$request->city;
         $address->zip=$request->zip;
+        $address->lat = $request->lat;
+        $address->lon = $request->lon;
         $address->address=$request->address;
         $address->save();
         toastr('alamat berhasil ditambahkan', 'success');

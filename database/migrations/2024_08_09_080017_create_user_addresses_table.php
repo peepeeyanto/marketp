@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('city');
             $table->string('zip');
             $table->text('address');
+            $table->decimal('lon', 11, 8);
+            $table->decimal('lat', 10, 8);
             $table->timestamps();
         });
     }

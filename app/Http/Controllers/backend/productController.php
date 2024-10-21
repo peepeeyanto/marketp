@@ -46,7 +46,8 @@ class productController extends Controller
             'price' => ['required'],
             'qty' => ['required'],
             'short_description' => ['required', 'max:600'],
-            'long_description' => ['required']
+            'long_description' => ['required'],
+            'weight' => ['required', 'integer'],
         ]);
 
         $imagepath = $this->imageUpload($request, 'image', 'uploads');
@@ -63,6 +64,7 @@ class productController extends Controller
         $product->sku = $request->sku;
         $product->short_description = $request->short_description;
         $product->long_description = $request->long_description;
+        $product->weight = $request->weight;
         $product->save();
 
         toastr('produk berhasil dibuat', 'success');

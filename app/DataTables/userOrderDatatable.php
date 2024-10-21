@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\order;
+use App\Models\orderProduct;
 // use App\Models\sellerOrder;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
@@ -34,14 +35,14 @@ class userOrderDataTable extends DataTable
             }
             return $showBtn. $completeButton;
         })
-        ->addColumn('customer', function($query){
-            return $query->user->name;
+        ->addColumn('Nama_Produk', function($query){
+            return $query->product->name;
         })
         ->addColumn('date', function($query){
             return date('d-M-Y', strtotime($query->created_at));
         })
         ->addColumn('payment_status', function($query){
-            if($query->payment_status == 1){
+            if($query->order->payment_status == 1){
                 return '<span class="badge bg-success">Berhasil</span>';
             }
             else{
@@ -71,6 +72,9 @@ class userOrderDataTable extends DataTable
             };
 
         })
+        ->addColumn('invoice_id', function($query){
+            return $query->order->invoice_id;
+        })
         ->rawColumns(['action', 'payment_status', 'order_status'])
         ->setRowId('id');
     }
@@ -78,7 +82,7 @@ class userOrderDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(order $model): QueryBuilder
+    public function query(orderProduct $model): QueryBuilder
     {
         return $model::where('user_id', Auth::user()->id)->newQuery();
     }
@@ -113,10 +117,10 @@ class userOrderDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('invoice_id'),
-            Column::make('customer'),
-            Column::make('product_qty'),
+            Column::make('Nama_Produk'),
+            Column::make('qty'),
             Column::make('date'),
-            Column::make('ammount'),
+            Column::make('subtotal'),
             Column::make('order_status'),
             Column::make('payment_status'),
             Column::computed('action')

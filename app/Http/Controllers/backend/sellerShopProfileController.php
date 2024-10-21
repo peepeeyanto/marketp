@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\shipping_couriers;
 use App\Models\vendor;
 use App\Traits\imageUploadsTrait;
 use Illuminate\Http\Request;
@@ -33,13 +34,18 @@ class sellerShopProfileController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request)->all();
         $request->validate([
             'banner' => ['required', 'image', 'max:3000'],
             'shop_name' => ['required','max:200'],
             'phone' => ['required', 'max:50'],
             'email' => ['required', 'email', 'max:200'],
             'address' => ['required'],
-            'description' => ['required',]
+            'city' => ['required'],
+            'province' => ['required'],
+            'zipcode' => ['required'],
+            'description' => ['required',],
+            'couriers' => ['required']
         ]);
 
         $vendor = new vendor();
@@ -49,9 +55,24 @@ class sellerShopProfileController extends Controller
         $vendor->shop_name = $request->shop_name;
         $vendor->phone = $request->phone;
         $vendor->email = $request->email;
+        $vendor->city = $request->city;
+        $vendor->province = $request->province;
+        $vendor->zipcode = $request->zipcode;
         $vendor->address = $request->address;
         $vendor->description = $request->description;
         $vendor->save();
+
+        $shipcourier = new shipping_couriers();
+        $shipcourier->vendor_id = $vendor->id;
+        $shipcourier->couriers = json_encode($request->couriers);
+        $shipcourier->lat = $request->lat;
+        $shipcourier->lon = $request->lon;
+        $shipcourier->is_local_deliveries = $request->is_localdelivery == 'on'? '1': '0';
+        $shipcourier->is_COD_enabled = $request->is_cod == 'on'? '1': '0';
+        $shipcourier->base_cost = $request->base;
+        $shipcourier->cost_per_km = $request->perkm;
+        $shipcourier->save();
+
 
         toastr('Pembuatan Toko Berhasil', 'success');
         return redirect()->route('seller.dashboard');
@@ -85,7 +106,10 @@ class sellerShopProfileController extends Controller
             'phone' => ['required', 'max:50'],
             'email' => ['required', 'email', 'max:200'],
             'address' => ['required'],
-            'description' => ['required',]
+            'city' => ['required'],
+            'province' => ['required'],
+            'zipcode' => ['required'],
+            'description' => ['required',],
         ]);
 
         $vendor = vendor::where('user_id', Auth::user()->id)->first();
@@ -96,6 +120,9 @@ class sellerShopProfileController extends Controller
         $vendor->email = $request->email;
         $vendor->address = $request->address;
         $vendor->description = $request->description;
+        $vendor->city = $request->city;
+        $vendor->province = $request->province;
+        $vendor->zipcode = $request->zipcode;
         $vendor->save();
 
         toastr('Berhasil Diupdate', 'success');

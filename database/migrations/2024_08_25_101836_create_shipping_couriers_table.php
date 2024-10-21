@@ -14,8 +14,14 @@ return new class extends Migration
         Schema::create('shipping_couriers', function (Blueprint $table) {
             $table->id();
             $table->integer('vendor_id');
-            $table->string('courier');
+            $table->text('couriers');
             $table->timestamps();
+            $table->boolean('is_COD_enabled')->default(false);
+            $table->boolean('is_local_deliveries')->default(false);
+            $table->float('base_cost')->nullable();
+            $table->float('cost_per_km')->nullable();
+            $table->decimal('lon', 11, 8)->nullable();
+            $table->decimal('lat', 10, 8)->nullable();
         });
     }
 

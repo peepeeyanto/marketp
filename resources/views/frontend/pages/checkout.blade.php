@@ -9,40 +9,32 @@
             <div class="row">
                 <div class="col-xl-8 col-lg-7">
                     <div class="wsus__check_form">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="d-flex align-items-center">Alamat pengiriman</h5>
-                            <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">add new address</a>
-                        </div>
-
+                        <h5>Billing Details <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">add new address</a></h5>
                         <div class="row">
-                            @foreach ($addresses as $address)
-                                <div class="col-xl-6">
+                                <div class="col-xl-12">
                                     <div class="wsus__checkout_single_address">
                                         <div class="form-check">
-                                            <input class="form-check-input ship_address" type="radio" data-id="{{$address->id}}" name="flexRadioDefault" id="flexRadioDefault1" >
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Pilih alamat
-                                            </label>
+                                            <h5>
+                                                Alamat Pengiriman
+                                            </h5>
                                         </div>
                                         <ul>
-                                            <li><span>Nama :</span> {{ $address->name }}</li>
-                                            <li><span>No.hp :</span> {{ $address->phone }}</li>
-                                            <li><span>Kota :</span> {{ $address->state }}</li>
-                                            <li><span>Provinsi :</span> {{ $address->city }}</li>
-                                            <li><span>Zip Code :</span> {{ $address->zip }}</li>
-                                            <li><span>Alamat :</span> {{ $address->address }}</li>
+                                            <li><span>Name :</span> {{ $addresses->name }}</li>
+                                            <li><span>Phone :</span> {{ $addresses->phone }}</li>
+                                            <li><span>State :</span> {{ $addresses->state }}</li>
+                                            <li><span>City :</span> {{ $addresses->city }}</li>
+                                            <li><span>Zip Code :</span> {{ $addresses->zip }}</li>
+                                            <li><span>Address :</span> {{ $addresses->address }}</li>
                                         </ul>
                                     </div>
                                 </div>
-                            @endforeach
-
                         </div>
                     </div>
                 </div>
 
                 <div class="col-xl-4 col-lg-5">
                     <div class="wsus__order_details" id="sticky_sidebar">
-                        <p class="wsus__product">Metode Pengiriman</p>
+                        {{-- <p class="wsus__product">shipping Methods</p>
 
                         @foreach ($shippingMethod as $method)
 
@@ -64,11 +56,14 @@
                                 </div>
                             @endif
 
-                        @endforeach
+                        @endforeach --}}
+
+
+
 
                         <div class="wsus__order_details_summery">
                             <p>subtotal: <span>Rp{{ getSubTotal() }}</span></p>
-                            <p>ongkos kirim: <span id="spanShipping">-</span></p>
+                            <p>shipping fee: <span id="spanShipping" data-id=0>0</span></p>
                             {{-- <p>tax: <span>$00.00</span></p> --}}
                             <p><b>total:</b> <span><b id="tAmmount" data-id="{{ getSubTotal() }}">Rp{{ getSubTotal() }}</b></span></p>
                         </div>
@@ -89,6 +84,38 @@
                         </form>
 
                         <a href="" id="submitCheckoutForm" class="common_btn">Place Order</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-xl-8">
+                    <div class="wsus__check_form">
+                        <h5>Pengiriman</h5>
+
+                        @foreach ($groupedCart as $key=>$vendorItems)
+                            <div class="wsus__checkout_single_address">
+                                <div class="row">
+                                    <div class="col-xl-8">
+                                        <h5>{{ $vendorInfo[$key][0]['shop_name'] }}</h5>
+                                        Produk:
+                                        @foreach ($vendorItems as $items)
+                                            <p>{{ $items->name }}</p>
+                                        @endforeach
+                                    </div>
+
+                                    <div class="col-xl-4 d-flex justify-content-end align-items-center">
+                                        <select class="shipping-method" name="" id="" style="width: 100%" data-id={{$key}}>
+                                            <option  value="" data-id="0"="">Pilih pengiriman</option>
+                                            @foreach ($responses[$key]->pricing as $value)
+                                                <option class="shipping-method" value="{{$value->courier_service_name}}" data-id="{{ $value->price }}">{{ $value->courier_name}} {{$value->courier_service_name}} (Harga:{{ $value->price }})</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
@@ -164,11 +191,32 @@
                 "headers": {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}
             });
 
+            let shipmet = {
+                @foreach ( $vendorInfo as $key => $value )
+                    {{$key}} : {
+                        method : null,
+                        cost : null
+                    },
+                @endforeach
+            };
+
+            console.log(shipmet);
+
             $('input[type="radio"]').prop('checked', false);
-            $('.shipping-method').on('click', function () {
-                let shipCost = $(this).data('id');
-                $('#ship_id').val($(this).val());
-                $('#spanShipping').text('Rp' + shipCost);
+            $('.shipping-method').on('change', function () {
+                let selectedOption = $(this).find('option:selected');
+                let shipCost = selectedOption.data('id');
+                let pastshipCost = $('#spanShipping').data('id');
+                let vendord = $(this).data('id');
+                console.log(shipCost);
+                shipmet[vendord] = {
+                    method : selectedOption.val(),
+                    cost : shipCost
+                };
+                console.log(shipmet);
+                // $('#ship_id').val($(this).val());
+                let tShipCost = pastshipCost + shipCost;
+                $('#spanShipping').text('Rp' + tShipCost);
                 let pastTotal = $('#tAmmount').data('id');
                 let total = pastTotal + shipCost;
                 $('#tAmmount').text('Rp' + total);
@@ -182,11 +230,14 @@
                 e.preventDefault();
                 if($('#ship_id').val() == ''){
                     toastr.error('Metode Pengiriman perlu diisi');
-                }else if($('#add_id').val() == ''){
+                }
+                else if($('#add_id').val() == ''){
                     toastr.error('Alamat pengiriman perlu diisi');
-                }else if(!$('.agree-tos').prop('checked')){
+                }
+                else if(!$('.agree-tos').prop('checked')){
                     toastr.error('Anda harus menyetujui syarat dan ketentuan');
-                }else{
+                }
+                else{
                     $.ajax({
                     url: '{{ route('user.checkout.submit') }}',
                     method: 'post',

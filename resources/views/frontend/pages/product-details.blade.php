@@ -364,9 +364,9 @@
                                                 @php
                                                     $isBought = false;
                                                     if(Auth::check()){
-                                                        $orders = \App\Models\order::where(['user_id' => auth()->user()->id, 'order_status' => 4])->get();
+                                                        $orders = \App\Models\orderProduct::where(['user_id' => auth()->user()->id, 'order_status' => 4])->get();
                                                         foreach ($orders as $key => $order) {
-                                                        $existItem = $order->orderProduct()->where('product_id', $product->id)->first();
+                                                        $existItem = $order->where('product_id', $product->id)->first();
                                                         if($existItem){
                                                             $isBought = true;
                                                         }

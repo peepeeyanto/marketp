@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('category_id');
             $table->integer('subcategory_id')->default(0);
             $table->integer('qty');
+            $table->integer('weight');
             $table->text('short_description');
             $table->text('long_description');
             $table->string('sku')->nullable();
