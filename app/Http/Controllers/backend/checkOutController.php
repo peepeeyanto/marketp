@@ -137,7 +137,47 @@ class checkOutController extends Controller
 
     }
 
+    public function checkoutsubmit2(Request $request){
+
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => rand(1, 999999),
+                'gross_amount' => getTotal(),
+            ),
+            'customer_details' => array(
+                'first_name' => Auth::user()->name,
+                'email' => Auth::user()->email
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        $order = new order();
+        $order->invoice_id = rand(1, 999999);
+        $order->user_id = Auth::user()->id;
+        $order->subtotal = getSubTotal();
+        $order->ammount =  getSubTotal() + $request->shipping_fee;
+        $order->product_qty = Cart::content()->count();
+        $order->payment_method = 'midtrans';
+        $order->payment_status = 0;
+        $order->order_address = json_encode(Session::get('shipping_address'));
+        $order->shipping_method = json_encode(Session::get('shipping_method'));
+        $order->order_status = 0;
+        $order->snap_id = $snapToken;
+        $order->save();
+    }
+
     public function checkoutSubmit(Request $request){
+        dd($request)->all();
         $request->validate([
             'shipping_method_id' => ['required', 'integer'],
            'shipping_address_id' => ['required', 'integer']

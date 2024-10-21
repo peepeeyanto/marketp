@@ -105,10 +105,10 @@
                                     </div>
 
                                     <div class="col-xl-4 d-flex justify-content-end align-items-center">
-                                        <select class="shipping-method" name="" id="" style="width: 100%" data-id={{$key}}>
-                                            <option  value="" data-id="0"="">Pilih pengiriman</option>
+                                        <select class="shipping-method" style="width: 100%" data-id={{$key}}>
+                                            <option value="" data-id="0">Pilih pengiriman</option>
                                             @foreach ($responses[$key]->pricing as $value)
-                                                <option class="shipping-method" value="{{$value->courier_service_name}}" data-id="{{ $value->price }}">{{ $value->courier_name}} {{$value->courier_service_name}} (Harga:{{ $value->price }})</option>
+                                                <option value="{{$value->courier_service_name}}" data-id="{{ $value->price }}">{{ $value->courier_name}} {{$value->courier_service_name}} (Harga:{{ $value->price }})</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -182,6 +182,7 @@
         </div>
     </div>
 </div>
+
 @endsection
 
 @push('script')
@@ -191,36 +192,63 @@
                 "headers": {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}
             });
 
-            let shipmet = {
-                @foreach ( $vendorInfo as $key => $value )
-                    {{$key}} : {
-                        method : null,
-                        cost : null
-                    },
+            // let shipmet = {
+            //     @foreach ( $vendorInfo as $key => $value )
+            //         {{$key}} : {
+            //             method : null,
+            //             cost : null
+            //         },
+            //     @endforeach
+            // };
+
+            // console.log(shipmet);
+
+            let object1 = {
+                @foreach ($responses as $key => $value)
+                    {{ $key }} : 0,
                 @endforeach
             };
 
-            console.log(shipmet);
 
             $('input[type="radio"]').prop('checked', false);
-            $('.shipping-method').on('change', function () {
+
+            $('.shipping-method').on('change', function() {
                 let selectedOption = $(this).find('option:selected');
                 let shipCost = selectedOption.data('id');
-                let pastshipCost = $('#spanShipping').data('id');
-                let vendord = $(this).data('id');
-                console.log(shipCost);
-                shipmet[vendord] = {
-                    method : selectedOption.val(),
-                    cost : shipCost
-                };
-                console.log(shipmet);
-                // $('#ship_id').val($(this).val());
-                let tShipCost = pastshipCost + shipCost;
-                $('#spanShipping').text('Rp' + tShipCost);
+                let vendorid = $(this).data('id')
+                object1[vendorid] = shipCost;
+                let totalShippingFee = Object.values(object1).reduce((accumulator, currentValue) => {
+                    return accumulator + currentValue;
+                }, 0);
+
+                $('#spanShipping').data('id', totalShippingFee);
+                $('#spanShipping').text('Rp' + totalShippingFee);
+
                 let pastTotal = $('#tAmmount').data('id');
-                let total = pastTotal + shipCost;
+                let total = pastTotal + totalShippingFee;
                 $('#tAmmount').text('Rp' + total);
+                console.log(totalShippingFee);
             })
+
+            // $('.shipping-method').on('change', function () {
+            //     let selectedOption = $(this).find('option:selected');
+            //     let shipCost = selectedOption.data('id');
+            //     let pastshipCost = $('#spanShipping').data('id');
+            //     let vendord = $(this).data('id');
+            //     // console.log(shipCost);
+            //     // shipmet[vendord] = {
+            //     //     method : selectedOption.val(),
+            //     //     cost : shipCost
+            //     // };
+            //     // console.log(shipmet);
+            //     // $('#ship_id').val($(this).val());
+            //     let tShipCost = pastshipCost + shipCost;
+            //     $('#spanShipping').data('id', tShipCost);
+            //     $('#spanShipping').text('Rp' + tShipCost);
+            //     let pastTotal = $('#tAmmount').data('id');
+            //     let total = pastTotal + shipCost;
+            //     $('#tAmmount').text('Rp' + total);
+            // })
 
             $('.ship_address').on('click', function () {
                 $('#add_id').val($(this).data('id'));
@@ -228,33 +256,41 @@
 
             $('#submitCheckoutForm').on('click', function (e) {
                 e.preventDefault();
-                if($('#ship_id').val() == ''){
+                let allfilled = true;
+
+                $('.shipping-method').each(function() {
+                    if ($(this).val() === "") {  // Check if any select is not filled
+                        allfilled = false;
+                    }
+                });
+
+                if(!allfilled){
+                    console.log('not all filled');
                     toastr.error('Metode Pengiriman perlu diisi');
                 }
-                else if($('#add_id').val() == ''){
-                    toastr.error('Alamat pengiriman perlu diisi');
-                }
+
                 else if(!$('.agree-tos').prop('checked')){
                     toastr.error('Anda harus menyetujui syarat dan ketentuan');
                 }
                 else{
-                    $.ajax({
-                    url: '{{ route('user.checkout.submit') }}',
-                    method: 'post',
-                    data: $('#checkout-form').serialize(),
-                    beforeSend: function(){
-                        $('#submitCheckoutForm').html('<i class="fas fa-spinner fa-spin fa-1x"></i>');
-                    },
-                    success: function (data) {
-                        if(data.status == "success"){
-                            $('#submitCheckoutForm').text('Pesan Sekarang');
-                            window.location.href = data.redirect_url;
-                        }
-                    },
-                    error: function (data) {
-                        console.log(data);
-                    }
-                })
+                    console.log(allfilled);
+                //     $.ajax({
+                //     url: '{{ route('user.checkout.submit') }}',
+                //     method: 'post',
+                //     data: $('#checkout-form').serialize(),
+                //     beforeSend: function(){
+                //         $('#submitCheckoutForm').html('<i class="fas fa-spinner fa-spin fa-1x"></i>');
+                //     },
+                //     success: function (data) {
+                //         if(data.status == "success"){
+                //             $('#submitCheckoutForm').text('Pesan Sekarang');
+                //             window.location.href = data.redirect_url;
+                //         }
+                //     },
+                //     error: function (data) {
+                //         console.log(data);
+                //     }
+                // })
                 }
             })
         })
