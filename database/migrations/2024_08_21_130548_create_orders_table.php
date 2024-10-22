@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('payment_status');
             $table->text('order_address');
             $table->string('payment_method');
+            $table->double('total_shipping');
             $table->timestamps();
         });
     }

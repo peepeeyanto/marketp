@@ -26,14 +26,18 @@ class userOrderDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
         ->addColumn('action', function($query){
-            $showBtn = "<a href='".route('user.orders.show', $query->id)."' class='btn btn-primary mb-1'>Tampilkan</a>";
+            $showBtn = "<a href='".route('user.orders.show', $query->order->id)."' class='btn btn-primary mb-1'>Tampilkan</a>";
+            $payBtn = '';
             if($query->order_status == 3 || $query->order_status == 6){
                 $completeButton = "<a href='".route('user.orders.complete', $query->id)."' class='btn btn-success mb-1'>Selesaikan</a>";
             }
             else{
                 $completeButton = "";
             }
-            return $showBtn. $completeButton;
+            if($query->order->payment_status == 0){
+                $payBtn = "<a href='".route('user.pay', $query->order->id)."' class='btn btn-primary mb-1'>Bayar</a>";
+            }
+            return $showBtn. $completeButton.$payBtn;
         })
         ->addColumn('Nama_Produk', function($query){
             return $query->product->name;
@@ -70,10 +74,16 @@ class userOrderDataTable extends DataTable
                     return '<span class="badge bg-danger">Batal</span>';
                     break;
             };
-
         })
         ->addColumn('invoice_id', function($query){
             return $query->order->invoice_id;
+        })
+        ->addColumn('No_resi', function($query){
+            if(empty($query->resi->resi)){
+                return 'Belum di kirim';
+            }else{
+                return $query->resi->resi;
+            }
         })
         ->rawColumns(['action', 'payment_status', 'order_status'])
         ->setRowId('id');
@@ -123,6 +133,7 @@ class userOrderDataTable extends DataTable
             Column::make('subtotal'),
             Column::make('order_status'),
             Column::make('payment_status'),
+            Column::make('No_resi'),
             Column::computed('action')
             ->exportable(false)
             ->printable(false)

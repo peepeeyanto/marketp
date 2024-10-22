@@ -107,9 +107,14 @@
                                     <div class="col-xl-4 d-flex justify-content-end align-items-center">
                                         <select class="shipping-method" style="width: 100%" data-id={{$key}}>
                                             <option value="" data-id="0">Pilih pengiriman</option>
-                                            @foreach ($responses[$key]->pricing as $value)
-                                                <option value="{{$value->courier_service_name}}" data-id="{{ $value->price }}">{{ $value->courier_name}} {{$value->courier_service_name}} (Harga:{{ $value->price }})</option>
-                                            @endforeach
+                                            @if ($responses[$key]->success == true)
+                                                @foreach ($responses[$key]->pricing as $value)
+                                                    <option value="{{$value->courier_service_name}}" data-id="{{ $value->price }}" data-couriername='{{$value->courier_name}}'>{{ $value->courier_name}} {{$value->courier_service_name}} (Harga:{{ $value->price }})</option>
+                                                @endforeach
+                                            @else
+                                                <option value="" disabled>Tidak ada pengiriman yang tersedia</option>
+                                            @endif
+
                                         </select>
                                     </div>
                                 </div>
@@ -209,24 +214,38 @@
                 @endforeach
             };
 
+            let object2 = {
+                @foreach ($responses as $key => $value )
+                    {{ $key }} : {
+                        name : '',
+                        service: ''
+                    },
+                @endforeach
+            };
+
+            let totals = $('#tAmmount').data('id');
 
             $('input[type="radio"]').prop('checked', false);
 
             $('.shipping-method').on('change', function() {
                 let selectedOption = $(this).find('option:selected');
                 let shipCost = selectedOption.data('id');
-                let vendorid = $(this).data('id')
+                let vendorid = $(this).data('id');
                 object1[vendorid] = shipCost;
+                object2[vendorid].service = $(this).val();
+                object2[vendorid].name = selectedOption.data('couriername');
                 let totalShippingFee = Object.values(object1).reduce((accumulator, currentValue) => {
                     return accumulator + currentValue;
                 }, 0);
 
-                $('#spanShipping').data('id', totalShippingFee);
+                $('#spanShipping').attr('data-id', totalShippingFee);
                 $('#spanShipping').text('Rp' + totalShippingFee);
 
                 let pastTotal = $('#tAmmount').data('id');
                 let total = pastTotal + totalShippingFee;
                 $('#tAmmount').text('Rp' + total);
+                $('#tAmmount').attr('data-id', total);
+                totals = total;
                 console.log(totalShippingFee);
             })
 
@@ -273,24 +292,29 @@
                     toastr.error('Anda harus menyetujui syarat dan ketentuan');
                 }
                 else{
-                    console.log(allfilled);
-                //     $.ajax({
-                //     url: '{{ route('user.checkout.submit') }}',
-                //     method: 'post',
-                //     data: $('#checkout-form').serialize(),
-                //     beforeSend: function(){
-                //         $('#submitCheckoutForm').html('<i class="fas fa-spinner fa-spin fa-1x"></i>');
-                //     },
-                //     success: function (data) {
-                //         if(data.status == "success"){
-                //             $('#submitCheckoutForm').text('Pesan Sekarang');
-                //             window.location.href = data.redirect_url;
-                //         }
-                //     },
-                //     error: function (data) {
-                //         console.log(data);
-                //     }
-                // })
+                    $.ajax({
+                    url: '{{ route('user.checkout.submit') }}',
+                    method: 'post',
+                    data: {
+                        "shipping_fee" : object1,
+                        "total_shipping_fee": $('#spanShipping').data('id'),
+                        "total_price": totals,
+                        "shipping_method" : object2,
+                        "shipping_address": {{ $addresses->id }},
+                    },
+                    beforeSend: function(){
+                        $('#submitCheckoutForm').html('<i class="fas fa-spinner fa-spin fa-1x"></i>');
+                    },
+                    success: function (data) {
+                        if(data.status == "success"){
+                            $('#submitCheckoutForm').text('Pesan Sekarang');
+                            window.location.href = data.redirect_url;
+                        }
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                })
                 }
             })
         })

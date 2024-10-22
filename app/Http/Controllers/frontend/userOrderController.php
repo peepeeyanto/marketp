@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\DataTables\userOrderDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\order;
+use App\Models\orderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +21,7 @@ class userOrderController extends Controller
     }
 
     public function complete(string $id){
-        $orders = order::findorFail($id);
+        $orders = orderProduct::findorFail($id);
         if(Auth::user()->id == $orders->user_id){
             $orders->order_status = 4;
             $orders->save();

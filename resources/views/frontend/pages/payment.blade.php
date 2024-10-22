@@ -135,10 +135,10 @@ COCOHub - Payment
                     <div class="col-xl-4 col-lg-4">
                         <div class="wsus__pay_booking_summary" id="sticky_sidebar2">
                             <h5>Rincian</h5>
-                            <p>subtotal: <span>Rp{{ getSubTotal() }}</span></p>
-                            <p>shipping fee: <span>Rp{{ getShippingFee() }}</span></p>
+                            <p>subtotal: <span>Rp{{ $order->subtotal }}</span></p>
+                            <p>shipping fee: <span>Rp{{ $order->total_shipping }}</span></p>
                             <p>tax: <span>Rp0</span></p>
-                            <h6>total <span>Rp{{getTotal()}}</span></h6>
+                            <h6>total <span>Rp{{ $order->ammount }}</span></h6>
                         </div>
                     </div>
                 </div>

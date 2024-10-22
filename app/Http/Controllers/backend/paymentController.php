@@ -16,11 +16,15 @@ use Midtrans\Transaction;
 class paymentController extends Controller
 {
     public function index($payId){
-        if(!Session::has('shipping_address')){
-            return redirect()->route('user.checkout');
-        }
+        // if(!Session::has('shipping_address')){
+        //     return redirect()->route('user.checkout');
+        // }
 
         $order = order::findOrFail($payId);
+
+        if($order->user_id != Auth::user()->id){
+            abort(404);
+        }
 
         return view('frontend.pages.payment', compact('order'));
     }

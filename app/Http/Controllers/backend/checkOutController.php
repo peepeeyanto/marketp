@@ -139,67 +139,7 @@ class checkOutController extends Controller
 
     public function checkoutsubmit2(Request $request){
 
-        // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = config('midtrans.serverKey');
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
-        // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
-
-        $params = array(
-            'transaction_details' => array(
-                'order_id' => rand(1, 999999),
-                'gross_amount' => getTotal(),
-            ),
-            'customer_details' => array(
-                'first_name' => Auth::user()->name,
-                'email' => Auth::user()->email
-            ),
-        );
-
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
-
-        $order = new order();
-        $order->invoice_id = rand(1, 999999);
-        $order->user_id = Auth::user()->id;
-        $order->subtotal = getSubTotal();
-        $order->ammount =  getSubTotal() + $request->shipping_fee;
-        $order->product_qty = Cart::content()->count();
-        $order->payment_method = 'midtrans';
-        $order->payment_status = 0;
-        $order->order_address = json_encode(Session::get('shipping_address'));
-        $order->shipping_method = json_encode(Session::get('shipping_method'));
-        $order->order_status = 0;
-        $order->snap_id = $snapToken;
-        $order->save();
-    }
-
-    public function checkoutSubmit(Request $request){
-        dd($request)->all();
-        $request->validate([
-            'shipping_method_id' => ['required', 'integer'],
-           'shipping_address_id' => ['required', 'integer']
-        ]);
-
-        $shippingMethod = shippingRule::findOrFail($request->shipping_method_id);
-
-        if($shippingMethod){
-            Session::put('shipping_method', [
-                'id' => $shippingMethod->id,
-                'name' => $shippingMethod->name,
-                'type' => $shippingMethod->type,
-                'cost' => $shippingMethod->cost
-            ]);
-        }
-
-
-        $address = userAddress::findOrFail($request->shipping_address_id)->toArray();
-
-        if($address){
-            Session::put('shipping_address', $address);
-        }
+        // dd($request)->all;
 
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = config('midtrans.serverKey');
@@ -213,7 +153,7 @@ class checkOutController extends Controller
         $params = array(
             'transaction_details' => array(
                 'order_id' => rand(1, 999999),
-                'gross_amount' => getTotal(),
+                'gross_amount' => $request->total_price,
             ),
             'customer_details' => array(
                 'first_name' => Auth::user()->name,
@@ -227,14 +167,13 @@ class checkOutController extends Controller
         $order->invoice_id = rand(1, 999999);
         $order->user_id = Auth::user()->id;
         $order->subtotal = getSubTotal();
-        $order->ammount =  getTotal();
+        $order->ammount =  $request->total_price;
         $order->product_qty = Cart::content()->count();
         $order->payment_method = 'midtrans';
         $order->payment_status = 0;
-        $order->order_address = json_encode(Session::get('shipping_address'));
-        $order->shipping_method = json_encode(Session::get('shipping_method'));
-        $order->order_status = 0;
+        $order->order_address = $request->shipping_address;
         $order->snap_id = $snapToken;
+        $order->total_shipping = $request->total_shipping_fee;
         $order->save();
 
         foreach(Cart::content() as $item){
@@ -243,9 +182,13 @@ class checkOutController extends Controller
             $orderProduct->order_id = $order->id;
             $orderProduct->product_id = $product->id;
             $orderProduct->vendor_id = $product->vendor_id;
+            $orderProduct->user_id = Auth::user()->id;
             $orderProduct->product_name = $product->name;
             $orderProduct->variants = json_encode($item->options->variants);
             $orderProduct->variant_total = $item->options->variants_total;
+            $orderProduct->order_status = 0;
+            $orderProduct->shipping_method = json_encode($request->shipping_method[$product->vendor_id]);
+            $orderProduct->subtotal = ($item->price + $item->options->variants_total)* $item->qty;
             $orderProduct->unit_price = $item->price;
             $orderProduct->qty = $item->qty;
             $orderProduct->save();
@@ -255,10 +198,96 @@ class checkOutController extends Controller
         $transaction->order_id = $order->id;
         $transaction->transaction_id = $params['transaction_details']['order_id'];
         $transaction->payment_method = 'midtrans';
-        $transaction->amount = getTotal();
+        $transaction->amount = $request->total_price;
         $transaction->save();
 
-
         return response(['status' => 'success', 'redirect_url' => route('user.pay', $order->id)]);
+    }
+
+    public function checkoutSubmit(Request $request){
+        // return 200;
+        dd($request)->all();
+        // $request->validate([
+        //     'shipping_method_id' => ['required', 'integer'],
+        //    'shipping_address_id' => ['required', 'integer']
+        // ]);
+
+        // $shippingMethod = shippingRule::findOrFail($request->shipping_method_id);
+
+        // if($shippingMethod){
+        //     Session::put('shipping_method', [
+        //         'id' => $shippingMethod->id,
+        //         'name' => $shippingMethod->name,
+        //         'type' => $shippingMethod->type,
+        //         'cost' => $shippingMethod->cost
+        //     ]);
+        // }
+
+
+        // $address = userAddress::findOrFail($request->shipping_address_id)->toArray();
+
+        // if($address){
+        //     Session::put('shipping_address', $address);
+        // }
+
+        // // Set your Merchant Server Key
+        // \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+        // // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        // \Midtrans\Config::$isProduction = false;
+        // // Set sanitization on (default)
+        // \Midtrans\Config::$isSanitized = true;
+        // // Set 3DS transaction for credit card to true
+        // \Midtrans\Config::$is3ds = true;
+
+        // $params = array(
+        //     'transaction_details' => array(
+        //         'order_id' => rand(1, 999999),
+        //         'gross_amount' => getTotal(),
+        //     ),
+        //     'customer_details' => array(
+        //         'first_name' => Auth::user()->name,
+        //         'email' => Auth::user()->email
+        //     ),
+        // );
+
+        // $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        // $order = new order();
+        // $order->invoice_id = rand(1, 999999);
+        // $order->user_id = Auth::user()->id;
+        // $order->subtotal = getSubTotal();
+        // $order->ammount =  getTotal();
+        // $order->product_qty = Cart::content()->count();
+        // $order->payment_method = 'midtrans';
+        // $order->payment_status = 0;
+        // $order->order_address = json_encode(Session::get('shipping_address'));
+        // $order->shipping_method = json_encode(Session::get('shipping_method'));
+        // $order->order_status = 0;
+        // $order->snap_id = $snapToken;
+        // $order->save();
+
+        // foreach(Cart::content() as $item){
+        //     $product = product::find($item->id);
+        //     $orderProduct = new orderProduct();
+        //     $orderProduct->order_id = $order->id;
+        //     $orderProduct->product_id = $product->id;
+        //     $orderProduct->vendor_id = $product->vendor_id;
+        //     $orderProduct->product_name = $product->name;
+        //     $orderProduct->variants = json_encode($item->options->variants);
+        //     $orderProduct->variant_total = $item->options->variants_total;
+        //     $orderProduct->unit_price = $item->price;
+        //     $orderProduct->qty = $item->qty;
+        //     $orderProduct->save();
+        // }
+
+        // $transaction = new transaction();
+        // $transaction->order_id = $order->id;
+        // $transaction->transaction_id = $params['transaction_details']['order_id'];
+        // $transaction->payment_method = 'midtrans';
+        // $transaction->amount = getTotal();
+        // $transaction->save();
+
+
+        // return response(['status' => 'success', 'redirect_url' => route('user.pay', $order->id)]);
     }
 }

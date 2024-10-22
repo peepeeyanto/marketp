@@ -33,8 +33,10 @@ Route::put('products-variant-item-status', [sellerProductsVariantItemController:
 Route::get('products-variant-item/{productID}/{variantID}', [sellerProductsVariantItemController::class, 'index'])->name('products-variant-item.index');
 
 Route::get('orders', [sellerOrderController::class, 'index'])->name('orders.index');
+Route::get('orders/resi/{id}', [sellerOrderController::class, 'resi'])->name('orders.resi');
+Route::post('orders/resi/create', [sellerOrderController::class, 'resiStore'])->name('orders.resi.create');
 Route::get('orders/show/{id}', [sellerOrderController::class,'show'])->name('orders.show');
-Route::get('orders/changeStatus/{id}', [sellerOrderController::class, 'changeStatus'])->name('orders.changeStatus');
+Route::get('orders/changeStatus/', [sellerOrderController::class, 'changeStatus'])->name('orders.changeStatus');
 
 Route::get('reviews', [sellerProductReviewController::class, 'index'])->name('reviews.index');
 

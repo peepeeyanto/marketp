@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
 
     Route::get('checkout', [checkOutController::class, 'index'])->name('checkout');
     Route::post('checkout/address', [checkOutController::class,'storeAddress'])->name('checkout.address.create');
-    Route::post('checkout/form-submit', [checkOutController::class,'checkoutSubmit'])->name('checkout.submit');
+    Route::post('checkout/form-submit', [checkOutController::class,'checkoutSubmit2'])->name('checkout.submit');
     Route::get('payment/{payId}', [paymentController::class, 'index'])->name('pay');
     Route::get('payment-success/{transactionID}', [paymentController::class, 'paySuccess'])->name('pay.success');
     Route::get('orders', [userOrderController::class, 'index'])->name('orders.index');
