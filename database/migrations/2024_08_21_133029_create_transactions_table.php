@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->integer('order_id');
             $table->integer('transaction_id');
             $table->string('payment_method');
             $table->double('amount');
+            $table->text('snap_token');
             $table->timestamps();
         });
     }

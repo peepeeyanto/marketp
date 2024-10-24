@@ -10,6 +10,6 @@ class transaction extends Model
     use HasFactory;
 
     public function order(){
-        return $this->belongsTo(order::class);
+        return $this->hasMany(order::class);
     }
 }

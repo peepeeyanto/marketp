@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-xl-8 col-lg-7">
                     <div class="wsus__check_form">
-                        <h5>Billing Details <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">add new address</a></h5>
+                        <h5>Billing Details <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Ganti alamat</a></h5>
                         <div class="row">
                                 <div class="col-xl-12">
                                     <div class="wsus__checkout_single_address">
@@ -133,54 +133,21 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">add new address</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ganti Alamat</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-0">
                     <div class="wsus__check_form p-3">
-                        <form action="{{ route('user.checkout.address.create') }}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="wsus__check_single_form">
-                                        <input type="text" placeholder="Nama" name="name" value="{{ old('name')  }}">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="wsus__check_single_form">
-                                        <input type="text" placeholder="Alamat" name="address" value="{{ old('address') }}">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="wsus__check_single_form">
-                                        <input type="text" placeholder="Provinsi" name="state" value="{{ old('state')  }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="wsus__check_single_form">
-                                        <input type="text" placeholder="Kota" name="city" value="{{ old('city')   }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="wsus__check_single_form">
-                                        <input type="text" placeholder="Kode Pos" name="zip" value="{{ old('zip')    }}">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="wsus__check_single_form">
-                                        <input type="text" placeholder="No. Handphone" name="phone" value="{{ old('phone')   }}">
-                                    </div>
-                                </div>
-
-                                <div class="col-xl-12">
-                                    <div class="wsus__check_single_form">
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
-                                    </div>
-                                </div>
+                        @foreach ($addresslist as $adr)
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">{{$adr->name}}</h4>
+                                <h6 class="text-muted card-subtitle mb-2">{{$adr->address}}</h6>
+                                <a class="card-link" href="{{route('user.checkout', ['address' => $adr->id]) }}">Ganti</a>
                             </div>
-                        </form>
+                        </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
@@ -196,17 +163,6 @@
             $.ajaxSetup({
                 "headers": {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}
             });
-
-            // let shipmet = {
-            //     @foreach ( $vendorInfo as $key => $value )
-            //         {{$key}} : {
-            //             method : null,
-            //             cost : null
-            //         },
-            //     @endforeach
-            // };
-
-            // console.log(shipmet);
 
             let object1 = {
                 @foreach ($responses as $key => $value)
@@ -224,8 +180,6 @@
             };
 
             let totals = $('#tAmmount').data('id');
-
-            $('input[type="radio"]').prop('checked', false);
 
             $('.shipping-method').on('change', function() {
                 let selectedOption = $(this).find('option:selected');
@@ -249,29 +203,6 @@
                 console.log(totalShippingFee);
             })
 
-            // $('.shipping-method').on('change', function () {
-            //     let selectedOption = $(this).find('option:selected');
-            //     let shipCost = selectedOption.data('id');
-            //     let pastshipCost = $('#spanShipping').data('id');
-            //     let vendord = $(this).data('id');
-            //     // console.log(shipCost);
-            //     // shipmet[vendord] = {
-            //     //     method : selectedOption.val(),
-            //     //     cost : shipCost
-            //     // };
-            //     // console.log(shipmet);
-            //     // $('#ship_id').val($(this).val());
-            //     let tShipCost = pastshipCost + shipCost;
-            //     $('#spanShipping').data('id', tShipCost);
-            //     $('#spanShipping').text('Rp' + tShipCost);
-            //     let pastTotal = $('#tAmmount').data('id');
-            //     let total = pastTotal + shipCost;
-            //     $('#tAmmount').text('Rp' + total);
-            // })
-
-            $('.ship_address').on('click', function () {
-                $('#add_id').val($(this).data('id'));
-            })
 
             $('#submitCheckoutForm').on('click', function (e) {
                 e.preventDefault();

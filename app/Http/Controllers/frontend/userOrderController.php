@@ -6,6 +6,7 @@ use App\DataTables\userOrderDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\order;
 use App\Models\orderProduct;
+use App\Models\userAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,6 +18,7 @@ class userOrderController extends Controller
 
     public function show(string $id){
         $orders = order::findOrFail($id);
+        // $address = userAddress::findOrFail($orders->order_address);
         return view('frontend.dashboard.order.show',compact('orders'));
     }
 

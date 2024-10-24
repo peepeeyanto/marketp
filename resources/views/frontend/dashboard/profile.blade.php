@@ -39,7 +39,7 @@
                             </div>
                     </div>
                     <div class="col-xl-12">
-                      <button class="common_btn mb-4 mt-2" type="submit">upload</button>
+                      <button class="common_btn mb-4 mt-2" type="submit">Submit</button>
                     </div>
                 </form>
                     <div class="wsus__dash_pass_change mt-2">
@@ -48,16 +48,19 @@
                         <div class="row">
                             <h4>Update Password</h4>
                             <div class="col-xl-4 col-md-6">
+
                             <div class="wsus__dash_pro_single">
                                 <i class="fas fa-unlock-alt"></i>
                                 <input type="password" placeholder="Current Password" name="current_password">
                             </div>
+
                             </div>
                             <div class="col-xl-4 col-md-6">
                             <div class="wsus__dash_pro_single">
                                 <i class="fas fa-lock-alt"></i>
                                 <input type="password" placeholder="New Password" name="password">
                             </div>
+
                             </div>
                             <div class="col-xl-4">
                             <div class="wsus__dash_pro_single">
@@ -66,7 +69,7 @@
                             </div>
                             </div>
                             <div class="col-xl-12">
-                            <button class="common_btn" type="submit">upload</button>
+                            <button class="common_btn" type="submit">Submit</button>
                             </div>
                         </div>
                       </form>

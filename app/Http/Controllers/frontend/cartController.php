@@ -52,6 +52,7 @@ class cartController extends Controller
         $cartData['options']['image'] = $product->thumb_image;
         $cartData['options']['slug'] = $product->slug;
         $cartData['options']['vendor_id'] = $product->vendor_id;
+        $cartData['options']['subtotal'] = $request->qty * ($productPrice + $variantTotalAmount);
 
         // dd($cartData);
         Cart::add($cartData);

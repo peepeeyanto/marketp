@@ -46,8 +46,9 @@ class userProfileController extends Controller
     }
 
     public function updatePassword(Request $request){
+        // dd($request)->all();
         $request->validate([
-            'currentPassword' => ['required', 'current_password'],
+            'current_password' => ['required', 'current_password'],
             'password' => ['required', 'confirmed', "min:8"],
         ]);
 

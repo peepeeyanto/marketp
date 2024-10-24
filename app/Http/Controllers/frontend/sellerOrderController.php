@@ -21,7 +21,7 @@ class sellerOrderController extends Controller
     }
 
     public function resi(String $id){
-        $order = orderProduct::findOrFail($id);
+        $order = order::findOrFail($id);
         if ($order->vendor_id != auth()->user()->vendor->id) {
             abort(404);
         }
@@ -31,15 +31,15 @@ class sellerOrderController extends Controller
     public function resiStore(Request $request){
         $request->validate([
             'resi' => 'required',
-            'orderProductId' => 'required',
+            'orderId' => 'required',
         ]);
 
         $resi = new resi();
-        $resi->order_product_id = $request->orderProductId;
+        $resi->order_id = $request->orderId;
         $resi->resi = $request->resi;
         $resi->save();
 
-        $order = orderProduct::findOrFail($request->orderProductId);
+        $order = order::findOrFail($request->orderId);
         $order->order_status = 3;
         $order->save();
         toastr('resi berhasil ditambah', 'success');

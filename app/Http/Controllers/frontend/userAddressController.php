@@ -80,20 +80,25 @@ class userAddressController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => ['required','max:200'],
-            'phone' => ['required','max:200'],
-           'state' => ['required','max:200'],
-            'city' => ['required','max:200'],
-            'zip' => ['required','max:200'],
+            'name' => ['required', 'max:200'],
+            'phone' => ['required', 'max:200'],
+            'state' => ['required', 'max:200'],
+            'city' => ['required', 'max:200'],
+            'zip' => ['required', 'max:200'],
+            'lat'=>['required'],
+            'lon'=>['required'],
             'address' => ['required'],
         ]);
+
         $address = userAddress::findOrFail($id);
-        $address->user_id  = Auth::user()->id;
         $address->name=$request->name;
+        $address->user_id = Auth::user()->id;
         $address->phone=$request->phone;
         $address->state=$request->state;
         $address->city=$request->city;
         $address->zip=$request->zip;
+        $address->lat = $request->lat;
+        $address->lon = $request->lon;
         $address->address=$request->address;
         $address->save();
         toastr('alamat berhasil diubah', 'success');

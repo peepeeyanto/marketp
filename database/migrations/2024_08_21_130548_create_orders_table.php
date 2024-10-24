@@ -17,12 +17,14 @@ return new class extends Migration
             $table->integer('user_id');
             $table->double('ammount');
             $table->double('subtotal');
-            $table->string('snap_id')->nullable();
-            $table->integer('product_qty');
             $table->integer('payment_status');
             $table->text('order_address');
             $table->string('payment_method');
             $table->double('total_shipping');
+            $table->integer('order_status');
+            $table->integer('transaction_id');
+            $table->integer('vendor_id');
+            $table->text('shipping_method');
             $table->timestamps();
         });
     }

@@ -28,19 +28,17 @@ class sellerOrderDataTable extends DataTable
         ->addColumn('action', function($query){
             $showBtn = "<a href='".route('seller.orders.show', $query->id)."' class='btn btn-primary mb-1'>Tampilkan</a>";
             if($query->order_status == 0){
-                $showBtn = "<a href='".route('seller.orders.changeStatus', ['id'=>$query->id, 'status'=>1])."' class='btn btn-primary mb-1'>Proses</a>";
+                $actionbtn = "<a href='".route('seller.orders.changeStatus', ['id'=>$query->id, 'status'=>1])."' class='btn btn-primary mb-1'>Proses</a>";
             }
             if($query->order_status == 1){
-                $showBtn = "<a href='".route('seller.orders.resi', $query->id)."' class='btn btn-primary mb-1'>Kirim Resi</a>";
+                $actionbtn = "<a href='".route('seller.orders.resi', $query->id)."' class='btn btn-primary mb-1'>Kirim Resi</a>";
             }
-            return $showBtn;
+            return $showBtn.$actionbtn;
         })
         ->addColumn('customer', function($query){
             return $query->user->name;
         })
-        ->addColumn('Nama_Produk', function ($query) {
-            return $query->product->name;
-        })
+
         ->addColumn('Pengiriman', function($query){
             $ship = json_decode($query->shipping_method);
             return $ship->name. ' - '. $ship->service;
@@ -49,7 +47,7 @@ class sellerOrderDataTable extends DataTable
             return date('d-M-Y', strtotime($query->created_at));
         })
         ->addColumn('payment_status', function($query){
-            if($query->order->payment_status == 1){
+            if($query->payment_status == 1){
                 return '<span class="badge bg-success">Berhasil</span>';
             }
             else{
@@ -86,11 +84,10 @@ class sellerOrderDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(orderProduct $model): QueryBuilder
+    public function query(order $model): QueryBuilder
     {
-        return $model::where('vendor_id', Auth::user()->vendor->id)->wherehas('order', function($query){
-            $query->where('payment_status', '1');
-        })->newQuery();
+        return $model::where('vendor_id', Auth::user()->vendor->id)
+        ->newQuery();
     }
 
     /**
@@ -122,12 +119,10 @@ class sellerOrderDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('Nama_Produk'),
             Column::make('customer'),
-            Column::make('qty'),
             Column::make('date'),
             Column::make('Pengiriman'),
-            Column::make('subtotal'),
+            Column::make('ammount'),
             Column::make('order_status'),
             Column::make('payment_status'),
             Column::computed('action')

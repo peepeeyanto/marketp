@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('resis', function (Blueprint $table) {
             $table->id();
-            $table->integer('order_product_id');
+            $table->integer('order_id');
             $table->text('resi');
             $table->timestamps();
         });

@@ -1,6 +1,5 @@
 @php
-    $address = json_decode($orders->order_address);
-    $shipping = json_decode($orders->shipping_method);
+    $address = json_decode($orders->order_address)
 @endphp
 
 @extends('frontend.dashboard.layouts.master')
@@ -42,7 +41,7 @@ COCOHub - Pesanan
                                 <div class="col-xl-4 col-md-4">
                                     <div class="wsus__invoice_single text-md-end">
                                         <h5>Order id: #{{ $orders->invoice_id }}</h5>
-                                        <h6>Order Status: {{ config('order_status.order_status_admin')[$orders->order_status]['status'] }}</h6>
+                                        {{-- <h6>Order Status: {{ config('order_status.order_status_admin')[$orders->order_status]['status'] }}</h6> --}}
                                         <p>Payment Method: {{ $orders->payment_method }}</p>
                                         <p>Payment Status: {{ $orders->payment_status }}</p>
                                         <p>Transaction Id: {{ $orders->transaction->transaction_id }}</p>
@@ -91,7 +90,7 @@ COCOHub - Pesanan
                                             </td>
 
                                             <td class="amount">
-                                                {{ $product->vendor->shop_name }}
+                                                {{ $product->product->vendor->shop_name }}
                                             </td>
 
                                             <td class="amount">
@@ -131,7 +130,7 @@ COCOHub - Pesanan
 
                     <div class="wsus__invoice_footer">
                         <p><span>Subtotal:</span> Rp{{ $orders->subtotal }} </p>
-                        <p><span>Ongkos Kirim:</span> Rp{{ $shipping->cost }} </p>
+                        <p><span>Ongkos Kirim:</span> Rp{{ $orders->total_shipping }} </p>
                         <p><span>Total:</span> Rp{{ $orders->ammount }}</p>
                     </div>
                 </div>

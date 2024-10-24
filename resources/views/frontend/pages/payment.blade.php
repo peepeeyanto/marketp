@@ -135,10 +135,7 @@ COCOHub - Payment
                     <div class="col-xl-4 col-lg-4">
                         <div class="wsus__pay_booking_summary" id="sticky_sidebar2">
                             <h5>Rincian</h5>
-                            <p>subtotal: <span>Rp{{ $order->subtotal }}</span></p>
-                            <p>shipping fee: <span>Rp{{ $order->total_shipping }}</span></p>
-                            <p>tax: <span>Rp0</span></p>
-                            <h6>total <span>Rp{{ $order->ammount }}</span></h6>
+                            <h6>total <span>Rp{{ $order->amount }}</span></h6>
                         </div>
                     </div>
                 </div>
@@ -152,11 +149,11 @@ COCOHub - Payment
     <script type="text/javascript">
       document.getElementById('pay-button').onclick = function(){
         // SnapToken acquired from previous step
-        snap.pay('{{ $order->snap_id }}', {
+        snap.pay('{{ $order->snap_token }}', {
           // Optional
           onSuccess: function(result){
             console.log(result);
-            window.location.href = '{{ route('user.pay.success', $order->transaction->transaction_id) }}';
+            window.location.href = '{{ route('user.pay.success', $order->transaction_id) }}';
           },
           // Optional
           onPending: function(result){

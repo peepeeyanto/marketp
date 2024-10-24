@@ -26,7 +26,7 @@ class userOrderDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
         ->addColumn('action', function($query){
-            $showBtn = "<a href='".route('user.orders.show', $query->order->id)."' class='btn btn-primary mb-1'>Tampilkan</a>";
+            $showBtn = "<a href='".route('user.orders.show', $query->id)."' class='btn btn-primary mb-1'>Tampilkan</a>";
             $payBtn = '';
             if($query->order_status == 3 || $query->order_status == 6){
                 $completeButton = "<a href='".route('user.orders.complete', $query->id)."' class='btn btn-success mb-1'>Selesaikan</a>";
@@ -34,19 +34,20 @@ class userOrderDataTable extends DataTable
             else{
                 $completeButton = "";
             }
-            if($query->order->payment_status == 0){
-                $payBtn = "<a href='".route('user.pay', $query->order->id)."' class='btn btn-primary mb-1'>Bayar</a>";
+            if($query->payment_status == 0){
+                $payBtn = "<a href='".route('user.pay', $query->transaction_id)."' class='btn btn-primary mb-1'>Bayar</a>";
             }
             return $showBtn. $completeButton.$payBtn;
         })
         ->addColumn('Nama_Produk', function($query){
-            return $query->product->name;
+            $name = $query->orderProduct->first();
+            return $name->product_name;
         })
         ->addColumn('date', function($query){
             return date('d-M-Y', strtotime($query->created_at));
         })
         ->addColumn('payment_status', function($query){
-            if($query->order->payment_status == 1){
+            if($query->payment_status == 1){
                 return '<span class="badge bg-success">Berhasil</span>';
             }
             else{
@@ -75,9 +76,9 @@ class userOrderDataTable extends DataTable
                     break;
             };
         })
-        ->addColumn('invoice_id', function($query){
-            return $query->order->invoice_id;
-        })
+        // ->addColumn('invoice_id', function($query){
+        //     return $query->order->invoice_id;
+        // })
         ->addColumn('No_resi', function($query){
             if(empty($query->resi->resi)){
                 return 'Belum di kirim';
@@ -92,7 +93,7 @@ class userOrderDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(orderProduct $model): QueryBuilder
+    public function query(order $model): QueryBuilder
     {
         return $model::where('user_id', Auth::user()->id)->newQuery();
     }
@@ -126,9 +127,7 @@ class userOrderDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('invoice_id'),
-            Column::make('Nama_Produk'),
-            Column::make('qty'),
+            // Column::make('Nama_Produk'),
             Column::make('date'),
             Column::make('subtotal'),
             Column::make('order_status'),

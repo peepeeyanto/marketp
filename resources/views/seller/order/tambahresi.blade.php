@@ -16,7 +16,7 @@ COCOHub - Tambah Produk
                 <h4>Tambah resi</h4>
                 <form action="{{ route('seller.orders.resi.create') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="orderProductId" value="{{ $order->id }}">
+                    <input type="hidden" name="orderId" value="{{ $order->id }}">
                     <div class="form-group wsus__sinput">
                         <label>No.resi</label>
                         <input type="text" name="resi" class="form-control">

@@ -21,8 +21,21 @@ use Yrehan32\PhpHaversine\Haversine;
 
 class checkOutController extends Controller
 {
-    public function index(){
-        $addresses = userAddress::where('user_id', Auth::user()->id)->first();
+    public function index(Request $request){
+        if( empty(Auth::user()->address->first())){
+            toastr('Mohon tambahkan alamat pengiriman', 'error');
+            return redirect()->route('user.address.index');
+        }
+
+        if($request->has('address')){
+            $addresses = userAddress::findOrFail($request->address);
+        }
+        else{
+            $addresses = userAddress::where('user_id', Auth::user()->id)->first();
+        }
+
+        $addresslist = userAddress::where('user_id',Auth::user()->id )->select('name', 'address', 'id')->get();
+        // dd($addresslist)->all();
 
         $groupedCart = Cart::content()->groupBy(function ($item) {
             return $item->options->vendor_id;
@@ -90,7 +103,7 @@ class checkOutController extends Controller
 
         // dd($responses);
 
-        return view('frontend.pages.checkout', compact('addresses', 'groupedCart', 'vendorInfo', 'responses'));
+        return view('frontend.pages.checkout', compact('addresses', 'groupedCart', 'vendorInfo', 'responses', 'addresslist'));
     }
 
 
@@ -139,7 +152,7 @@ class checkOutController extends Controller
 
     public function checkoutsubmit2(Request $request){
 
-        // dd($request)->all;
+        dd($request)->all;
 
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = config('midtrans.serverKey');
@@ -289,5 +302,87 @@ class checkOutController extends Controller
 
 
         // return response(['status' => 'success', 'redirect_url' => route('user.pay', $order->id)]);
+    }
+
+    public function checkoutSubmit3(Request $request){
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => rand(1, 999999),
+                'gross_amount' => $request->total_price,
+            ),
+            'customer_details' => array(
+                'first_name' => Auth::user()->name,
+                'email' => Auth::user()->email
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        $transaction = new transaction();
+        $transaction->transaction_id = $params['transaction_details']['order_id'];
+        $transaction->payment_method = 'midtrans';
+        $transaction->amount = $request->total_price;
+        $transaction->snap_token = $snapToken;
+        $transaction->save();
+
+        $subtotalsByVendor = [];
+
+        foreach(Cart::content() as $cart){
+            $vendorid = $cart->options['vendor_id'];
+            $subtotal = $cart->options['subtotal'];
+
+            if (!isset($subtotalsByVendor[$vendorid])) {
+                $subtotalsByVendor[$vendorid] = 0;
+            }
+                // Add the subtotal to the corresponding vendor_id
+            $subtotalsByVendor[$vendorid] += $subtotal;
+        }
+
+
+        // dd($subtotalsByVendor)->all();
+
+        foreach($subtotalsByVendor as $key => $value){
+        $order = new order();
+        $order->invoice_id = rand(1, 999999);
+        $order->user_id = Auth::user()->id;
+        $order->vendor_id = $key;
+        $order->subtotal = $value;
+        $order->ammount = $value + $request->shipping_fee[$key];
+        $order->payment_method = 'midtrans';
+        $order->payment_status = 0;
+        $order->order_status = 0;
+        $order->order_address = json_encode(userAddress::findOrFail($request->shipping_address));
+        $order->total_shipping = $request->shipping_fee[$key];
+        $order->transaction_id = $transaction->id;
+        $order->shipping_method = json_encode($request->shipping_method[$key]);
+        $order->save();
+        }
+
+
+        foreach(Cart::content() as $item){
+            $product = product::find($item->id);
+            $orderProduct = new orderProduct();
+            $orderProduct->order_id = $order->id;
+            $orderProduct->product_id = $product->id;
+            $orderProduct->product_name = $product->name;
+            $orderProduct->variants = json_encode($item->options->variants);
+            $orderProduct->variant_total = $item->options->variants_total;
+            $orderProduct->subtotal = ($item->price + $item->options->variants_total)* $item->qty;
+            $orderProduct->unit_price = $item->price;
+            $orderProduct->qty = $item->qty;
+            $orderProduct->save();
+        }
+
+        toastr('checkout berhasil');
+        return response(['status' => 'success', 'redirect_url' => url('/')]);
+
     }
 }

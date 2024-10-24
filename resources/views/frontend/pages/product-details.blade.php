@@ -362,16 +362,16 @@
                                             </div>
                                             <div class="col-xl-4 col-lg-5 mt-4 mt-lg-0">
                                                 @php
-                                                    $isBought = false;
-                                                    if(Auth::check()){
-                                                        $orders = \App\Models\orderProduct::where(['user_id' => auth()->user()->id, 'order_status' => 4])->get();
-                                                        foreach ($orders as $key => $order) {
-                                                        $existItem = $order->where('product_id', $product->id)->first();
-                                                        if($existItem){
-                                                            $isBought = true;
-                                                        }
-                                                        }
+                                                $isBought = false;
+                                                if(Auth::check()){
+                                                    $orders = \App\Models\order::where(['user_id' => auth()->user()->id, 'order_status' => 4])->get();
+                                                    foreach ($orders as $key => $order) {
+                                                    $existItem = $order->orderProduct()->where('product_id', $product->id)->first();
+                                                    if($existItem){
+                                                        $isBought = true;
                                                     }
+                                                    }
+                                                }
                                                 @endphp
 
                                                 @if ($isBought)

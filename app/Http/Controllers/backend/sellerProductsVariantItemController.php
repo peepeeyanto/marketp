@@ -26,7 +26,9 @@ class sellerProductsVariantItemController extends Controller
     public function store(Request $request){
         $request->validate([
             'variant_id' => ['required', 'integer'],
+            'stock' => ['required', 'integer'],
             'name' => ['required', 'max:200'],
+            'weight'=> ['required', 'integer'],
             'price' => ['required', 'integer'],
             'is_default' => ['required'],
             'status' => ['required'],
@@ -36,6 +38,8 @@ class sellerProductsVariantItemController extends Controller
         $variantitem->product_variant_id = $request->variant_id;
         $variantitem->name = $request->name;
         $variantitem->price = $request->price;
+        $variantitem->stock = $request->stock;
+        $variantitem->weight = $request->weight;
         $variantitem->is_default = $request->is_default;
         $variantitem->status = $request->status;
         $variantitem->save();

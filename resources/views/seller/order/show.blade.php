@@ -75,7 +75,6 @@ COCOHub - Pesanan
                                     </tr>
 
                                     @foreach ($orders->orderProduct as $product)
-                                        @if ($product->vendor_id == Auth::user()->vendor->id)
                                             @php
                                                 $variants = json_decode($product->variants);
                                                 $total = 0;
@@ -91,7 +90,7 @@ COCOHub - Pesanan
                                                 </td>
 
                                                 <td class="amount">
-                                                    {{ $product->vendor->shop_name }}
+                                                    {{ $product->product->vendor->shop_name }}
                                                 </td>
 
                                                 <td class="amount">
@@ -105,7 +104,7 @@ COCOHub - Pesanan
                                                     Rp{{ ($product->unit_price + $product->variant_total) * $product->qty }}
                                                 </td>
                                             </tr>
-                                        @endif
+
                                     @endforeach
 
                                     {{-- <tr>
@@ -131,11 +130,13 @@ COCOHub - Pesanan
                     </div>
 
                     <div class="wsus__invoice_footer">
-                        <p><span>Total Amount:</span> Rp{{$total}} </p>
+                        <p><span>Subtotal:</span> Rp{{ $orders->subtotal }} </p>
+                        <p><span>Ongkos Kirim:</span> Rp{{ $orders->total_shipping }} </p>
+                        <p><span>Total:</span> Rp{{ $orders->ammount }}</p>
                     </div>
                 </div>
 
-                <div class="row mt-4">
+                {{-- <div class="row mt-4">
                     <div class="col-xl-6">
                         <form action="{{ route('seller.orders.changeStatus', $orders->id) }}">
                             <div class="form-group">
@@ -153,7 +154,7 @@ COCOHub - Pesanan
                     <div class="col-xl-6 d-flex flex-column align-items-end">
                         <button class="btn btn-warning print_invoice">Print</button>
                     </div>
-                </div>
+                </div> --}}
             </div>
           </div>
         </div>
@@ -162,7 +163,7 @@ COCOHub - Pesanan
   </section>
 @endsection
 
-@push('script')
+{{-- @push('script')
 <script>
     $('.print_invoice').on('click', function () {
     let contentBody = $('.invoice-print');
@@ -172,4 +173,4 @@ COCOHub - Pesanan
     $('body').html(originalContent);
     })
 </script>
-@endpush
+@endpush --}}

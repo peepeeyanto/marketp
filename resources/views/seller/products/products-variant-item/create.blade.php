@@ -42,6 +42,16 @@ COCOHub - Item Varian
                     </div>
 
                     <div class="form-group wsus__sinput">
+                        <label>Stok</label>
+                        <input type="text" name="stock" class="form-control">
+                    </div>
+
+                    <div class="form-group wsus__sinput">
+                        <label>Berat</label>
+                        <input type="text" name="weight" class="form-control">
+                    </div>
+
+                    <div class="form-group wsus__sinput">
                         <label>Default</label>
                         <select class="form-control" name="is_default">
                             <option value="">select</option>

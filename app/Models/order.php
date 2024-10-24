@@ -10,7 +10,11 @@ class order extends Model
     use HasFactory;
 
     public function transaction(){
-        return $this->hasOne(transaction::class);
+        return $this->belongsTo(transaction::class);
+    }
+
+    public function resi(){
+        return $this->hasOne(resi::class);
     }
 
     public function user(){

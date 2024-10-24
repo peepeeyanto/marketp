@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\order;
 use App\Models\orderProduct;
 use App\Models\product;
-use App\Models\transaction as ModelsTransaction;
+use App\Models\transaction;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Midtrans\Transaction;
+
 
 class paymentController extends Controller
 {
@@ -19,12 +19,12 @@ class paymentController extends Controller
         // if(!Session::has('shipping_address')){
         //     return redirect()->route('user.checkout');
         // }
+        // dd($payId)->all();
+        $order = transaction::findOrFail($payId);
 
-        $order = order::findOrFail($payId);
-
-        if($order->user_id != Auth::user()->id){
-            abort(404);
-        }
+        // if($order->user_id != Auth::user()->id){
+        //     abort(404);
+        // }
 
         return view('frontend.pages.payment', compact('order'));
     }
@@ -36,10 +36,14 @@ class paymentController extends Controller
     }
 
     public function paySuccess($transactionID){
-        $transaction = ModelsTransaction::where('transaction_id', $transactionID)->firstOrFail();
-        $order = order::findOrFail($transaction->order_id);
-        $order->payment_status = 1;
-        $order->save();
+        $transaction = transaction::where('transaction_id', $transactionID)->firstOrFail();
+        $order = order::where('transaction_id', $transaction->id)->get();
+        // dd($order)->all();
+        foreach ($order as $item) {
+            $pay = order::findOrFail($item->id);
+            $pay->payment_status = 1;
+            $pay->save();
+        }
         $this->clearSession();
         return view('frontend.pages.paySuccess');
     }

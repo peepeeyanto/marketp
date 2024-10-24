@@ -10,6 +10,6 @@ class resi extends Model
     use HasFactory;
 
     public function order_products(){
-        return $this->belongsTo(orderProduct::class);
+        return $this->belongsTo(order::class);
     }
 }
