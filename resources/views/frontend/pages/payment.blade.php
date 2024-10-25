@@ -32,7 +32,7 @@ COCOHub - Payment
                                 aria-orientation="vertical">
                                 <button class="nav-link common_btn active" id="v-pills-home-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-ewallet" type="button" role="tab" aria-controls="v-pills-ewallet"
-                                    aria-selected="true">E-Wallet</button>
+                                    aria-selected="true">Halaman Pembayaran</button>
 
                                 {{-- <button class="nav-link common_btn" id="v-pills-profile-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-profile" type="button" role="tab"
@@ -91,14 +91,15 @@ COCOHub - Payment
                                 </div>
                             </div> --}}
 
-
-
                             <div class="tab-pane fade show active" id="v-pills-ewallet" role="tabpanel"
                                 aria-labelledby="v-pills-home-tab">
                                 <div class="row">
                                     <div class="col-xl-12 m-auto">
                                         <div class="wsus__payment_area">
                                             <button class="btn btn-primary" id="pay-button">Pay!</button>
+                                            @if ($is_cod == 1)
+                                            <a href="{{route("user.pay.success.cod", $order->id)}}" class="btn btn-secondary">COD</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

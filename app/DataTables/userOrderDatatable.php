@@ -50,6 +50,9 @@ class userOrderDataTable extends DataTable
             if($query->payment_status == 1){
                 return '<span class="badge bg-success">Berhasil</span>';
             }
+            elseif($query->payment_status == 2){
+                return '<span class="badge bg-success">COD</span>';
+            }
             else{
                 return '<span class="badge bg-danger">Pending</span>';
             }

@@ -382,7 +382,7 @@ class checkOutController extends Controller
         }
 
         toastr('checkout berhasil');
-        return response(['status' => 'success', 'redirect_url' => url('/')]);
+        return response(['status' => 'success', 'redirect_url' => route('user.pay', $transaction->id)]);
 
     }
 }

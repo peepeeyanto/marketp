@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class shipping_couriers extends Model
 {
     use HasFactory;
+
+    public function vendor(){
+        return $this->belongsTo(vendor::class,'vendor_id');
+    }
 }
