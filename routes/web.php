@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
 
     Route::get('orders', [userOrderController::class, 'index'])->name('orders.index');
     Route::get('orders/show/{id}', [userOrderController::class,'show'])->name('orders.show');
+    Route::get('orders/complete/{id}', [userOrderController::class, 'complete'])->name('orders.complete');
 
     Route::get('payment-success/cod/{transactionID}', [paymentController::class, 'cod'])->name('pay.success.cod');
     Route::get('payment-success/{transactionID}', [paymentController::class, 'paySuccess'])->name('pay.success');

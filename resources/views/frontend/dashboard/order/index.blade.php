@@ -12,7 +12,7 @@ COCOHub - Pesanan
           <div class="dashboard_content mt-2 mt-md-0">
             <h3><i class="far fa-user"></i> Pesanan</h3>
             <div class="wsus__dashboard_profile">
-              <div class="wsus__dash_pro_area">
+              <div class="wsus__dash_pro_area table-responsive">
                 <h4>Lihat Semua Pesanan</h4>
                 {{ $dataTable->table() }}
               </div>

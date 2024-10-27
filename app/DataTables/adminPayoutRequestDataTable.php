@@ -2,10 +2,9 @@
 
 namespace App\DataTables;
 
-use App\Models\product;
-use App\Models\vendorProduct;
+use App\Models\adminPayoutRequest;
+use App\Models\withdraw_log;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -14,7 +13,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class vendorProductDataTable extends DataTable
+class adminPayoutRequestDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -25,29 +24,21 @@ class vendorProductDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function($query){
-                $editBtn = "<a href='".route('admin.products.edit', $query->id)."' class='btn btn-primary mr-2'>edit</a>";
-                $deleteBtn = "<a href='".route('admin.products.destroy', $query->id)."' class='btn btn-danger delete-item'>delete</a>";
-                $moreBtn = '<div class="btn-group dropleft">
-                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            More
-                            </button>
-                            <div class="dropdown-menu dropleft">
-                                <a class="dropdown-item" href="'.route('admin.products-image-gallery.index', ['product' => $query->id]).'">Galeri gambar</a>
-                                <a class="dropdown-item" href="'.route('admin.products-variant.index', ['product' => $query->id]).'">Varian produk</a>s
-                            </div>';
-                return $editBtn.$deleteBtn.$moreBtn;
+                $approveBtn = "<a class='btn btn-primary' href='". route('admin.payout.approve.index', $query->id) ."'>Approve</a>";
+                $denyBtn = "<a class='btn btn-danger' href='".route('admin.payout.deny', $query->id)."'>Deny</a>";
+                return $approveBtn.$denyBtn;
             })
-            ->addColumn('image', function($query){
-                return "<img width='100px' src='".asset($query->thumb_image)."'></img>";
+            ->addColumn('vendor', function($query){
+                $name = $query->vendor->shop_name;
+                return $name;
             })
-            ->rawColumns(['image', 'action'])
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(product $model): QueryBuilder
+    public function query(withdraw_log $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -58,11 +49,11 @@ class vendorProductDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('vendorproduct-table')
+                    ->setTableId('adminpayoutrequest-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(0)
+                    ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -81,14 +72,18 @@ class vendorProductDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('name'),
-            Column::make('image'),
-            Column::make('qty'),
-            Column::make('price'),
+            Column::make('vendor'),
+            Column::make('amount'),
+            Column::make('from_acc_no'),
+            Column::make('notes'),
+            Column::make('status'),
+            Column::make('reference'),
+            Column::make('created_at'),
+            Column::make('updated_at'),
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
-            ->width(200)
+            ->width(60)
             ->addClass('text-center'),
         ];
     }
@@ -98,6 +93,6 @@ class vendorProductDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'vendorProduct_' . date('YmdHis');
+        return 'adminPayoutRequest_' . date('YmdHis');
     }
 }

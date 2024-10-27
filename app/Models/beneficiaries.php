@@ -14,6 +14,7 @@ class beneficiaries extends Model
     }
 
     public function withdraw_log(){
-        return $this->hasMany(withdraw_log::class, 'beneficiary_id');
+        return $this->hasMany(withdraw_log::class, 'from_acc_no');
     }
+    
 }

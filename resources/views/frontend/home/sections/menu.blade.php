@@ -28,7 +28,7 @@
                                 @endif
                             </li>
                         @endforeach
-                        <li><a href="#"><i class="fal fa-gem"></i> Semua kategori</a></li>
+                        {{-- <li><a href="#"><i class="fal fa-gem"></i> Semua kategori</a></li> --}}
 
                         @if (Auth::check())
                         <li><a class="wsus__droap_arrow" href="{{route('user.dashboard')}}"> Akun</a>

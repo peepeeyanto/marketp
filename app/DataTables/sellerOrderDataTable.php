@@ -27,6 +27,7 @@ class sellerOrderDataTable extends DataTable
         return (new EloquentDataTable($query))
         ->addColumn('action', function($query){
             $showBtn = "<a href='".route('seller.orders.show', $query->id)."' class='btn btn-primary mb-1'>Tampilkan</a>";
+            $actionbtn = '';
             if($query->order_status == 0){
                 $actionbtn = "<a href='".route('seller.orders.changeStatus', ['id'=>$query->id, 'status'=>1])."' class='btn btn-primary mb-1'>Proses</a>";
             }
@@ -49,6 +50,9 @@ class sellerOrderDataTable extends DataTable
         ->addColumn('payment_status', function($query){
             if($query->payment_status == 1){
                 return '<span class="badge bg-success">Berhasil</span>';
+            }
+            elseif($query->payment_status == 2){
+                return '<span class="badge bg-success">COD</span>';
             }
             else{
                 return '<span class="badge bg-danger">Pending</span>';
@@ -123,6 +127,7 @@ class sellerOrderDataTable extends DataTable
             Column::make('date'),
             Column::make('Pengiriman'),
             Column::make('ammount'),
+            Column::make('total_shipping'),
             Column::make('order_status'),
             Column::make('payment_status'),
             Column::computed('action')

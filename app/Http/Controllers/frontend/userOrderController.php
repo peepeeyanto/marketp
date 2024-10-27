@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\order;
 use App\Models\orderProduct;
 use App\Models\userAddress;
+use App\Models\vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,10 +24,15 @@ class userOrderController extends Controller
     }
 
     public function complete(string $id){
-        $orders = orderProduct::findorFail($id);
+        $orders = order::findorFail($id);
+        $vendor = vendor::findOrFail($orders->vendor_id);
         if(Auth::user()->id == $orders->user_id){
             $orders->order_status = 4;
             $orders->save();
+
+            $vendor->balance = $vendor->balance + $orders->ammount;
+            $vendor->save();
+
             toastr('Pesanan berhasil diselesaikan', 'success');
             return redirect()->back();
         }

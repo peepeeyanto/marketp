@@ -140,7 +140,7 @@ class payoutController extends Controller
         $log = new withdraw_log();
         $log->vendor_id = $account->vendor->id;
         $log->amount = $request->amount;
-        $log->beneficiary_id = $account->id;
+        $log->from_acc_no = $account->id;
         $log->notes = $request->notes;
         $log->status = $data['payouts'][0]['status'];
         $log->reference = $data['payouts'][0]['reference_no'];
@@ -156,6 +156,6 @@ class payoutController extends Controller
     }
 
     public function approve(){
-        
+
     }
 }

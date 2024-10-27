@@ -10,6 +10,9 @@ class withdraw_log extends Model
     use HasFactory;
 
     public function beneficiaries() {
-        return $this->belongsTo(beneficiaries::class, 'beneficiary_id');
+        return $this->belongsTo(beneficiaries::class, 'from_acc_no');
+    }
+    public function vendor() {
+        return $this->belongsTo(vendor::class,'vendor_id');
     }
 }

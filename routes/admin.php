@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\adminController;
+use App\Http\Controllers\backend\adminPayoutRequest;
 use App\Http\Controllers\backend\adminProductReviewController;
 use App\Http\Controllers\backend\adminVendorProfile;
 use App\Http\Controllers\backend\categoryController;
@@ -67,3 +68,8 @@ Route::get('customers', [customerListController::class, 'index'])->name('custome
 
 Route::put('sellers/change-status', [sellerListController::class, 'changeStatus'])->name('sellers.change-status');
 Route::get('sellers', [sellerListController::class, 'index'])->name('sellers.index');
+
+Route::get('payout-request/', [adminPayoutRequest::class, 'index'])->name('payout.index');
+Route::get('payout-request/approve/{id}', [adminPayoutRequest::class, 'approve'])->name('payout.approve.index');
+Route::post('payout-request/approve/', [adminPayoutRequest::class, 'storeApproval'])->name('payout.approve.store');
+Route::get('payout-request/deny/{id}', [adminPayoutRequest::class,'deny'])->name('payout.deny');

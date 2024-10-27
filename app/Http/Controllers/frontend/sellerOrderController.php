@@ -47,7 +47,7 @@ class sellerOrderController extends Controller
     }
 
     public function changeStatus(Request $request){
-        $order = orderProduct::findOrFail($request->id);
+        $order = order::findOrFail($request->id);
         $order->order_status = $request->status;
         $order->save();
 

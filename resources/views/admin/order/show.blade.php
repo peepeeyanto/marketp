@@ -89,7 +89,7 @@
 
                         <tr>
                             <td>{{++$loop->index}}</td>
-                            <td>{{$product->vendor->shop_name}}</td>
+                            <td>{{$product->product->vendor->shop_name}}</td>
                             <td>
                                 @if ($product->product->slug)
                                     <a href="{{ route('product-detail', $product->product->slug) }}">{{ $product->product_name }}</a>
@@ -159,7 +159,7 @@
                       </div>
                       <div class="invoice-detail-item">
                         <div class="invoice-detail-name">Shipping</div>
-                        <div class="invoice-detail-value">Rp{{ $shipping->cost }}</div>
+                        <div class="invoice-detail-value">Rp{{ $order->total_shipping }}</div>
                       </div>
                       <hr class="mt-2 mb-2">
                       <div class="invoice-detail-item">
