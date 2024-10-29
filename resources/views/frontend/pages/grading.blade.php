@@ -50,6 +50,7 @@ Grading - COCOHub
         maxPredictions = model.getTotalClasses();
 
         labelContainer = document.getElementById('label-container');
+        $('#label-container').empty();
         for (let i = 0; i < maxPredictions; i++) {
             // and class labels
             labelContainer.appendChild(document.createElement('div'));
@@ -76,6 +77,7 @@ Grading - COCOHub
             reader.onload = function (e) {
                 $('#imagePreview').attr('src', e.target.result);
                 // $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                $('#label-container').html('sedang diproses');
                 $('#imagePreview').hide();
                 $('#imagePreview').fadeIn(650);
             };
