@@ -23,10 +23,10 @@ class orderDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function($query){
-                $showBtn = "<a href='".route('admin.order.show', $query->id)."' class='btn btn-primary mb-1'>Tampilkan</a>";
+                $showBtn = "<a href='".route('admin.order.show', $query->id)."' class='btn btn-primary mb-1'>Edit</a>";
                 $deleteBtn = "<a href='".route('admin.order.destroy', $query->id)."' class='btn btn-danger delete-item mb-1'>delete</a>";
-                $statusBtn = "<a href='' class='btn btn-warning'>Status</a>";
-                return $showBtn.'<br>'.$deleteBtn.'<br>'.$statusBtn;
+
+                return $showBtn.'<br>'.$deleteBtn.'<br>';
             })
             ->addColumn('customer', function($query){
                 return $query->user->name;

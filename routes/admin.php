@@ -71,5 +71,5 @@ Route::get('sellers', [sellerListController::class, 'index'])->name('sellers.ind
 
 Route::get('payout-request/', [adminPayoutRequest::class, 'index'])->name('payout.index');
 Route::get('payout-request/approve/{id}', [adminPayoutRequest::class, 'approve'])->name('payout.approve.index');
-Route::post('payout-request/approve/', [adminPayoutRequest::class, 'storeApproval'])->name('payout.approve.store');
+Route::post('payout-request/approve/', [adminPayoutRequest::class, 'storeApprove'])->name('payout.approve.store');
 Route::get('payout-request/deny/{id}', [adminPayoutRequest::class,'deny'])->name('payout.deny');

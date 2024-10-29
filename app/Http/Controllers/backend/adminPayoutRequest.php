@@ -37,14 +37,17 @@ class adminPayoutRequest extends Controller
         ];
 
         $body = [
-            'reference_nos' => $log->reference_no,
+            'reference_nos' => [$log->reference],
             'otp' => $request->otp
         ];
+
+
+        // dd($body);
 
         $response = Http::withHeaders($headers)->post('https://app.sandbox.midtrans.com/iris/api/v1/payouts/approve', $body);
 
 
-
+        // dd($response)->all();
         if (!$response->successful()){
             toastr('Penarikan gagal', 'error');
             return redirect()->back();

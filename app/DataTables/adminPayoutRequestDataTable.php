@@ -24,8 +24,12 @@ class adminPayoutRequestDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function($query){
+                $approveBtn = '';
+                $denyBtn = '';
+                if($query->status == 'queued'){
                 $approveBtn = "<a class='btn btn-primary' href='". route('admin.payout.approve.index', $query->id) ."'>Approve</a>";
                 $denyBtn = "<a class='btn btn-danger' href='".route('admin.payout.deny', $query->id)."'>Deny</a>";
+                }
                 return $approveBtn.$denyBtn;
             })
             ->addColumn('vendor', function($query){

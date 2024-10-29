@@ -6,11 +6,11 @@
                     <a class="wsus__footer_2_logo" href="#">
                         <img src="images/logo_2.png" alt="logo">
                     </a>
-                    <a class="action" href="callto:+8896254857456"><i class="fas fa-phone-alt"></i>
-                        +8896254857456</a>
-                    <a class="action" href="mailto:example@gmail.com"><i class="far fa-envelope"></i>
-                        example@gmail.com</a>
-                    <p><i class="fal fa-map-marker-alt"></i> San Francisco City Hall, San Francisco, CA</p>
+                    <a class="action" href="callto:+628123818123"><i class="fas fa-phone-alt"></i>
+                        +628123818123</a>
+                    <a class="action" href="mailto:donifebrian20@outlook.co.id"><i class="far fa-envelope"></i>
+                        donifebrian20@outlook.co.id</a>
+                    <p><i class="fal fa-map-marker-alt"></i> Jl Nuansa Permai no3, Depok, Jawa Barat</p>
                     <ul class="wsus__footer_social">
                         <li><a class="facebook" href="#"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a class="twitter" href="#"><i class="fab fa-twitter"></i></a></li>
@@ -22,15 +22,15 @@
             </div>
             <div class="col-xl-2 col-sm-5 col-md-4 col-lg-2">
                 <div class="wsus__footer_content">
-                    <h5>Company</h5>
+                    <h5>Shop</h5>
                     <ul class="wsus__footer_menu">
-                        <li><a href="#"><i class="fas fa-caret-right"></i> About Us</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Career</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Contact Us</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Affilate</a></li>
+                        <li><a href="#"><i class="fas fa-caret-right"></i> Produk</a></li>
+                        <li><a href="#"><i class="fas fa-caret-right"></i> Toko</a></li>
+                        <li><a href="#"><i class="fas fa-caret-right"></i> Cek Kualitas Kelapa</a></li>
+                        <li><a href="#"><i class="fas fa-caret-right"></i> Bantuan</a></li>
+                        {{-- <li><a href="#"><i class="fas fa-caret-right"></i> Affilate</a></li>
                         <li><a href="#"><i class="fas fa-caret-right"></i> Order History</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
+                        <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li> --}}
                     </ul>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-xl-4 col-sm-7 col-md-8 col-lg-5">
+            {{-- <div class="col-xl-4 col-sm-7 col-md-8 col-lg-5">
                 <div class="wsus__footer_content wsus__footer_content_2">
                     <h3>Subscribe To Our Newsletter</h3>
                     <p>Get all the latest information on Events, Sales and Offers.
@@ -62,7 +62,7 @@
                         <img src="images/credit2.png" alt="card" class="img-fluid">
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     <div class="wsus__footer_bottom">

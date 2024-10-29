@@ -12,6 +12,14 @@ COCOHub - User Dashboard
           <br>
           <div class="dashboard_content">
             <div class="wsus__dashboard">
+                @if (empty(Auth::user()->address))
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h4 class="card-title">Tambahkan alamat pengiriman anda</h4>
+                            <a class="btn btn-primary" href="{{ route('user.address.index')}}" type="button">Tambah Alamat</a>
+                        </div>
+                    </div>
+                @endif
               <div class="row">
                 <div class="col-xl-2 col-6 col-md-4">
                   <a class="wsus__dashboard_item red" href="{{ route('user.orders.index') }}">
