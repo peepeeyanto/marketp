@@ -51,12 +51,12 @@ COCOHub - Tambah Produk
 
                     <div class="form-group wsus__sinput">
                         <label>SKU</label>
-                        <input type="text" name="sku" class="form-control">
+                        <input type="number" name="sku" class="form-control">
                     </div>
 
                     <div class="form-group wsus__sinput">
                         <label>Price</label>
-                        <input type="text" name="price" class="form-control">
+                        <input type="number" name="price" class="form-control">
                     </div>
 
                     <div class="form-group wsus__sinput">

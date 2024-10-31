@@ -100,7 +100,7 @@ COCOHub - Login
 
                                         <div class="wsus__login_input">
                                             <i class="fas fa-key"></i>
-                                            <input type="password" id="password" name="password" placeholder="Password">
+                                            <input type="password" id="password" name="password" placeholder="Password" minlength="8">
                                         </div>
 
                                         <div class="wsus__login_input">

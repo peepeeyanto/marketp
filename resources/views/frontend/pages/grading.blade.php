@@ -48,7 +48,7 @@ Grading - COCOHub
         // load the model and metadata
         model = await tmImage.load(modelURL, metadataURL);
         maxPredictions = model.getTotalClasses();
-
+        $('#label-container').empty();
         labelContainer = document.getElementById('label-container');
         for (let i = 0; i < maxPredictions; i++) {
             // and class labels
@@ -76,6 +76,7 @@ Grading - COCOHub
             reader.onload = function (e) {
                 $('#imagePreview').attr('src', e.target.result);
                 // $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                $('#label-container').html('Sedang Diproses');
                 $('#imagePreview').hide();
                 $('#imagePreview').fadeIn(650);
             };
