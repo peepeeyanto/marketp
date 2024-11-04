@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\adminController;
 use App\Http\Controllers\backend\checkOutController;
 use App\Http\Controllers\backend\paymentController;
 use App\Http\Controllers\backend\sellerController;
+use App\Http\Controllers\backend\yolov5Controller;
 use App\Http\Controllers\frontend\cartController;
 use App\Http\Controllers\frontend\chatListController;
 use App\Http\Controllers\frontend\demoProduct;
@@ -100,3 +101,8 @@ Route::get('grading', [gradingController::class, 'index'])->name('grading');
 Route::get('demoproduct', [demoProduct::class, 'index'])->name('demo.product');
 Route::get('sellers-product/{id}', [homeController::class,'sellerProductsPage'])->name('sellers-products');
 Route::get('sellers', [homeController::class, 'sellers'])->name('sellers');
+
+Route::post('yolov5/apirequest', [yolov5Controller::class, 'detect'])->name('yolov5-request');
+route::get('yolov5/filegrade', [yolov5Controller::class, 'filegrade'])->name('yolov5-filegrade');
+Route::get('yolov5/cameragrade', [yolov5Controller::class, 'cameragrade'])->name('yolov5-cameragrade');
+Route::get('yolov5', [yolov5Controller::class,'index'])->name('yolov5-grading');
