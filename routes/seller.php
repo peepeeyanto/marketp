@@ -10,6 +10,7 @@ use App\Http\Controllers\backend\sellerProductsVariantItemController;
 use App\Http\Controllers\backend\sellerProductVariantController;
 use App\Http\Controllers\backend\sellerShopProfileController;
 use App\Http\Controllers\frontend\sellerOrderController;
+use App\Http\Controllers\frontend\sellerReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('dashboard', [sellerController::class, 'dashboard'])->name('dashboard');
@@ -50,3 +51,4 @@ Route::post('payout/store',[payoutController::class,'store'])->name('payout.stor
 Route::post('withdraw/store', [payoutController::class, 'withdraw'])->name('withdraw-store');
 Route::get('withdraw/{id}', [payoutController::class, 'withdrawIndex'])->name('withdraw');
 
+Route::get('/report', [sellerReportController::class,'index'])->name('report.index') ;
