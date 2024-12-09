@@ -5,6 +5,7 @@ use App\Http\Controllers\backend\adminPayoutRequest;
 use App\Http\Controllers\backend\adminProductReviewController;
 use App\Http\Controllers\backend\adminVendorProfile;
 use App\Http\Controllers\backend\categoryController;
+use App\Http\Controllers\backend\couponController;
 use App\Http\Controllers\backend\customerListController;
 use App\Http\Controllers\backend\orderController;
 use App\Http\Controllers\backend\productController;
@@ -73,3 +74,5 @@ Route::get('payout-request/', [adminPayoutRequest::class, 'index'])->name('payou
 Route::get('payout-request/approve/{id}', [adminPayoutRequest::class, 'approve'])->name('payout.approve.index');
 Route::post('payout-request/approve/', [adminPayoutRequest::class, 'storeApprove'])->name('payout.approve.store');
 Route::get('payout-request/deny/{id}', [adminPayoutRequest::class,'deny'])->name('payout.deny');
+
+Route::resource('coupons', couponController::class);

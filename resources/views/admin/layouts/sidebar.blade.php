@@ -57,6 +57,7 @@
               {{-- <li class="{{ setActive(['admin.shipping-rule.*']) }}"><a class="nav-link" href="{{ route('admin.shipping-rule.index') }}">Shipping</a></li> --}}
               <li class="{{ setActive(['admin.review.*']) }}"><a class="nav-link" href="{{ route('admin.review.index') }}">Ulasan</a></li>
               <li class="{{ setActive(['admin.payout.*']) }}"><a class="nav-link" href="{{ route('admin.payout.index') }}">Ajuan Penarikan Saldo</a></li>
+              <li class="{{ setActive(['admin.coupons.*']) }}"><a class="nav-link" href="{{ route('admin.coupons.index') }}">Kupon</a></li>
             </ul>
         </li>
 
