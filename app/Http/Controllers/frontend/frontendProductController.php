@@ -9,6 +9,9 @@ use App\Models\productReview;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+use function Laravel\Prompts\error;
+use function PHPUnit\Framework\isEmpty;
+
 class frontendProductController extends Controller
 {
     public function showProduct(String $slug){
@@ -24,11 +27,14 @@ class frontendProductController extends Controller
         if($request->has('category')){
             $category = category::where('slug', $request->category)->first();
             $products = product::where('category_id', $category->id)->when($request->has('price_range'), function($query) use($request){
-                $price = explode(';', $request->price_range);
-                $from = $price[0];
-                $to   = $price[1];
+                if(!empty($request->price_range)){
+                    $price = explode(';', $request->price_range);
+                    $from = $price[0] * 1000 ;
+                    $to   = $price[1]  * 1000;
 
-                return $query->where('price', '>=', $from)->where('price', '<=', $to);
+                    return $query->where('price', '>=', $from)->where('price', '<=', $to);
+                }
+
             })
             ->paginate(12);
         }elseif($request->has('search')){
@@ -39,13 +45,22 @@ class frontendProductController extends Controller
                 $query->where('name', 'like', '%'.$request->search.'%')->orWhere('long_description', 'like', '%'.$request->search.'%');
             })
             ->paginate(12);
-        }else{
+        }
+        elseif($request->has('location')){
+            $products = product::whereHas('vendor', function($query) use ($request){
+                $query->where('city', 'like', '%'.$request->location.'%');
+            })->paginate(12);
+        }
+        else{
             $products = product::when($request->has('price_range'), function($query) use ($request){
-                $price = explode(';', $request->price_range);
-                $from = $price[0];
-                $to = $price[1];
+                if(!empty($request->price_range)){
+                    $price = explode(';', $request->price_range);
+                    $from = $price[0] * 1000;
+                    $to = $price[1] * 1000;
 
-                return $query->where('price', '>=', $from)->where('price', '<=', $to);
+                    return $query->where('price', '>=', $from)->where('price', '<=', $to);
+                }
+
             })->paginate(12);
         }
 

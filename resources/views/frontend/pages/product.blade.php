@@ -75,6 +75,25 @@ COCOHub - Produk
                                     </div>
                                 </div>
                             </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTri">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTri" aria-expanded="false" aria-controls="collapseTri">
+                                        Lokasi
+                                    </button>
+                                </h2>
+                                <div id="collapseTri" class="accordion-collapse collapse show"
+                                    aria-labelledby="headingTri" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="wsus__search">
+                                            <form action="{{ route('products.index') }}" method="GET">
+                                                <input type="text" placeholder="Search..." name="location">
+                                                <button type="submit"><i class="far fa-search"></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -149,7 +168,7 @@ COCOHub - Produk
                                                     </p>
                                                     <a class="wsus__pro_name" href="{{ route('product-detail', $product->slug) }}">{{ $product->name }}</a>
                                                     <p class="wsus__price">Rp{{ $product->price }}</p>
-                                                    {{-- <a class="add_cart" href="#">add to cart</a> --}}
+                                                    <p class="add_cart">{{$product->vendor->city}}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -321,23 +340,23 @@ COCOHub - Produk
             })
 
             @php
-                if (request()->has('price_range')) {
+                if (request()->has('price_range') && !empty(request()->price_range)) {
                     $price = explode(';', request()->price_range);
                     $from = $price[0];
                     $to   = $price[1];
                 }else{
                     $from = 0;
-                    $to   = 50000;
+                    $to   = 50;
                 }
             @endphp
 
             jQuery(function () {
                 jQuery("#slider_range").flatslider({
-                    min: 0, max: 1000000,
-                    step: 10000,
+                    min: 0, max: 1000,
+                    step: 10,
                     values: [{{ $from }}, {{ $to }}],
                     range: true,
-                    einheit: 'Rp'
+                    einheit: 'k'
                 });
             });
         })
