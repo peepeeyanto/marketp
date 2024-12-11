@@ -58,11 +58,11 @@ COCOHub - Edit Produk
                             </div>
                         </div>
                     </div>
-
+{{--
                     <div class="form-group wsus__sinput">
                         <label>SKU</label>
                         <input type="text" name="sku" class="form-control" value="{{ $product->sku }}">
-                    </div>
+                    </div> --}}
 
                     <div class="form-group wsus__sinput">
                         <label>Price</label>

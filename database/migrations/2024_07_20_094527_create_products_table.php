@@ -23,7 +23,6 @@ return new class extends Migration
             $table->integer('weight');
             $table->text('short_description');
             $table->text('long_description');
-            $table->string('sku')->nullable();
             $table->double('price');
             $table->timestamps();
         });

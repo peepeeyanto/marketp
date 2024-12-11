@@ -11,6 +11,11 @@ COCOHub - Grading Yolov5
             <div class="card-body">
                 <div class="row">
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <img class="w-75" src="{{asset('backend/assets/img/classes.png')}}">
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                         <a href="{{route('yolov5-filegrade')}}" class="btn btn-primary" type="button" style="margin-right: 21px;">Klasifikasi dengan file</a>
                         <a href="{{ route('yolov5-cameragrade') }}" class="btn btn-primary" type="button">Klasifikasi dengan kamera</a>
                     </div>

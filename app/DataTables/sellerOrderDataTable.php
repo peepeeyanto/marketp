@@ -32,7 +32,14 @@ class sellerOrderDataTable extends DataTable
                 $actionbtn = "<a href='".route('seller.orders.changeStatus', ['id'=>$query->id, 'status'=>1])."' class='btn btn-primary mb-1'>Proses</a>";
             }
             if($query->order_status == 1){
-                $actionbtn = "<a href='".route('seller.orders.resi', $query->id)."' class='btn btn-primary mb-1'>Kirim Resi</a>";
+                $method = json_decode($query->shipping_method);
+                if($method->service == 'lokal'){
+                    $location = json_decode($query->order_address);
+                    $lat = $location->lat;
+                    $lon = $location->lon;
+                    $actionbtn = "<a href='".route('seller.orders.changeStatus', ['id' => $query->id, 'status'=>3])."' class='btn btn-primary mb-1'>Kirim barang</a><a href='https://www.google.com/maps/place/".$lat.",".$lon."' class='btn btn-secondary'>Lihat lokasi</a>";
+                }
+                else{$actionbtn = "<a href='".route('seller.orders.resi', $query->id)."' class='btn btn-primary mb-1'>Kirim Resi</a>";}
             }
             return $showBtn.$actionbtn;
         })

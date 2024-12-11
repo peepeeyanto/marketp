@@ -112,8 +112,8 @@
                         </li> --}}
                         <li><a href="{{ route('sellers') }}">Toko</a></li>
                         <li><a href="{{ route('products.index') }}">Produk</a></li>
-                        <li><a href="{{ route('grading') }}">Cek Kualitas Kelapa</a></li>
-                        <li><a href="{{ route('yolov5-grading') }}">Cek Kualitas Kelapa yolov5</a></li>
+                        {{-- <li><a href="{{ route('grading') }}">Cek Kualitas Kelapa</a></li> --}}
+                        <li><a href="{{ route('yolov5-grading') }}">Cek Kualitas Kelapa</a></li>
                         {{-- <li class="wsus__relative_li"><a href="#">pages <i class="fas fa-caret-down"></i></a>
                             <ul class="wsus__menu_droapdown">
                                 <li><a href="404.html">404</a></li>

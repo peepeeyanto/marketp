@@ -61,7 +61,6 @@ class productController extends Controller
         $product->subcategory_id = $request->subcategory;
         $product->price = $request->price;
         $product->qty = $request->qty;
-        $product->sku = $request->sku;
         $product->short_description = $request->short_description;
         $product->long_description = $request->long_description;
         $product->weight = $request->weight;
@@ -118,7 +117,6 @@ class productController extends Controller
         $product->subcategory_id = $request->subcategory;
         $product->price = $request->price;
         $product->qty = $request->qty;
-        $product->sku = $request->sku;
         $product->short_description = $request->short_description;
         $product->long_description = $request->long_description;
         $product->save();
