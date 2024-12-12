@@ -54,7 +54,8 @@ COCOHub - Penjual Kami
             </div>
             <div class="col-xl-12">
                 <section id="pagination">
-                    <nav aria-label="Page navigation example">
+                    {{ $vendors->links() }}
+                    {{-- <nav aria-label="Page navigation example">
                         <ul class="pagination">
                             <li class="page-item">
                                 <a class="page-link" href="#" aria-label="Previous">
@@ -71,7 +72,7 @@ COCOHub - Penjual Kami
                                 </a>
                             </li>
                         </ul>
-                    </nav>
+                    </nav> --}}
                 </section>
             </div>
         </div>

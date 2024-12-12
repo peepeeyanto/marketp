@@ -172,11 +172,11 @@
                                     aria-controls="pills-contact2" aria-selected="false">Reviews</button>
                             </li>
 
-                            <li class="nav-item" role="presentation">
+                            {{-- <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="pills-contact-tab23" data-bs-toggle="pill"
                                     data-bs-target="#pills-contact23" type="button" role="tab"
                                     aria-controls="pills-contact23" aria-selected="false">comment</button>
-                            </li>
+                            </li> --}}
 
                         </ul>
                         <div class="tab-content" id="pills-tabContent4">
