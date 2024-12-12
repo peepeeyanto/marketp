@@ -1,5 +1,5 @@
 @php
-    $categories = \App\Models\Category::where('status', 1)
+    $categories = App\Models\category::where('status', 1)
     ->with(['subCategories' => function($query){
         $query->where('status', 1);
     }])

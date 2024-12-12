@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\frontend;
 
-use App\DataTables\userOrderDataTable;
+use App\DataTables\userOrderDatatable;
 use App\Http\Controllers\Controller;
 use App\Models\order;
 use App\Models\orderProduct;
