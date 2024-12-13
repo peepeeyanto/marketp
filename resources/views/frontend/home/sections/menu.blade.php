@@ -223,8 +223,8 @@
             <div class="wsus__mobile_menu_main_menu">
                 <div class="accordion accordion-flush" id="accordionFlushExample2">
                     <ul>
-                        <li><a href="index.html">home</a></li>
-                        <li><a href="#" class="accordion-button collapsed" data-bs-toggle="collapse"
+                        <li><a href="{{ url('/')}}">home</a></li>
+                        {{-- <li><a href="#" class="accordion-button collapsed" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseThree" aria-expanded="false"
                                 aria-controls="flush-collapseThree">shop</a>
                             <div id="flush-collapseThree" class="accordion-collapse collapse"
@@ -238,10 +238,10 @@
                                     </ul>
                                 </div>
                             </div>
-                        </li>
-                        <li><a href="vendor.html">vendor</a></li>
-                        <li><a href="blog.html">blog</a></li>
-                        <li><a href="daily_deals.html">campain</a></li>
+                        </li> --}}
+                        <li><a href="{{route('sellers')}}">Toko</a></li>
+                        <li><a href="{{route('products.index')}}">Belanja</a></li>
+                        {{-- <li><a href="daily_deals.html">campain</a></li> --}}
                         <li><a href="#" class="accordion-button collapsed" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseThree101" aria-expanded="false"
                                 aria-controls="flush-collapseThree101">pages</a>
@@ -249,20 +249,36 @@
                                 data-bs-parent="#accordionFlushExample2">
                                 <div class="accordion-body">
                                     <ul>
-                                        <li><a href="404.html">404</a></li>
-                                        <li><a href="faqs.html">faq</a></li>
-                                        <li><a href="invoice.html">invoice</a></li>
+                                        <li><a href="{{route('yolov5-grading')}}">Cek kualitas kelapa</a></li>
+                                        <li><a href="{{route('user.assistant')}}">bantuan</a></li>
+                                        {{-- <li><a href="invoice.html">invoice</a></li>
                                         <li><a href="about_us.html">about</a></li>
                                         <li><a href="team.html">team</a></li>
                                         <li><a href="product_grid_view.html">product grid view</a></li>
                                         <li><a href="product_grid_view.html">product list view</a></li>
-                                        <li><a href="team_details.html">team details</a></li>
+                                        <li><a href="team_details.html">team details</a></li> --}}
                                     </ul>
                                 </div>
                             </div>
                         </li>
-                        <li><a href="track_order.html">track order</a></li>
-                        <li><a href="daily_deals.html">daily deals</a></li>
+                        @if (Auth::check())
+                            @if (Auth::user()->role == 'admin')
+                                <li><a href={{route('admin.dashboard')}}>Dashboard</a></li>
+                            @elseif (Auth::user()->role == 'seller')
+                                <li><a href={{route('seller.dashboard')}}>Jualan sekarang!</a></li>
+                            @endif
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();">
+                                        Log out
+                                    </a>
+                                </form>
+                            </li>
+
+                        @else
+                            <li><a href="{{route('login')}}">Login/Daftar</a></li>
+                        @endif
                     </ul>
                 </div>
             </div>
