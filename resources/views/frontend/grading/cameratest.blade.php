@@ -153,7 +153,7 @@ COCOHub - Camera
             // Send image via AJAX
             $.ajax({
                 type: 'POST',
-                url: 'http://43.216.253.86:8000/object-to-img', // Change this to your server URL
+                url: 'http://0.0.0.0:8000/object-to-img', // Change this to your server URL
                 data: formData,
                 processData: false, // Important: don't process the form data
                 contentType: false, // Important: let jQuery set the content type

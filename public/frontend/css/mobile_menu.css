@@ -36,7 +36,7 @@ a {
 
 .wsus__mobile_menu_icon:hover {
   color: #fff;
-  background: #0363ae;
+  background: #6bd958;
 }
 
 .wsus__mobile_menu_close {
@@ -62,7 +62,7 @@ a {
 }
 
 .wsus__mobile_menu_close:hover {
-  background: #2a9cf5;
+  background: #6bd958;
 }
 
 #wsus__mobile_menu {
@@ -90,9 +90,9 @@ a {
 
 .mobile_menu_lan li a {
   height: 30px;
-  background: #2a9cf5;
+  background: #6bd958;
   color: #fff;
-  border: 1px solid #2a9cf5;
+  border: 1px solid #6bd958;
   text-align: center;
   line-height: 30px;
   margin-left: 10px;
@@ -130,7 +130,7 @@ a {
 
 .mobile_menu_lan .dropdown-menu li a:hover {
   background: #aad8ff73;
-  color: #007aff;
+  color: #6bd958;
 }
 
 .wsus__mobile_menu_header_icon {
@@ -150,7 +150,7 @@ a {
 	text-align: center;
 	line-height: 20px;
 	font-weight: 600;
-	color: #5897fb;
+	color: #6bd958;
 }
 
 .wsus__mobile_menu_header_icon li a {
@@ -174,8 +174,8 @@ a {
 
 .wsus__mobile_menu_header_icon li a:hover {
   background: transparent;
-  color: #2a9cf5;
-  border-color: #2a9cf5;
+  color: #6bd958;
+  border-color: #6bd958;
 }
 
 #wsus__mobile_menu form {
@@ -281,7 +281,7 @@ a {
 .wsus_mobile_menu_category li:hover > a,
 .wsus__mobile_menu_main_menu li:hover > a,
 .wsus__mobile_menu_main_menu .accordion-button:hover {
-  color: #2a9cf5 !important;
+  color: #6bd958 !important;
 }
 
 .wsus__mobile_menu_main_menu {

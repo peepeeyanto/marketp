@@ -5,6 +5,67 @@ Grading - COCOHub
 @endsection
 
 @section('content')
+
+<div class="d-flex d-lg-flex justify-content-lg-center align-items-lg-center mt-5">
+    <div class="card" style="width: 677px;">
+        <div class="card-body">
+            <div class="row" style="border: 1px solid var(--bs-gray) ;">
+                <div class="col d-lg-flex justify-content-lg-center align-items-lg-center"><img id="imagePreview" class="img-fluid" width="300px"></div>
+            </div>
+            <div class="row">
+                <div class="col" style="padding: 18px;border: 1px solid var(--bs-gray) ;">
+                    <div class="row">
+                        <div class="col">
+                            <h5>Upload gambar kelapa anda disini:</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><input id="imageUpload" type="file"></div>
+                    </div>
+                </div>
+                <div class="col" style="padding: 18px;border: 1px solid var(--bs-gray) ;">
+                    <div class="row">
+                        <div class="col">
+                            <h5>Kualitas kelapa anda:</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div id="label-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- <div class="d-flex d-lg-flex justify-content-lg-center align-items-lg-center" style="margin: 17px;">
+    <div class="card" style="width: 717px;">
+        <div class="card-body">
+            <div class="row" style="border: 1px solid var(--bs-gray-400) ;">
+                <div class="col-lg-12 d-lg-flex justify-content-lg-center"><img id="imagePreview" class="img-fluid" width="500px" style="width: 326px;"></div>
+            </div>
+            <div class="row">
+                <div class="col" style="padding: 11px;border: 1px solid var(--bs-gray-500) ;">
+                    <div class="row">
+                        <div class="col">
+                            <h5>Upload gambar kelapa anda disini</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><input id="imageUpload" type="file"></div>
+                    </div>
+                </div>
+                <div class="col" style="padding: 11px;border: 1px solid var(--bs-gray-400) ;">
+                    <h5>Kualitas kelapa anda:</h5>
+                    <div id="label-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> --}}
+{{--
 <div class="container">
     <div class="card mt-5">
         <div class="card-header">
@@ -25,7 +86,7 @@ Grading - COCOHub
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
 
 @push('script')
@@ -69,7 +130,7 @@ Grading - COCOHub
     }
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> --}}
 <script type="text/javascript">
     function readURL(input) {
         if (input.files && input.files[0]) {

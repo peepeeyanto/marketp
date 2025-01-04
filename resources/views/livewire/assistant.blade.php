@@ -27,7 +27,7 @@
     </div>
 </div> --}}
 
-<div class="d-lg-flex justify-content-lg-center align-items-lg-center mt-2">
+{{-- <div class="d-lg-flex justify-content-lg-center align-items-lg-center mt-2">
     <div class="card" style="width: 50%;">
         <div class="card-body">
             <div class="row">
@@ -54,6 +54,44 @@
                             {!! $answer!!}
                         @endif
                     </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+<div class="container mt-5" >
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h4>Asisten AI CocoHub</h4>
+                    <h6 class="text-muted mb-2">Tanyakan pertanyaan anda seputar CocoHub disini!<br></h6>
+                </div>
+            </div>
+            <form wire:submit.prevent="ask">
+                <div class="row d-lg-flex align-items-lg-center">
+                    <div class="col-lg-9"><input type="text" name="question" wire:model="question" style="width: 100%;" placeholder="Pertanyaan anda" maxlength="250"></div>
+                    <div class="col"><button class="btn btn-primary" type="submit">Submit</button></div>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <h4>Jawaban:</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p>
+                                @if ($answer)
+                                 {!! $answer!!}
+                                @endif
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

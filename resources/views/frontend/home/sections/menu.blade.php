@@ -112,8 +112,7 @@
                         </li> --}}
                         <li><a href="{{ route('sellers') }}">Toko</a></li>
                         <li><a href="{{ route('products.index') }}">Produk</a></li>
-                        {{-- <li><a href="{{ route('grading') }}">Cek Kualitas Kelapa</a></li> --}}
-                        <li><a href="{{ route('yolov5-grading') }}">Cek Kualitas Kelapa</a></li>
+                        <li><a href="{{ route('grading') }}">Cek Kualitas Kelapa</a></li>
                         {{-- <li class="wsus__relative_li"><a href="#">pages <i class="fas fa-caret-down"></i></a>
                             <ul class="wsus__menu_droapdown">
                                 <li><a href="404.html">404</a></li>
@@ -181,7 +180,7 @@
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
-                role="tab" aria-controls="pills-home" aria-selected="true">Categories</button>
+                role="tab" aria-controls="pills-home" aria-selected="true">Belanja</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
@@ -239,17 +238,17 @@
                                 </div>
                             </div>
                         </li> --}}
-                        <li><a href="{{route('sellers')}}">Toko</a></li>
+                        <li><a href="{{route('sellers')}}">Penjual Kami</a></li>
                         <li><a href="{{route('products.index')}}">Belanja</a></li>
                         {{-- <li><a href="daily_deals.html">campain</a></li> --}}
                         <li><a href="#" class="accordion-button collapsed" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseThree101" aria-expanded="false"
-                                aria-controls="flush-collapseThree101">pages</a>
+                                aria-controls="flush-collapseThree101">Fitur Cerdas</a>
                             <div id="flush-collapseThree101" class="accordion-collapse collapse"
                                 data-bs-parent="#accordionFlushExample2">
                                 <div class="accordion-body">
                                     <ul>
-                                        <li><a href="{{route('yolov5-grading')}}">Cek kualitas kelapa</a></li>
+                                        <li><a href="{{route('grading')}}">Cek kualitas kelapa</a></li>
                                         <li><a href="{{route('user.assistant')}}">bantuan</a></li>
                                         {{-- <li><a href="invoice.html">invoice</a></li>
                                         <li><a href="about_us.html">about</a></li>
@@ -262,11 +261,27 @@
                             </div>
                         </li>
                         @if (Auth::check())
-                            @if (Auth::user()->role == 'admin')
-                                <li><a href={{route('admin.dashboard')}}>Dashboard</a></li>
-                            @elseif (Auth::user()->role == 'seller')
-                                <li><a href={{route('seller.dashboard')}}>Jualan sekarang!</a></li>
-                            @endif
+                            <li><a href="#" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseThree102" aria-expanded="false"
+                                aria-controls="flush-collapseThree102">Akun saya</a>
+                            <div id="flush-collapseThree102" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample2">
+                                <div class="accordion-body">
+                                    <ul>
+                                        @if (Auth::user()->role == 'admin')
+                                            <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                                        @elseif (Auth::user()->role == 'seller')
+                                            <li><a href="{{route('seller.dashboard')}}">Jualan sekarang!</a></li>
+                                        @else
+                                            <li><a href="{{route('user.dashboard')}}">Dashboard</a></li>
+                                            <li><a href="{{route('user.orders.index')}}">Pesanan</a></li>
+                                            <li><a href="{{route('user.address.index')}}">Alamat</a></li>
+                                            <li><a href="{{route('user.chat-list')}}">Chat</a></li>
+                                        @endif
+
+                                    </ul>
+                                </div>
+                            </div>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -275,7 +290,6 @@
                                     </a>
                                 </form>
                             </li>
-
                         @else
                             <li><a href="{{route('login')}}">Login/Daftar</a></li>
                         @endif
