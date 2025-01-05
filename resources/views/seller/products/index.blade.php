@@ -15,7 +15,7 @@ COCOHub - Produk
               <div class="wsus__dash_pro_area table-responsive">
                 <h4>Produk Toko</h4>
                 <div>
-                    <a href="{{ route('seller.products.create') }}" class="btn btn-primary float-end">add</a>
+                    <a href="{{ route('seller.products.create') }}" class="btn btn-primary float-end">Tambah Produk</a>
                 </div>
                 {{ $dataTable->table() }}
               </div>

@@ -96,8 +96,8 @@ COCOHub - Cart
                     <h6>total cart</h6>
                     <p>subtotal: <span id="subtotalSide">Rp{{ getSubTotal() }}</span></p>
                     <a class="common_btn mt-4 w-100 text-center" href="{{ route('user.checkout') }}">checkout</a>
-                    <a class="common_btn mt-1 w-100 text-center" href="product_grid_view.html"><i
-                            class="fab fa-shopify"></i> go shop</a>
+                    {{-- <a class="common_btn mt-1 w-100 text-center" href="product_grid_view.html"><i
+                            class="fab fa-shopify"></i> go shop</a> --}}
                 </div>
             </div>
         </div>
