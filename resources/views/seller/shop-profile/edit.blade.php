@@ -24,7 +24,7 @@
                     </div>
                     <div class="form-group wsus__sinput">
                         <label>Gambar Banner</label>
-                        <input type="file" name="banner" class="form-control">
+                        <input type="file" name="banner" accept="image/*" class="form-control">
                     </div>
                     <div class="form-group wsus__sinput">
                         <label>Nama Toko</label>

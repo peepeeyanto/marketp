@@ -25,7 +25,7 @@ COCOHub - Edit Produk
 
                     <div class="form-group wsus__sinput">
                         <label>Image</label>
-                        <input type="file" name="image" class="form-control" value="{{ $product->thumb_image }}">
+                        <input type="file" name="image" accept="image/*" class="form-control" value="{{ $product->thumb_image }}">
                     </div>
 
                     <div class="form-group wsus__sinput">

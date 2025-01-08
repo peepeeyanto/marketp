@@ -20,7 +20,7 @@ Grading - COCOHub
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col"><input id="imageUpload" type="file"></div>
+                        <div class="col"><input id="imageUpload" type="file" accept="image/*"></div>
                     </div>
                 </div>
                 <div class="col" style="padding: 18px;border: 1px solid var(--bs-gray) ;">

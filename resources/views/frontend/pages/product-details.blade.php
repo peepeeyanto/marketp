@@ -421,7 +421,7 @@
 
                                                             <div class="img_upload">
                                                                 <div class="">
-                                                                    <input type="file" name="image[]" multiple>
+                                                                    <input type="file" accept="image/*" name="image[]" multiple>
                                                                 </div>
                                                             </div>
 

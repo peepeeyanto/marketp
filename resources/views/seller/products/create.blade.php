@@ -18,7 +18,7 @@ COCOHub - Tambah Produk
                     @csrf
                     <div class="form-group wsus__sinput">
                         <label>Image</label>
-                        <input type="file" name="image" class="form-control">
+                        <input type="file" name="image" accept="image/*" class="form-control">
                     </div>
 
                     <div class="form-group wsus__sinput">
