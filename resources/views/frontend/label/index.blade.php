@@ -49,6 +49,8 @@ COCOHub - Cek Label
         });
 
         function onScanSuccess(decodedText, decodedResult) {
+            html5QrcodeScanner.clear();
+
             $.ajax({
                 url: "{{ route('label.decrypt.show') }}",
                 type: "POST",
