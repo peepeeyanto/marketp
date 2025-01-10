@@ -82,16 +82,7 @@ class labelGeneratorController extends Controller
     }
 
     public function decryptData(Request $request){
-        $request->validate([
-            'qrs' => ['required', 'image', 'max:2048']
-        ]);
-
-
-        $qrcode = new QrReader($request->qrs);
-
-        $text = $qrcode->text();
-
-        $parts = explode(':', $text);
+        $parts = explode(':', $request->ciphertext);
         $iv = base64_decode($parts[0]);
         $ciphertext = base64_decode($parts[1]);
 
@@ -104,11 +95,17 @@ class labelGeneratorController extends Controller
 
         $info = json_decode($data);
 
-        $product = product::findOrFail($info->prod);
-        $shop = vendor::findOrFail($info->shop);
+        $product = product::where('id', $info->prod)->value('name');
+        $shop = vendor::where('id', $info->shop)->value('shop_name');
         $date = $info->prod_date;
 
-        return view('frontend.label.show', compact('product', 'shop', 'date'));
+        $responses = [
+            'product_name' => $product,
+            'shop_name' => $shop,
+            'date' => $date,
+        ];
+
+        return response()->json($responses);
     }
 
 
