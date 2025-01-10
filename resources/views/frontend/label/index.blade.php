@@ -7,7 +7,7 @@ COCOHub - Cek Label
 @section('content')
 <section>
     <div class="container">
-        <div class="card">
+        <div class="card" style="margin-top:53px">
             <div class="card-body d-lg-flex flex-column justify-content-lg-center align-items-lg-center">
                 <div class="row">
                     <div class="col"><img /></div>

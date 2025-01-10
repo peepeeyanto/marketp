@@ -251,6 +251,7 @@
                                     <ul>
                                         <li><a href="{{route('grading')}}">Cek kualitas kelapa</a></li>
                                         <li><a href="{{route('user.assistant')}}">Bantuan</a></li>
+                                        <li><a href="{{route('label.decrypt.index')}}">Cek label produk</a></li>
                                         {{-- <li><a href="invoice.html">invoice</a></li>
                                         <li><a href="about_us.html">about</a></li>
                                         <li><a href="team.html">team</a></li>
