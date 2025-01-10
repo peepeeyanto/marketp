@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\backend\labelGeneratorController;
 use App\Http\Controllers\backend\payoutController;
 use App\Http\Controllers\backend\sellerChatListController;
 use App\Http\Controllers\backend\sellerController;
@@ -52,3 +53,7 @@ Route::post('withdraw/store', [payoutController::class, 'withdraw'])->name('with
 Route::get('withdraw/{id}', [payoutController::class, 'withdrawIndex'])->name('withdraw');
 
 Route::get('/report', [sellerReportController::class,'index'])->name('report.index') ;
+
+Route::get('label', [labelGeneratorController::class, 'index'])->name('label.index');
+route::post('label/encrypt', [labelGeneratorController::class, 'encryptData'])->name('label.encrypt');
+

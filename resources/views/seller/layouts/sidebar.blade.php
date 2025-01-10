@@ -19,6 +19,7 @@
       <li><a class="{{setActive(['seller.orders.*'])}}" href="{{ route('seller.orders.index') }}"><i class="fas fa-shopping-cart"></i> Order</a></li>
       <li><a class="{{setActive(['seller.payout.*'])}}" href="{{ route('seller.payout.index') }}"><i class="fa fa-money"></i> Penarikan Saldo</a></li>
       <li><a class="{{setActive(['seller.report.*'])}}" href="{{ route('seller.report.index') }}"><i class="fa fa-money"></i> Laporan penjualan</a></li>
+      <li><a class="{{setActive(['seller.label.*'])}}" href="{{ route('seller.label.index') }}"><i class="fa fa-money"></i> Label</a></li>
       @endif
 
       <li>

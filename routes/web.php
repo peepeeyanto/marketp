@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\adminController;
 use App\Http\Controllers\backend\checkOutController;
+use App\Http\Controllers\backend\labelGeneratorController;
 use App\Http\Controllers\backend\paymentController;
 use App\Http\Controllers\backend\sellerController;
 use App\Http\Controllers\backend\yolov5Controller;
@@ -106,3 +107,6 @@ Route::post('yolov5/apirequest', [yolov5Controller::class, 'detect'])->name('yol
 route::get('yolov5/filegrade', [yolov5Controller::class, 'filegrade'])->name('yolov5-filegrade');
 Route::get('yolov5/cameragrade', [yolov5Controller::class, 'cameragrade'])->name('yolov5-cameragrade');
 Route::get('yolov5', [yolov5Controller::class,'index'])->name('yolov5-grading');
+
+route::get('label/', [labelGeneratorController::class, 'decryptIndex'])->name('label.decrypt.index');
+route::post('label/decrypt', [labelGeneratorController::class,'decryptData'])->name('label.decrypt.show');

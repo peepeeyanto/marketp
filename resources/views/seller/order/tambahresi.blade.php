@@ -1,6 +1,6 @@
 @extends('seller.layouts.master')
 @section('title')
-COCOHub - Tambah Produk
+COCOHub - Tambah Resi
 @endsection
 @section('content')
 <section id="wsus__dashboard">

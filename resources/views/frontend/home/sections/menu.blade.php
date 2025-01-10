@@ -113,6 +113,7 @@
                         <li><a href="{{ route('sellers') }}">Toko</a></li>
                         <li><a href="{{ route('products.index') }}">Produk</a></li>
                         <li><a href="{{ route('grading') }}">Cek Kualitas Kelapa</a></li>
+                        <li><a href="{{ route('label.decrypt.index') }}">Cek Label</a></li>
                         {{-- <li class="wsus__relative_li"><a href="#">pages <i class="fas fa-caret-down"></i></a>
                             <ul class="wsus__menu_droapdown">
                                 <li><a href="404.html">404</a></li>
@@ -249,7 +250,7 @@
                                 <div class="accordion-body">
                                     <ul>
                                         <li><a href="{{route('grading')}}">Cek kualitas kelapa</a></li>
-                                        <li><a href="{{route('user.assistant')}}">bantuan</a></li>
+                                        <li><a href="{{route('user.assistant')}}">Bantuan</a></li>
                                         {{-- <li><a href="invoice.html">invoice</a></li>
                                         <li><a href="about_us.html">about</a></li>
                                         <li><a href="team.html">team</a></li>

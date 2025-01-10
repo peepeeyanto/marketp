@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
   <link href="https://cdn.datatables.net/v/bs5/dt-2.1.2/r-3.0.2/datatables.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <link rel="stylesheet" href="{{asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.css')}}">
   <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
 
@@ -97,7 +98,8 @@
   <script src="{{ asset('frontend/js/venobox.min.js') }}"></script>
   <!--classycountdown js-->
   <script src="{{ asset('frontend/js/jquery.classycountdown.js') }}"></script>
-
+  <script src="{{ asset('backend/assets/modules/moment.min.js') }}"></script>
+  <script src="{{ asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
   <!--main/custom js-->
   <script src="{{ asset('frontend/js/main.js') }}"></script>
   <script src={{asset("backend/assets/modules/summernote/summernote-bs4.js")}}></script>
