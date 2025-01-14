@@ -11,6 +11,7 @@ use App\Models\shippingRule;
 use App\Models\transaction;
 use App\Models\userAddress;
 use App\Models\vendor;
+use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,7 +64,12 @@ class checkOutController extends Controller
 
         foreach($vendorInfo as $key=>$value){
             $shippingc = shipping_couriers::where('vendor_id',$key)->first();
-            $courier = json_decode($shippingc->couriers,true);
+            try{
+                $courier = json_decode($shippingc->couriers,true);
+            }catch(Exception $e){
+                toastr('Terjadi kesalahan pada produk ke-'.$key, 'error');
+                return redirect()->back();
+            }
             $data[$key] = [
                 "origin_postal_code" => $value[0]['zipcode'],
                 "destination_postal_code" => $addresses->zip,
@@ -79,25 +85,33 @@ class checkOutController extends Controller
         $url = 'https://api.biteship.com/v1/rates/couriers';
         $header = ['authorization' => getenv('BITESHIP_API_KEY'), 'content-type' => 'application/json'];
         foreach($data as $key => $value){
-            $shippingMethod[$key] = Http::withHeaders($header)->post($url, $value);
+            $biteres = Http::withHeaders($header)->post($url, $value);
+            if($biteres->status() == 200){
+                $shippingMethod[$key] = $biteres;
+            }
+
         }
 
         $responses = [];
         foreach($shippingMethod as $key=>$value){
-            $responses[$key] = json_decode($value->body());
+            if(!empty($value)){
+                $responses[$key] = json_decode($value->body());
+            }
+
         }
-
-
 
         foreach($responses as $key => $value){
             $vendor = shipping_couriers::where('vendor_id', $key)->first();
             if ($vendor->is_local_deliveries == 1){
-                $price = $vendor->base_cost + (Haversine::calculate($vendor->lat, $vendor->lon, $addresses->lat, $addresses->lon) * $vendor->cost_per_km);
-                $obj = new stdClass();
-                $obj->price = $price;
-                $obj->courier_name = 'pengantaran lokal';
-                $obj->courier_service_name = 'lokal';
-                $responses[$key]->pricing[] = $obj;
+                $dist = Haversine::calculate($vendor->lat, $vendor->lon, $addresses->lat, $addresses->lon);
+                if($dist < 5){
+                    $price = $vendor->base_cost + ( $dist * $vendor->cost_per_km);
+                    $obj = new stdClass();
+                    $obj->price = $price;
+                    $obj->courier_name = 'pengantaran lokal';
+                    $obj->courier_service_name = 'lokal';
+                    $responses[$key]->pricing[] = $obj;
+                }
             }
         }
 

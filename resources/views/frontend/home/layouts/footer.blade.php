@@ -24,10 +24,10 @@
                 <div class="wsus__footer_content">
                     <h5>Shop</h5>
                     <ul class="wsus__footer_menu">
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Produk</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Toko</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Cek Kualitas Kelapa</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Bantuan</a></li>
+                        <li><a href="{{route('products.index')}}"><i class="fas fa-caret-right"></i> Produk</a></li>
+                        <li><a href="{{route('sellers')}}"><i class="fas fa-caret-right"></i> Toko</a></li>
+                        <li><a href="{{route('grading')}}"><i class="fas fa-caret-right"></i> Cek Kualitas Kelapa</a></li>
+                        <li><a href="{{route('user.assistant')}}"><i class="fas fa-caret-right"></i> Bantuan</a></li>
                         {{-- <li><a href="#"><i class="fas fa-caret-right"></i> Affilate</a></li>
                         <li><a href="#"><i class="fas fa-caret-right"></i> Order History</a></li>
                         <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li> --}}
@@ -39,11 +39,6 @@
                     <h5>Company</h5>
                     <ul class="wsus__footer_menu">
                         <li><a href="#"><i class="fas fa-caret-right"></i> About Us</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Career</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Contact Us</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Affilate</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Order History</a></li>
                         <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
                     </ul>
                 </div>

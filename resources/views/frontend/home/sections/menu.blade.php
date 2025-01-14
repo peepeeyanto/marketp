@@ -137,13 +137,13 @@
                     <ul class="wsus__menu_item wsus__menu_item_right">
                         {{-- <li><a href="contact.html">contact</a></li> --}}
 
-
-
                         @if (Auth::check())
                             @if (Auth::user()->role == 'admin')
                                 <li><a href={{route('admin.dashboard')}}>Dashboard</a></li>
                             @elseif (Auth::user()->role == 'seller')
                                 <li><a href={{route('seller.dashboard')}}>Jualan sekarang!</a></li>
+                            @else
+                                <li><a href={{route('user.orders.index')}}>Daftar transaksi</a></li>
                             @endif
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
@@ -153,7 +153,6 @@
                                     </a>
                                 </form>
                             </li>
-
                         @else
                             <li><a href="{{route('login')}}">Login/Daftar</a></li>
                         @endif
@@ -263,6 +262,9 @@
                             </div>
                         </li>
                         @if (Auth::check())
+                            @if(Auth::user()->role == 'user')
+                                <li><a href="{{route('user.orders.index')}}">Daftar transaksi</a></li>
+                            @endif
                             <li><a href="#" class="accordion-button collapsed" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseThree102" aria-expanded="false"
                                 aria-controls="flush-collapseThree102">Akun saya</a>
