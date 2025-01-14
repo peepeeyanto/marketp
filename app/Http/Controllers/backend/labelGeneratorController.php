@@ -59,16 +59,16 @@ class labelGeneratorController extends Controller
 
         $data = json_encode($jsn);
 
-        $text = '{
-        farmers_id: 12,
-        product_id: 13
-        prod: "11-02-2"
-        best_before: "-"
-        }';
+        // $text = '{
+        // farmers_id: 12,
+        // product_id: 13
+        // prod: "11-02-2"
+        // best_before: "-"
+        // }';
 
-        $iv_size        = openssl_cipher_iv_length('AES-256-CBC');
+        $iv_size        = openssl_cipher_iv_length('AES-128-CBC');
         $iv             = openssl_random_pseudo_bytes($iv_size);
-        $ciphertext     = openssl_encrypt($data, 'AES-256-CBC', getenv('LABEL_SECRET'), OPENSSL_RAW_DATA, $iv);
+        $ciphertext     = openssl_encrypt($data, 'AES-128-CBC', getenv('LABEL_SECRET'), OPENSSL_RAW_DATA, $iv);
         $ciphertext_hex = base64_encode($ciphertext);
         $iv_hex         = base64_encode($iv);
 
@@ -87,7 +87,7 @@ class labelGeneratorController extends Controller
         $ciphertext = base64_decode($parts[1]);
 
         try{
-            $data = openssl_decrypt($ciphertext, 'AES-256-CBC', getenv('LABEL_SECRET'), OPENSSL_RAW_DATA, $iv);
+            $data = openssl_decrypt($ciphertext, 'AES-128-CBC', getenv('LABEL_SECRET'), OPENSSL_RAW_DATA, $iv);
         } catch(Exception $e){
             toastr('Kode Qr tidak valid', 'error');
             return redirect()->back();
