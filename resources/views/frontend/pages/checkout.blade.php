@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-xl-8 col-lg-7">
                     <div class="wsus__check_form">
-                        <h5>Billing Details <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Ganti alamat</a></h5>
+                        <h5><a class="btn btn-secondary" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Ganti alamat</a></h5>
                         <div class="row">
                                 <div class="col-xl-12">
                                     <div class="wsus__checkout_single_address">
@@ -91,7 +91,7 @@
             <div class="row mt-4">
                 <div class="col-xl-8">
                     <div class="wsus__check_form">
-                        <h5>Pengiriman</h5>
+                        <h5>Metode Pengiriman</h5>
 
                         @foreach ($groupedCart as $key=>$vendorItems)
                             <div class="wsus__checkout_single_address">
