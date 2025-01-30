@@ -30,7 +30,7 @@ class yolov5Controller extends Controller
 
         $response = Http::attach(
             'file', file_get_contents($image->getRealPath()), $image->getClientOriginalName()
-        )->post('http://127.0.0.1:8655/object-to-img/');
+        )->post(getenv('CLASS_SERVER_IP'));
 
 
         // Handle the response
